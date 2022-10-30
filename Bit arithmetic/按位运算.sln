@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.2.32616.157
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "按位运算", "按位运算\按位运算.vcxproj", "{7FD8834D-0619-4315-86A5-427A04BA5AD2}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7FD8834D-0619-4315-86A5-427A04BA5AD2}.Debug|x64.ActiveCfg = Debug|x64
+		{7FD8834D-0619-4315-86A5-427A04BA5AD2}.Debug|x64.Build.0 = Debug|x64
+		{7FD8834D-0619-4315-86A5-427A04BA5AD2}.Debug|x86.ActiveCfg = Debug|Win32
+		{7FD8834D-0619-4315-86A5-427A04BA5AD2}.Debug|x86.Build.0 = Debug|Win32
+		{7FD8834D-0619-4315-86A5-427A04BA5AD2}.Release|x64.ActiveCfg = Release|x64
+		{7FD8834D-0619-4315-86A5-427A04BA5AD2}.Release|x64.Build.0 = Release|x64
+		{7FD8834D-0619-4315-86A5-427A04BA5AD2}.Release|x86.ActiveCfg = Release|Win32
+		{7FD8834D-0619-4315-86A5-427A04BA5AD2}.Release|x86.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {425872C3-4088-4482-8F70-CB6FCD8CB5AE}
+	EndGlobalSection
+EndGlobal
