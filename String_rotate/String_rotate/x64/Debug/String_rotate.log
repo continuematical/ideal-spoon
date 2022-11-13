@@ -1,0 +1,4 @@
+﻿  源.cpp
+D:\ideal-spoon\String_rotate\String_rotate\源.cpp(6,24): warning C4267: “初始化”: 从“size_t”转换到“int”，可能丢失数据
+D:\ideal-spoon\String_rotate\String_rotate\源.cpp(37,24): warning C4267: “初始化”: 从“size_t”转换到“int”，可能丢失数据
+  String_rotate.vcxproj -> D:\ideal-spoon\String_rotate\x64\Debug\String_rotate.exe
