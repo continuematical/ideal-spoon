@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="6daa3400-cc78-49f2-9c17-3de646d4efc3" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/../array/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../array/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../array/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../array/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../array/array.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../calendar/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../calendar/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../calendar/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../calendar/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../calendar/calendar.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../calendar/out/production/calendar/Main.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../calendar/src/Main.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../java/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/../java/src/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lottery/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lottery/.idea/.name" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lottery/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lottery/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lottery/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lottery/Retirement.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lottery/out/production/Retirement/Main.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lottery/src/Main.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lottery2/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lottery2/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lottery2/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lottery2/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lottery2/BigInteger.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lottery2/out/production/BigInteger/Main.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lottery2/src/Main.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/practice/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/practice/Main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="2HzYRavZnbGlShbc8nhXackIv59" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true"
+  }
+}]]></component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="6daa3400-cc78-49f2-9c17-3de646d4efc3" name="Changes" comment="" />
+      <created>1669289374184</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1669289374184</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>

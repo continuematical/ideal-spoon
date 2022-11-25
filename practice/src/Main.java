@@ -1,27 +1,22 @@
-import java.io.File;
+import java.io.*;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.util.Scanner;
 
+@SuppressWarnings("unused")
 public class Main {
     public static void main(String[] args) {
-
-    }
-
-    public void filefind(File target,String exc){
-        if(target==null)
-            return;
-        //判断是否为文件夹
-        if(target.isDirectory()){
-            File[] file=target.listFiles();
-            //有些系统文件无法访问，返回空值
-            if(file!=null){
-                for(File f:file){
-                    filefind(f,exc);
-                }
-            }
-        }else{
-            String name=target.getName().toLowerCase();
-            if(name.endsWith(exc)){
-                System.out.println(target.getAbsolutePath());
-            }
+        Dog dog = new Dog(3,"mike","母");
+        File file = new File("D:\\ideal-spoon\\practice\\src\\Dog.obj");
+        try {
+            OutputStream out = new FileOutputStream(file);
+            ObjectOutputStream ou = new ObjectOutputStream(out);
+            ou.writeObject(file);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch(IOException e){
+            e.printStackTrace();
         }
     }
 }
+
