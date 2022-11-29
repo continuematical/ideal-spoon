@@ -2,21 +2,6 @@ import javax.imageio.IIOException;
 import java.io.*;
 import java.nio.charset.Charset;
 
-public class Main {
-    public static void main(String[] args) {
-        NodeManager manager = new NodeManager();
-        manager.add(5);
-        manager.add(10);
-        manager.add(13);
-        manager.add(24);
-        manager.add(34);
-        manager.update(13, 56);
-        manager.delete(24);
-        manager.insert(1,45);
-        manager.print();
-    }
-}
-
 class NodeManager {
     private Node root;
     private int size = 1;
