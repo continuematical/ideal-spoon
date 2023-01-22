@@ -1,22 +1,89 @@
-import java.io.*;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.util.Scanner;
-
-@SuppressWarnings("unused")
 public class Main {
+    //生产者/消费者问题
     public static void main(String[] args) {
-        Dog dog = new Dog(3,"mike","母");
-        File file = new File("D:\\ideal-spoon\\practice\\src\\Dog.obj");
-        try {
-            OutputStream out = new FileOutputStream(file);
-            ObjectOutputStream ou = new ObjectOutputStream(out);
-            ou.writeObject(file);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch(IOException e){
-            e.printStackTrace();
+        Clerk clerk = new Clerk();
+        Producer producer = new Producer(clerk);
+        Customer customer = new Customer(clerk);
+        producer.setName("生产者");
+        customer.setName("消费者");
+
+        producer.start();
+        customer.start();
+    }
+}
+
+class Producer extends Thread {
+    private Clerk clerk;
+
+    public Producer(Clerk clerk) {
+        this.clerk = clerk;
+    }
+
+    @Override
+    public void run() {
+        while(true){
+            try {
+                sleep(100);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+
+            clerk.produceProduct();
         }
     }
 }
 
+class Customer extends Thread {
+    private Clerk clerk;
+
+    public Customer(Clerk clerk) {
+        this.clerk = clerk;
+    }
+
+    @Override
+    public void run() {
+        while (true){
+            try {
+                sleep(500);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+
+            clerk.consumeProduct();
+        }
+    }
+}
+
+class Clerk {
+    private int number = 0;
+
+    public synchronized void produceProduct(){
+        if (number < 20) {
+            number++;
+            System.out.println(Thread.currentThread().getName() + " 生产商品" + number);
+
+            notify();
+        } else {
+            try {
+                wait();
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+        }
+    }
+
+    public synchronized void consumeProduct() {
+        if (number > 0) {
+            number--;
+            System.out.println(Thread.currentThread().getName() + " 购买商品" + number);
+
+            notify();
+        } else {
+            try {
+                wait();
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+        }
+    }
+}
