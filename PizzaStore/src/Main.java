@@ -1,4 +1,3 @@
-import java.util.ArrayList;
 
 public class Main {
     public static void main(String[] args) {
@@ -9,8 +8,7 @@ public class Main {
 
 abstract class PizzaStore {
     public void orderPizza(String type) {
-        Pizza pizza = new Pizza();
-        pizza = createPizza(type);
+        Pizza pizza = createPizza(type);
         pizza.prepare();
         pizza.bake();
         pizza.cut();
@@ -24,7 +22,7 @@ class NYPizzaStore extends PizzaStore {
     @Override
     Pizza createPizza(String type) {
         if (type.equals("cheese")) {
-            return new NYStyleCheesePizza();
+            return new NYStyleCheesePizza(new NYPizzaIngredientFactory());
         } else return null;
     }
 }
@@ -33,25 +31,21 @@ class ChicagoStyleStore extends PizzaStore {
     @Override
     Pizza createPizza(String type) {
         if (type.equals("cheese")) {
-            return new ChicagoStyleCheesePizza();
+            return new ChicagoStyleCheesePizza(new ChicagoPizzaIngredientFactory());
         } else return null;
     }
 }
 
-class Pizza {
+abstract class Pizza {
     String name;
-    String dough;
-    String sauce;
-    ArrayList<String> topping = new ArrayList<>();
+    Dough dough;
+    Sauce sauce;
+    Cheese cheese;
+    Veggies[] veggies;
+    Pepperoni pepperoni;
+    Clams clams;
 
-    public void prepare() {
-        System.out.println("Preparing" + name);
-        System.out.println("Tossing dough");
-        System.out.println("Adding sauce");
-        for (int i = 0; i < topping.size(); i++) {
-            System.out.println(topping.get(i));
-        }
-    }
+    abstract void prepare();
 
     public void bake() {
         System.out.println("Baking for 45 minutes at 350");
@@ -67,26 +61,213 @@ class Pizza {
 }
 
 class NYStyleCheesePizza extends Pizza {
-    public NYStyleCheesePizza() {
-        name = "NY sauce and cheese pizza";
-        dough = "thin crust dough";
-        sauce = "Marinara Sauce";
+    private PizzaIngredientFactory factory;
 
-        topping.add("Grated cheese");
+    public NYStyleCheesePizza(PizzaIngredientFactory factory) {
+        this.factory = factory;
+    }
+
+    @Override
+    void prepare() {
+        name = "NY sauce and cheese pizza";
+        dough = factory.createDough();
+        cheese = factory.createCheese();
+        clams = factory.createClams();
+        pepperoni = factory.createPepperoni();
+        sauce = factory.createSauce();
+        veggies = factory.createVeggies();
     }
 }
 
 class ChicagoStyleCheesePizza extends Pizza {
-    public ChicagoStyleCheesePizza() {
-        name = "Chicago Style Deep Dish Cheese Pizza";
-        dough = "Extra thick crust dough";
-        sauce = "Plum tomato sauce";
+    private PizzaIngredientFactory factory;
 
-        topping.add("Shredded Mozzarella Cheese");
+    @Override
+    void prepare() {
+        name = "Chicago Style Deep Dish Cheese Pizza";
+        dough = factory.createDough();
+        cheese = factory.createCheese();
+        clams = factory.createClams();
+        pepperoni = factory.createPepperoni();
+        sauce = factory.createSauce();
+        veggies = factory.createVeggies();
+    }
+
+    public ChicagoStyleCheesePizza(PizzaIngredientFactory factory) {
+        this.factory = factory;
     }
 
     @Override
     public void cut() {
         System.out.println("Cutting the pizza into square pieces");
     }
+}
+
+interface PizzaIngredientFactory {
+    public Dough createDough();
+
+    public Cheese createCheese();
+
+    public Sauce createSauce();
+
+    public Pepperoni createPepperoni();
+
+    public Clams createClams();
+
+    public Veggies[] createVeggies();
+}
+
+class NYPizzaIngredientFactory implements PizzaIngredientFactory {
+
+    @Override
+    public Dough createDough() {
+        return new ThinCrustDough();
+    }
+
+    @Override
+    public Cheese createCheese() {
+        return new RegCheese();
+    }
+
+    @Override
+    public Sauce createSauce() {
+        return new MarinaraSauce();
+    }
+
+    @Override
+    public Pepperoni createPepperoni() {
+        return new SlicedPepperoni();
+    }
+
+    @Override
+    public Clams createClams() {
+        return new FreshClams();
+    }
+
+    @Override
+    public Veggies[] createVeggies() {
+        return new Veggies[]{new Garlic(), new Onion(), new Mushroom(), new RedPepper()};
+    }
+}
+
+class ChicagoPizzaIngredientFactory implements PizzaIngredientFactory {
+
+    @Override
+    public Dough createDough() {
+        return new ThickCrustDough();
+    }
+
+    @Override
+    public Cheese createCheese() {
+        return new RegCheese();
+    }
+
+    @Override
+    public Sauce createSauce() {
+        return new PlumTomatoSauce();
+    }
+
+    @Override
+    public Pepperoni createPepperoni() {
+        return new SlicedPepperoni();
+    }
+
+    @Override
+    public Clams createClams() {
+        return new FrozenClams();
+    }
+
+    @Override
+    public Veggies[] createVeggies() {
+        return new Veggies[]{new BlackOlive(), new Eggplant(), new Spinach(), new Mozzarella()};
+    }
+}
+
+abstract class Dough {
+
+}
+
+class ThinCrustDough extends Dough {
+
+}
+
+class ThickCrustDough extends Dough {
+
+}
+
+abstract class Cheese {
+
+}
+
+class RegCheese extends Cheese {
+
+}
+
+abstract class Sauce {
+
+}
+
+class MarinaraSauce extends Sauce {
+
+}
+
+class PlumTomatoSauce extends Sauce {
+
+}
+
+abstract class Pepperoni {
+
+}
+
+class SlicedPepperoni extends Pepperoni {
+
+}
+
+abstract class Veggies {
+
+}
+
+abstract class Clams {
+
+}
+
+class FreshClams extends Clams {
+
+}
+
+class FrozenClams extends Clams {
+
+}
+
+//蔬菜类
+class Garlic extends Veggies {
+
+}
+
+class Onion extends Veggies {
+
+}
+
+class Mushroom extends Veggies {
+
+}
+
+class RedPepper extends Veggies {
+
+}
+
+class Eggplant extends Veggies {
+
+}
+
+class Spinach extends Veggies {
+
+}
+
+class BlackOlive extends Veggies {
+
+}
+
+class Mozzarella extends Veggies {
+
 }
