@@ -1,0 +1,3 @@
+﻿  源.cpp
+D:\ideal-spoon\第七章练习\第七章练习\源.cpp(9,14): error C2084: 函数“unsigned int rrotate(unsigned int,int)”已有主体
+D:\ideal-spoon\第七章练习\第七章练习\源.cpp(5): message : 参见“rrotate”的前一个定义

@@ -1,89 +1,55 @@
+import java.lang.reflect.Field;
+import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
+
 public class Main {
-    //生产者/消费者问题
-    public static void main(String[] args) {
-        Clerk clerk = new Clerk();
-        Producer producer = new Producer(clerk);
-        Customer customer = new Customer(clerk);
-        producer.setName("生产者");
-        customer.setName("消费者");
-
-        producer.start();
-        customer.start();
+    public static void main(String[] args) throws Exception {
+        Class clazz = Cooker.class;
+        Type types = clazz.getGenericSuperclass();
+        ParameterizedType parameterizedType = (ParameterizedType) types;
+        Type[] parameter = parameterizedType.getActualTypeArguments();
+        System.out.println(((Class)parameter[0]).getName());
     }
 }
 
-class Producer extends Thread {
-    private Clerk clerk;
+class Person {
+    private String name;
+    private int age;
 
-    public Producer(Clerk clerk) {
-        this.clerk = clerk;
+    public String getName() {
+        return name;
     }
 
-    @Override
-    public void run() {
-        while(true){
-            try {
-                sleep(100);
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
-            }
-
-            clerk.produceProduct();
-        }
-    }
-}
-
-class Customer extends Thread {
-    private Clerk clerk;
-
-    public Customer(Clerk clerk) {
-        this.clerk = clerk;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    @Override
-    public void run() {
-        while (true){
-            try {
-                sleep(500);
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
-            }
+    public int getAge() {
+        return age;
+    }
 
-            clerk.consumeProduct();
-        }
+    public void setAge(int age) {
+        this.age = age;
     }
 }
 
-class Clerk {
-    private int number = 0;
+class Cooker extends Person {
+    private String food;
+    public String cook;
 
-    public synchronized void produceProduct(){
-        if (number < 20) {
-            number++;
-            System.out.println(Thread.currentThread().getName() + " 生产商品" + number);
-
-            notify();
-        } else {
-            try {
-                wait();
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
-            }
-        }
+    public String getFood() {
+        return food;
     }
 
-    public synchronized void consumeProduct() {
-        if (number > 0) {
-            number--;
-            System.out.println(Thread.currentThread().getName() + " 购买商品" + number);
+    public void setFood(String food) {
+        this.food = food;
+    }
 
-            notify();
-        } else {
-            try {
-                wait();
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
-            }
-        }
+    public String getCook() {
+        return cook;
+    }
+
+    public void setCook(String cook) {
+        this.cook = cook;
     }
 }

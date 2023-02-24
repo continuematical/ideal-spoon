@@ -16,6 +16,12 @@
 
     <string name="next_button">Next</string>
     <string name="prev_button">Prev</string>
-    
+
+    <string name="warning_text">Are you sure you want to do this?</string>
+    <string name="show_answer_button">show answer</string>
+    <string name="cheat_button">Cheat!</string>
+    <string name="judgeToast">cheating is wrong!</string>
+
     <string name="toast_score">You have %d correct answers!</string>
+    <string name="left">You have %d opportunity</string>
 </resources>
