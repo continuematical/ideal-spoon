@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:ljw="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:background="@color/background_green">
+    <ImageButton
+        android:id="@+id/pre_button"
+        android:background="@mipmap/arrow_back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"/>
+
+    <TextView
+        android:textSize="30sp"
+        android:id="@+id/paper_storage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="12dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="10dp"
+        android:text="@string/paper_store"
+        android:textColor="@color/lightgreen"
+        android:background="@drawable/stroke_shape_white"/>
+
+    <TextView
+        android:id="@+id/write_paper"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:gravity="center"
+        android:background="@drawable/stroke_shape_my_paper_storage_green"/>
+
+    <TextView
+        android:id="@+id/draw_paper"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:gravity="center"
+        android:background="@drawable/stroke_shape_my_paper_storage_green"/>
+
+    <TextView
+        android:id="@+id/my_paper_storage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/my_paper_storage"
+        android:textColor="@color/black"
+        android:textSize="30sp"
+        android:gravity="center"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:padding="20dp"
+        android:background="@drawable/stroke_shape_my_paper_storage_green"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:gravity="bottom|center">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center|bottom"
+            android:text="@string/service" />
+    </LinearLayout>
+</LinearLayout>
