@@ -3,9 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:shop/AppSize.dart';
 import 'package:shop/Resource/RegularColor.dart';
 import 'package:shop/View/CustomBar.dart';
-import 'package:shop/View/CustomIcons.dart';
 import 'package:shop/View/CustomView.dart';
-import 'package:shop/View/IconFonts.dart';
 
 class SettingPage extends StatefulWidget {
   const SettingPage({super.key});

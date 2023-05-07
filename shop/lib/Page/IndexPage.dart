@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:shop/Page/HomePage.dart';
+import 'package:shop/Page/LikeGoodPage.dart';
 import 'package:shop/Page/MemberPage.dart';
 import 'package:shop/Page/SearchPage.dart';
 import 'package:shop/Page/SettingPage.dart';
@@ -72,7 +72,7 @@ Widget _getPageBody(BuildContext context){
 //页面
 List<Widget> pages(){
   return [
-    const SettingPage(),
+    const LikeGoodPage(),
     const SearchPage(),
     const CartPage(),
     const MemberPage(),
