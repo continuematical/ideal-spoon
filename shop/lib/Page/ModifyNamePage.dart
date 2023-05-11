@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:shop/AppSize.dart';
 import 'package:shop/Resource/RegularColor.dart';
+import 'package:shop/View/CustomBar.dart';
 import 'package:shop/View/CustomView.dart';
 
 class ModifyNamePage extends StatefulWidget {
@@ -16,6 +18,26 @@ class _CreateModifyNamePageState extends State<ModifyNamePage> {
 
   @override
   Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: CustomAppBar(
+          preferredSize: Size.fromHeight(AppSize.height(160)),
+          child: CommonBackBar(
+            title: '修改姓名',
+            onBack: () => {
+            Navigator.pop(context);
+          },)),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            _buildName(),
+            _btnSave(),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildName() {
     return Container(
       color: Colors.white,
       child: Column(
@@ -44,27 +66,27 @@ class _CreateModifyNamePageState extends State<ModifyNamePage> {
                     ),
                     Expanded(
                         child: TextField(
-                      textAlign: TextAlign.end,
-                      controller: TextEditingController.fromValue(
-                          TextEditingValue(
-                              text:
+                          textAlign: TextAlign.end,
+                          controller: TextEditingController.fromValue(
+                              TextEditingValue(
+                                  text:
                                   _inputText.isEmpty ? widget.name : _inputText,
-                              selection: TextSelection.fromPosition(
-                                  TextPosition(
-                                      offset: _inputText.isEmpty
-                                          ? widget.name.length
-                                          : _inputText.length,
-                                      affinity: TextAffinity.downstream)))),
-                      decoration: const InputDecoration(
-                        border: InputBorder.none,
-                        hintText: "请输入姓名",
-                        hintStyle:
+                                  selection: TextSelection.fromPosition(
+                                      TextPosition(
+                                          offset: _inputText.isEmpty
+                                              ? widget.name.length
+                                              : _inputText.length,
+                                          affinity: TextAffinity.downstream)))),
+                          decoration: const InputDecoration(
+                            border: InputBorder.none,
+                            hintText: "请输入姓名",
+                            hintStyle:
                             TextStyle(color: Colors.grey, fontSize: 15.0),
-                      ),
-                      onChanged: (inputStr) {
-                        _inputText = inputStr;
-                      },
-                    ))
+                          ),
+                          onChanged: (inputStr) {
+                            _inputText = inputStr;
+                          },
+                        ))
                   ],
                 ),
               ],
@@ -75,4 +97,44 @@ class _CreateModifyNamePageState extends State<ModifyNamePage> {
       ),
     );
   }
+
+  Widget _btnSave() {
+    return Container(
+      margin: const EdgeInsets.only(top: 10),
+      child: Center(
+        child: Material(
+          child: Ink(
+            decoration: const BoxDecoration(
+              color: Colors.blue,
+              borderRadius: BorderRadius.all(Radius.circular(25.0)),
+            ),
+            child: InkWell(
+              borderRadius: BorderRadius.circular(25.0),
+              onTap: () {
+                if (_inputText.isEmpty) {
+                  //对话框
+                } else {
+                  loadSave();
+                }
+              },
+              child: Container(
+                width: 300.0,
+                height: 50.0,
+                alignment: const Alignment(0, 0),
+                child: const Text(
+                  "保 存",
+                  style: TextStyle(
+                    fontSize: 16.0,
+                    color: Colors.white,
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  void loadSave() {}
 }
