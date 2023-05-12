@@ -18,13 +18,14 @@ class _CreateModifyNamePageState extends State<ModifyNamePage> {
 
   @override
   Widget build(BuildContext context) {
+    AppSize.init(context);
     return Scaffold(
       appBar: CustomAppBar(
           preferredSize: Size.fromHeight(AppSize.height(160)),
           child: CommonBackBar(
             title: '修改姓名',
             onBack: () => {
-            Navigator.pop(context);
+            //Navigator.pop(context)
           },)),
       body: SingleChildScrollView(
         child: Column(

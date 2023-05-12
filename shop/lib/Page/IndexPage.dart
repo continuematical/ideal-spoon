@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:shop/Page/HomePage.dart';
 import 'package:shop/Page/LikeGoodPage.dart';
 import 'package:shop/Page/MemberPage.dart';
+import 'package:shop/Page/ModifyNamePage.dart';
 import 'package:shop/Page/SearchPage.dart';
 import 'package:shop/Page/SettingPage.dart';
 
@@ -73,7 +74,7 @@ Widget _getPageBody(BuildContext context){
 //页面
 List<Widget> pages(){
   return [
-    const HomePage(),
+    ModifyNamePage(name: "修改姓名"),
     const SearchPage(),
     const CartPage(),
     const MemberPage(),
