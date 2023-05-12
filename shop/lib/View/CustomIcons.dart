@@ -19,7 +19,7 @@ class CustomIcons {
   static const IconData daiFaHuo = IconData(0xe63e, fontFamily: 'MyIcons3');
   static const IconData yifahuo = IconData(0xe620, fontFamily: 'MyIcons3');
   static const IconData yiwancheng = IconData(0xe6d7, fontFamily: 'MyIcons3');
-  static const IconData zhifubpay = IconData(0xe68a, fontFamily: 'MyIcons4');
-  static const IconData weixinpay = IconData(0xe61b, fontFamily: 'MyIcons4');
+  static const IconData ZhiFuBaoPay = IconData(0xe68a, fontFamily: 'MyIcons4');
+  static const IconData wechatPay = IconData(0xe61b, fontFamily: 'MyIcons4');
   static const IconData sexicon = IconData(0xe611, fontFamily: 'MyIcons4');
 }

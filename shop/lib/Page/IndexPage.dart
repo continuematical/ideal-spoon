@@ -1,14 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:shop/Page/HomePage.dart';
+import 'package:shop/Page/Home/HomePage.dart';
 import 'package:shop/Page/LikeGoodPage.dart';
-import 'package:shop/Page/MemberPage.dart';
-import 'package:shop/Page/ModifyNamePage.dart';
-import 'package:shop/Page/SearchPage.dart';
-import 'package:shop/Page/SettingPage.dart';
+import 'package:shop/Page/Member/MemberPage.dart';
+import 'package:shop/Page/Member/ModifyNamePage.dart';
+import 'package:shop/Page/Search/SearchPage.dart';
+import 'package:shop/Page/Member/SettingPage.dart';
 
-import 'CartPage.dart';
+import 'Cart/CartPage.dart';
 
 class IndexPage extends StatefulWidget {
   const IndexPage({super.key});

@@ -4,7 +4,7 @@ import 'package:shop/AppSize.dart';
 import 'package:shop/View/CustomBar.dart';
 import 'package:shop/LoadStateLayout.dart';
 
-import '../Model/Good.dart';
+import '../../Model/Good.dart';
 
 class CartPage extends StatefulWidget {
   const CartPage({super.key});

@@ -3,8 +3,8 @@ import 'package:shop/AppSize.dart';
 import 'package:shop/View/CustomBar.dart';
 import 'package:shop/LoadStateLayout.dart';
 
-import '../Model/Category.dart';
-import '../Model/Good.dart';
+import '../../Model/Category.dart';
+import '../../Model/Good.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
