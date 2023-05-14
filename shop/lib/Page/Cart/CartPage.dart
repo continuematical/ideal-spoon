@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:shop/AppSize.dart';
@@ -27,6 +28,7 @@ class _CartPageState extends State<CartPage> {
 
   @override
   Widget build(BuildContext context) {
+    AppSize.init(context);
     return Scaffold(
       appBar: CustomAppBar(
         preferredSize: Size.fromHeight(AppSize.height(160)),

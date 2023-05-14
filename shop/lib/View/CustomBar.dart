@@ -150,7 +150,6 @@ class CommonTopBar extends StatelessWidget {
   }
 }
 
-
 class CommonRightBar extends StatelessWidget {
   late String title;
   late String menu;

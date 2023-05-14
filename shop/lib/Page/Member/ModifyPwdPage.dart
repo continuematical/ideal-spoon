@@ -16,8 +16,18 @@ class _CreateModifyPwdPage extends State<ModifyPwdPage> {
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
-    throw UnimplementedError();
+    return Container(
+      color: Colors.white,
+      child: Center(
+        child: Column(
+          children: [
+            _buildPwdNew(),
+            _buildPwdOld(),
+            _buildPwdAgain(),
+          ],
+        ),
+      )
+    );
   }
 
   Widget _buildPwdOld() {

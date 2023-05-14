@@ -1,12 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:shop/Page/Home/HomePage.dart';
-import 'package:shop/Page/LikeGoodPage.dart';
 import 'package:shop/Page/Member/MemberPage.dart';
 import 'package:shop/Page/Member/ModifyNamePage.dart';
 import 'package:shop/Page/Search/SearchPage.dart';
-import 'package:shop/Page/Member/SettingPage.dart';
 
 import 'Cart/CartPage.dart';
 
@@ -61,18 +58,19 @@ class _IndexPageState extends State<IndexPage> {
         ));
   }
 }
+
 final PageController _controller = PageController();
 
-Widget _getPageBody(BuildContext context){
+Widget _getPageBody(BuildContext context) {
   return PageView(
     controller: _controller,
-    physics: const NeverScrollableScrollPhysics(),//禁止滑动
+    physics: const NeverScrollableScrollPhysics(), //禁止滑动
     children: pages(),
   );
 }
 
 //页面
-List<Widget> pages(){
+List<Widget> pages() {
   return [
     ModifyNamePage(name: "修改姓名"),
     const SearchPage(),
