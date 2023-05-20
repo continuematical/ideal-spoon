@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Star Coffee</title>
+    <style type="text/css">
+        body{
+            background-color: #d2b48c;
+            margin-right: 20%;
+            margin-left: 20%;
+            border: 2px dotted black;
+            padding: 10px 10px 10px 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Star Coffee Beverages</h1>
+    <p>Join us any evening for refreshing elixirs <em>Dance</em></p>
+    <h2>House Blend, $1.49</h2>
+    <p>A smooth,mild blend of coffee from Mexico,Bolivia and Guatemala</p>
+    <h2>Mocha Coffee Latte, $2.35</h2>
+    <p>Express,steamed milk and chocolate syrup</p>
+    <h2>Cappuccino, $1.89</h2>
+    <p>A mixture of express,steamed milk and milk foam</p>
+    <h2>Chai Tea, $1.85</h2>
+    <p>A spicy drink made with black tea, spices, milk and honey</p>
+    <a href="http://www.baidu.com">百度</a>
+
+    <!--GET请求的特点是
+        1.不安全；
+        2.有长度的限制；
+
+        POST请求的特点是：
+        1.浏览器地址中只有action属性；
+        2.相对于GET来说更加安全；
+        3.理论上没有数据长度的限制；
+    -->
+    <form action="http://localhost:8080" method="get">
+        <h1 align="center">用户提交</h1>
+        <table align="center">
+            <tr>
+                <td>用户名：</td>
+                <td><input type="text" name="name" value="默认值"><br></td>
+            </tr>
+            <tr>
+                <td>密码：</td>
+                <td><input type="password" name="password"><br></td>
+            </tr>
+            <tr>
+                <td>性别：</td>
+                <td><input type="radio" checked="checked" name="sex">男<input type="radio">女<br></td>
+            </tr>
+            <tr>
+                <td>兴趣爱好：</td>
+                <td>
+                    <input type="checkbox" name="hobby">Java
+                    <input type="checkbox" checked="checked" name="hobby">JavaScript
+                    <input type="checkbox" name="hobby">C++<br>
+                </td>
+            </tr>
+            <tr>
+                <td>国籍：</td>
+                <td><select name="country">
+                    <option value="China">中国</option>
+                    <option value="America">美国</option>
+                    <option value="Japan">日本</option>
+                </select></td>
+            </tr>
+            <tr>
+                <td>自我评价：</td>
+                <td><textarea rows="10" cols="50" name="text"></textarea><br></td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="reset" value="重置">
+                    <input type="submit" value="提交">
+                    <input type="button" value="按钮">
+                </td>
+            </tr>
+        </table>
+    </form>
+</body>
+</html>
