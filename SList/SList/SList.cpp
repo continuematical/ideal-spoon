@@ -114,8 +114,7 @@ SList* SListFind(SList* phead, SLDataType x)
 }
 
 //在链表中插入元素
-void SListInsert(SList** phead, SList*pos,SLDataType x)
-{
+void SListInsert(SList** phead, SList* pos, SLDataType x) {
 	SList* newcode = BuySListNode(x);
 	if (*phead != pos)
 	{

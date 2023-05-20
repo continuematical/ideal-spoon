@@ -209,6 +209,7 @@ public class MainActivity extends AppCompatActivity {
     //检查请求代码和返回代码是否符合预期
     protected void onActivityResult(int reqCode, int resultCode, Intent data) {
         //用户未偷看答案
+        super.onActivityResult(reqCode, resultCode, data);
         if (resultCode != Activity.RESULT_OK) {
             return;
         }

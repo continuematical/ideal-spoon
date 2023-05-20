@@ -5,7 +5,7 @@ int main()
 	phead = ListNodeInit();
 	ListNodePushBack(phead, 1);
 	ListNodePushBack(phead, 2);
-	ListNodePushBack(phead,3);
+	ListNodePushBack(phead, 3);
 	ListNodePushBack(phead, 4);
 
 	ListPrint(phead);

@@ -39,6 +39,6 @@ int main()
 	reverse(string, string + k - 1);
 	reverse(string + k, string + n - 1);
 	reverse(string, string + n - 1);
-	printf("%s", string);
+	printf("%s\n", string);
 	return 0;
 }

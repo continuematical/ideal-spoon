@@ -1,5 +1,8 @@
+import 'dart:html';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:shop/AppSize.dart';
 import 'package:shop/Resource/RegularColor.dart';
 import 'package:shop/View/CustomBar.dart';
@@ -21,7 +24,8 @@ class _SettingPageState extends State {
           preferredSize: Size.fromHeight(AppSize.height(160)),
           child: CommonBackBar(
             title: "设置",
-            onBack: () => {
+            onBack: () =>
+            {
               Navigator.pop(context),
             },
           )),
