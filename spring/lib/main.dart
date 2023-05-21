@@ -40,13 +40,11 @@ class _CreateDraggableCard extends State<DraggableCard>
     with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<Alignment> _animation;
-  late Alignment _dragAliment;
+  Alignment _dragAliment = Alignment(0, 0);
 
   @override
   Widget build(BuildContext context) {
-    var size = MediaQuery
-        .of(context)
-        .size;
+    var size = MediaQuery.of(context).size;
     return GestureDetector(
       onPanStart: (details) {
         print("on pan start: $_dragAliment");
@@ -83,6 +81,8 @@ class _CreateDraggableCard extends State<DraggableCard>
     super.initState();
     _controller =
         AnimationController(vsync: this, duration: const Duration(seconds: 1));
+    _animation = _controller
+        .drive(AlignmentTween(begin: Alignment.center, end: _dragAliment));
     _animation.addListener(() {
       setState(() {
         _dragAliment = _animation.value;
@@ -102,8 +102,6 @@ class _CreateDraggableCard extends State<DraggableCard>
     //
     // final simulation = SpringSimulation(spring, 0, 1, -unitVelocity);
     // _controller.animateWith(simulation);
-    _animation = _controller.drive(
-        AlignmentTween(begin: _dragAliment, end: Alignment.center));
     _controller.reset();
     _controller.forward();
   }
