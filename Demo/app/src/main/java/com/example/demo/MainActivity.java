@@ -4,11 +4,13 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.view.ScaleGestureDetector;
 import android.view.animation.Animation;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
     private TextView mTextView;
+    private ScaleGestureDetector mDetector;
 
     @SuppressLint("MissingInflatedId")
     @Override
