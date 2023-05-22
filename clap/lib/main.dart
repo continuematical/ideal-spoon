@@ -36,29 +36,31 @@ class _MyHomePageState extends State<MyHomePage>
   int _counter = 0;
   final duration = const Duration(milliseconds: 300);
   late Timer timer;
-  late AnimationController scoreAnimationController = AnimationController(
-      vsync: this, duration: const Duration(milliseconds: 150));
+  late AnimationController scoreAnimationController =
+      AnimationController(vsync: this, duration: const Duration(seconds: 300));
+  var scorePosition = 0.0;
+  var scoreOpacity = 0.0;
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     scoreAnimationController.addListener(() {
-      setState(() {});
+      setState(() {
+        scorePosition = scoreAnimationController.value * 100;
+        scoreOpacity = scoreAnimationController.value;
+      });
     });
   }
 
   void onTapUp(TapUpDetails tap) {
     timer.cancel();
-    print("on tap up");
   }
 
   void onTapDown(TapDownDetails tap) {
     scoreAnimationController.forward(from: 0.0);
-    timer = Timer.periodic(duration, (timer) {
-      _incrementCounter(timer);
-    });
-    print("on tap down");
+    timer = Timer.periodic(duration, _incrementCounter);
+    _incrementCounter(timer);
   }
 
   void _incrementCounter(Timer timer) {
@@ -68,15 +70,14 @@ class _MyHomePageState extends State<MyHomePage>
   }
 
   Widget getScoreButton() {
-    var scorePosition = scoreAnimationController.value * 100;
-    var scoreOpacity = scoreAnimationController.value;
     return Positioned(
       bottom: scorePosition,
       child: Opacity(
-        opacity: 0.5,
+        opacity: scoreOpacity,
         child: Container(
           height: 50.0,
           width: 50.0,
+          alignment: FractionalOffset.bottomLeft,
           decoration: const ShapeDecoration(
             shape: CircleBorder(
               side: BorderSide.none,
@@ -87,9 +88,9 @@ class _MyHomePageState extends State<MyHomePage>
             child: Text(
               "+$_counter",
               style: const TextStyle(
-                  color: Colors.black,
+                  color: Colors.white,
                   fontWeight: FontWeight.bold,
-                  fontSize: 15.0),
+                  fontSize: 20.0),
             ),
           ),
         ),
@@ -125,32 +126,32 @@ class _MyHomePageState extends State<MyHomePage>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: Text(widget.title),
+      appBar: AppBar(
+        title: Text(widget.title),
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            const Text(
+              'You have pushed the button this many times:',
+            ),
+            Text(
+              '$_counter',
+              style: Theme.of(context).textTheme.headlineMedium,
+            ),
+          ],
         ),
-        body: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              const Text(
-                'You have pushed the button this many times:',
-              ),
-              Text(
-                '$_counter',
-                style: Theme.of(context).textTheme.headlineMedium,
-              ),
-            ],
-          ),
-        ),
-        floatingActionButton: Padding(
+      ),
+      floatingActionButton: Padding(
           padding: const EdgeInsets.only(right: 20.0),
           child: Stack(
-            alignment: FractionalOffset.center,
-            children: [
+            alignment: FractionalOffset.bottomRight,
+            children: <Widget>[
               getScoreButton(),
               getClapButton(),
             ],
-          ),
-        ));
+          )),
+    );
   }
 }
