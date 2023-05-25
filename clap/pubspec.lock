@@ -62,6 +62,14 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  flutter_hooks:
+    dependency: "direct dev"
+    description:
+      name: flutter_hooks
+      sha256: "7b38948cea5498c68667decfb24a48fd7e5ce663a16d1707f3db4696da64a058"
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "0.12.0"
   flutter_lints:
     dependency: "direct dev"
     description:

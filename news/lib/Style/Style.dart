@@ -6,6 +6,12 @@ class StandardTextStyle {
     fontSize: SysSize.big,
   );
 
+  static TextStyle? bigWithOpacity = TextStyle(
+    fontWeight: FontWeight.w600,
+    fontSize: SysSize.big,
+    color: const Color.fromRGBO(0xff, 0xff, 0xff, 66),
+  );
+
   static TextStyle? selectBig = TextStyle(
     fontWeight: FontWeight.w600,
     fontSize: SysSize.big,
@@ -17,9 +23,21 @@ class StandardTextStyle {
     fontSize: SysSize.normal,
   );
 
+  static TextStyle? normalWithOpacity = TextStyle(
+    fontWeight: FontWeight.normal,
+    fontSize: SysSize.normal,
+    color: const Color.fromRGBO(0xff, 0xff, 0xff, 66),
+  );
+
   static TextStyle? small = TextStyle(
     fontWeight: FontWeight.normal,
     fontSize: SysSize.small,
+  );
+
+  static TextStyle? smallWithOpacity = TextStyle(
+    fontWeight: FontWeight.normal,
+    fontSize: SysSize.small,
+    color: const Color.fromRGBO(0xff, 0xff, 0xff, 66),
   );
 }
 
@@ -49,7 +67,7 @@ class ColorPlate {
   static const Color lightGray = Color(0xfff5f5f4);
   static const Color black = Color(0xff000000);
   static const Color white = Color(0xffffffff);
-  static const Color clear = Color(0);
+  static const Color clear = Color(0x00000000);
 
   /// 深色背景
   static const Color back1 = Color(0xff1D1F22);

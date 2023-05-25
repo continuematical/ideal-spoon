@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -37,7 +38,7 @@ class _MyHomePageState extends State<MyHomePage>
   final duration = const Duration(milliseconds: 300);
   late Timer timer;
   late AnimationController scoreAnimationController =
-      AnimationController(vsync: this, duration: const Duration(seconds: 300));
+  AnimationController(vsync: this, duration: const Duration(seconds: 300));
   var scorePosition = 0.0;
   var scoreOpacity = 0.0;
 
@@ -138,7 +139,10 @@ class _MyHomePageState extends State<MyHomePage>
             ),
             Text(
               '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
+              style: Theme
+                  .of(context)
+                  .textTheme
+                  .headlineMedium,
             ),
           ],
         ),
