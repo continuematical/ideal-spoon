@@ -52,6 +52,9 @@ export default struct ProgressEditPanel {
       .width(CommonConstants.FULL_WIDTH)
       .justifyContent(FlexAlign.SpaceBetween)
     }
+    .height($r('app.float.edit_panel_height'))
+    .width(CommonConstants.FULL_WIDTH)
+    .justifyContent(FlexAlign.End)
   }
 }
 
