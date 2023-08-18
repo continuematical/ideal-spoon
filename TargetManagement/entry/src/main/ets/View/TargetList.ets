@@ -1,33 +1,80 @@
 import TaskItemBean from '../common/bean/TaskItemBean'
 import { CommonConstants } from '../common/constants/CommonConstants'
+import { isSelectedAll, selectAllOrCancel } from '../ViewModel/TaskListViewModel'
 import TargetListItem from './TargetListItem'
 
 @Component
 export default struct TargetList {
   //项目列表
   @Link targetData: Array<TaskItemBean>
+  //是否为编辑模式
   @State isEditMode: boolean = false
   //选择的列表项
   @State selectArray: Array<boolean> = []
+  //是否全部选择
+  @State selectAll: boolean = false
+  //是否改变进度条
   @Consume overallProgressChanged: boolean
+  //当前点击按钮
   @State clickIndex: number = CommonConstants.DEFAULT_CLICK_INDEX
+  onAddClick: () => void
 
   build() {
     Column() {
-      Row()
+      Row() {
+        Text($r('app.string.sub_goals'))
+          .fontSize($r('app.float.secondary_title'))
+          .fontWeight(CommonConstants.FONT_WEIGHT_LARGE)
+          .fontColor($r('app.color.title_black_color'))
 
-      Blank()
+        Blank()
+
+        if (this.targetData.length > 0) {
+          if (this.isEditMode) {
+            Text($r('app.string.cancel_button'))
+              .operateTextStyle($r('app.color.main_blue'))
+              .margin({
+                left: $r('app.float.operate_button_margin')
+              })
+              .onClick(() => {
+                this.selectAll = false
+                this.isEditMode = false
+                selectAllOrCancel.call(this, false)
+              })
+
+            Text($r('app.string.select_all_button'))
+              .operateTextStyle($r('app.color.main_blue'))
+              .margin({
+                left: $r('app.float.operate_button_margin')
+              })
+
+            Checkbox()
+              .select(isSelectedAll.call(this))
+
+          } else {
+            Text($r('app.string.edit_button'))
+              .operateTextStyle($r('app.color.main_blue'))
+              .onClick(() => {
+                this.isEditMode = true
+                selectAllOrCancel.call(this, false)
+              })
+          }
+        }
+      }
 
       List({
         space: CommonConstants.LIST_SPACE
       }) {
         ForEach(this.targetData, (item: TaskItemBean, index: number) => {
-          ListItem(){
+          ListItem() {
             TargetListItem({
-
+              clickIndex: $clickIndex,
+              selectedArr: $selectArray,
+              isEditMode: this.isEditMode,
+              index: index,
             })
           }
-        })
+        }, (item, index) => JSON.stringify(item) + index)
       }
 
       Blank()
