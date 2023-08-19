@@ -25,6 +25,7 @@ export function isSelectRows(): boolean {
   return this.selectArray.filter(selected => selected === true).length !== 0
 }
 
+//全部置换为某种状态
 export function selectAllOrCancel(selectStatus: boolean) {
   let newSelectArray = []
   this.targetData.forEach(() => {

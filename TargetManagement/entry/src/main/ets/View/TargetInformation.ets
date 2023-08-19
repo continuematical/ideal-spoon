@@ -74,7 +74,7 @@ export default struct TargetInformation {
             .fontColor($r('app.color.main_blue'))
             .fontWeight(CommonConstants.FONT_WEIGHT)
 
-          Text('/${this.totalTaskNumber}')
+          Text(`/${this.totalTaskNumber}`)
             .fontSize($r('app.float.progress_font'))
             .fontWeight(CommonConstants.FONT_WEIGHT)
         }
