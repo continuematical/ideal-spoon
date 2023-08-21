@@ -1,5 +1,4 @@
-// @ts-nocheck
-import securityLabel from '@ohos.file.securityLabel'
+// @ts-check
 import CommonConstants from '../contants/CommonConstants'
 import Logger from './Logger'
 
@@ -51,8 +50,8 @@ export class CommonUtils {
     TextPickerDialog.show({
       range: sexArray,
       selected: 0,
-      onAccept: ((value: TextPickerResult) => {
-        sexCallback(value.value)
+      onAccept: ((result: TextPickerResult) => {
+        sexCallback(result.value)
       }),
       onCancel: (() => {
         Logger.info(CommonConstants.TAG_COMMON_UTILS, 'TextPickerDialog onCancel')
@@ -67,10 +66,10 @@ export class CommonUtils {
   }
 
   isEmptyArr(array): boolean {
-    return this.isEmptyArr(array) || array.length === 0
+    return this.isEmpty(array) || array.length === 0
   }
 
-  idEmpty(obj): boolean {
+  isEmpty(obj): boolean {
     return obj === undefined || obj === null || obj === '';
   }
 }
