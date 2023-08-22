@@ -25,6 +25,7 @@ struct MainPage {
 
   build() {
     Tabs({ barPosition: BarPosition.End, controller: this.tabsController }) {
+      //Home
       TabContent() {
         Home()
       }
@@ -37,6 +38,7 @@ struct MainPage {
         , CommonConstants.HOME_TAB_INDEX
         , $r('app.media.home_selected'), $r('app.media.home_normal')))
 
+      //Settings
       TabContent(){
         Settings()
       }
@@ -52,7 +54,7 @@ struct MainPage {
     .width(CommonConstants.FULL_PARENT)
     .backgroundColor(Color.White)
     .barHeight($r('app.float.mainPage_barHeight'))
-    .barMode(BarMode.Fixed)
+    .barMode(BarMode.Fixed)//平均分配宽度
     .onChange((index: number) => {
       this.currentIndex = index;
     })

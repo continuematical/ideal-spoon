@@ -9,6 +9,7 @@ export default struct Home {
   build() {
     Scroll() {
       Column({ space: CommonConstants.COMMON_SPACE }) {
+
         Column() {
           Text($r('app.string.mainPage_tabTitles_home'))
             .fontSize($r('app.float.page_title_text_size'))
@@ -47,9 +48,9 @@ export default struct Home {
             }
           }, item => JSON.stringify(item))
         }
-        .columnsTemplate('1fr 1fr 1fr 1fr')
+        .columnsTemplate('1fr 1fr 1fr 1fr')//设置当前网格布局列的数量
         .rowsTemplate('1fr 1fr')
-        .columnsGap($r('app.float.home_grid_columnsGap'))
+        .columnsGap($r('app.float.home_grid_columnsGap'))//列与列的行距
         .rowsGap($r('app.float.home_grid_rowGap'))
         .padding({
           top: $r('app.float.home_grid_padding'),
@@ -58,6 +59,7 @@ export default struct Home {
         .height($r('app.float.home_grid_height'))
         .backgroundColor(Color.White)
         .borderRadius($r('app.float.home_grid_borderRadius'))
+
 
         Text($r('app.string.home_list'))
           .fontSize($r('app.float.normal_text_size'))

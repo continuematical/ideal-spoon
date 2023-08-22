@@ -38,14 +38,15 @@ struct Index {
       console.log('密码账号为空')
       Prompt.showToast({
         // @ts-ignore
-        message: $r('app.string.input_empty_tips')
+        message: $r('app.string.input_empty_tips'),
       })
     } else {
       this.isShowProgress = true;
       if (this.timeOutId === null) {
+        //设置一个定时器，一定时间后执行一个函数
         this.timeOutId = setTimeout(() => {
-          this.isShowProgress = false;
-          this.timeOutId = null;
+          this.isShowProgress = false
+          this.timeOutId = null
           router.replaceUrl({
             url: 'pages/MainPage'
           });
@@ -159,6 +160,7 @@ struct Index {
         .fontSize($r('app.float.little_text_size'))
         .fontWeight(FontWeight.Medium)
         .margin({ top: $r('app.float.other_login_margin_top'), bottom: $r('app.float.other_login_margin_bottom') })
+
       Row({ space: CommonConstants.LOGIN_METHODS_SPACE }) {
         this.imageButton($r('app.media.login_method1'))
         this.imageButton($r('app.media.login_method2'))

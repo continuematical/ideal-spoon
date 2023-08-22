@@ -24,6 +24,7 @@ export default struct Settings {
     }
     .justifyContent(FlexAlign.SpaceBetween)
     .width(CommonConstants.FULL_PARENT)
+    .height($r('app.float.setting_list_height'))
     .padding({
       left: $r('app.float.setting_settingCell_left'),
       right: $r('app.float.setting_settingCell_right')
