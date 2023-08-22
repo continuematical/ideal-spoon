@@ -46,11 +46,10 @@ struct Index {
         this.timeOutId = setTimeout(() => {
           this.isShowProgress = false;
           this.timeOutId = null;
-          console.log('已经跳转')
           router.replaceUrl({
             url: 'pages/MainPage'
-          }, CommonConstants.LOGIN_DELAY_TIME)
-        })
+          });
+        }, CommonConstants.LOGIN_DELAY_TIME)
       }
     }
   }
@@ -74,13 +73,16 @@ struct Index {
 
   build() {
     Column() {
+
       Image($r('app.media.logo'))
         .width($r('app.float.logo_image_size'))
         .height($r('app.float.logo_image_size'))
+
       Text($r('app.string.login_page'))
         .fontSize($r('app.float.page_title_text_size'))
         .fontWeight(FontWeight.Medium)
         .fontColor($r('app.color.title_text_color'))
+
       Text($r('app.string.login_more'))
         .fontSize($r('app.float.normal_text_size'))
         .fontColor($r('app.color.login_more_text_color'))
