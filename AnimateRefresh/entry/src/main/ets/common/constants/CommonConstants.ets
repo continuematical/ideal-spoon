@@ -56,5 +56,11 @@ export default class CommonConstants {
   /**
    * index tab item feature
    */
-  static readonly INDEX_TAB = [];
+  static readonly INDEX_TAB = [
+    {
+      selectedIcon: "",
+      defaultIcon: "",
+    },
+    {}
+  ];
 }

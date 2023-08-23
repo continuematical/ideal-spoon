@@ -7,7 +7,7 @@ struct Index {
 
   @Builder TabBuilder(item, index) {
     Column() {
-
+      Text()
     }
   }
 
@@ -17,8 +17,12 @@ struct Index {
       index: this.currentPageIndex
     }) {
       ForEach(CommonConstants.INDEX_TAB, (item, index) => {
-        TabContent()
-          .tabBar(this.TabBuilder(item, index))
+        TabContent() {
+          if (index === CommonConstants.INDEX_DEFAULT_SELECT){
+
+          }
+        }
+        .tabBar(this.TabBuilder(item, index))
       }, item => JSON.stringify(item))
     }
   }
