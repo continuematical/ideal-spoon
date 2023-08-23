@@ -21,7 +21,7 @@ export default class DimensionUtil {
     let beforeVp = context.resourceManager.getNumber(value.id);
     return px2vp(this.adaptDimension(beforeVp));
   }
-  
+
   static getFp(value: Resource): number {
     let beforeFp = context.resourceManager.getNumber(value.id);
     return px2fp(this.adaptDimension(beforeFp));

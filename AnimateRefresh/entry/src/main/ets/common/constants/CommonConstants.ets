@@ -58,9 +58,29 @@ export default class CommonConstants {
    */
   static readonly INDEX_TAB = [
     {
-      selectedIcon: "",
-      defaultIcon: "",
+      selectedIcon: $r('app.media.ic_tab_main_select'),
+      defaultIcon: $r('app.media.ic_tab_main_default'),
+      content: '首页'
     },
-    {}
+    {
+      selectedIcon: $r('app.media.ic_tab_file_select'),
+      defaultIcon: $r('app.media.ic_tab_file_default'),
+      content: '文件'
+    },
+    {
+      selectedIcon: $r('app.media.ic_tab_cloud_select'),
+      defaultIcon: $r('app.media.ic_tab_cloud_default'),
+      content: '云村'
+    },
+    {
+      selectedIcon: $r('app.media.ic_tab_copy_select'),
+      defaultIcon: $r('app.media.ic_tab_copy_default'),
+      content: '备份'
+    },
+    {
+      selectedIcon: $r('app.media.ic_tab_mine_select'),
+      defaultIcon: $r('app.media.ic_tab_mine_default'),
+      content: '我的'
+    }
   ];
 }
