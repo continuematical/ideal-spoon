@@ -9,6 +9,7 @@ export default struct RefreshComponent {
   private displayHeight: number
   //状态
   @Consume(RefreshConstants.REFRESH_STATE_TAG) @Watch('onStateChange') state: number;
+  @BuilderParam itemLayout: () => void
 
   aboutToAppear() {
     //正在刷新
