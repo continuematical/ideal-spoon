@@ -5,6 +5,7 @@ import StyleConstants from '../common/constants/StyleConstants'
 export default struct SettingItemComponent {
   itemClick: () => void
   settingData: SettingData
+  @Prop changeFontSize: number
 
   build() {
     Row() {
@@ -17,7 +18,9 @@ export default struct SettingItemComponent {
         })
 
       Text(this.settingData.settingName)
-        .fontSize()
+        .fontSize(this.changeFontSize + StyleConstants.UNIT_FP)
+        .fontColor($r('app.color.text'))
+        .fontWeight(FontWeight.Medium)
     }
     .width(StyleConstants.FULL_WIDTH)
     .height($r('app.float.setting_item_height'))

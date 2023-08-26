@@ -5,11 +5,11 @@
       "value": "description"
     },
     {
-      "name": "Entry_ability_desc",
+      "name": "EntryAbility_desc",
       "value": "description"
     },
     {
-      "name": "Entry_ability_label",
+      "name": "EntryAbility_label",
       "value": "SetAppFontSize"
     },
     {

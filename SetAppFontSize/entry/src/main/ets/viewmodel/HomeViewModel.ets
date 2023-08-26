@@ -9,12 +9,33 @@ export class HomeViewModel {
 
       let settingData = new SettingData()
       settingData.settingName = $r('app.string.home_display_and_brightness')
+      settingData.settingImage = $r('app.media.ic_display_and_brightness')
+      this.settingArr.push(settingData)
 
       settingData = new SettingData()
       settingData.settingName = $r('app.string.home_voice')
+      settingData.settingImage = $r('app.media.ic_voice')
+      this.settingArr.push(settingData)
 
       settingData = new SettingData()
       settingData.settingName = $r('app.string.home_app_management')
+      settingData.settingImage = $r('app.media.ic_app_management')
+      this.settingArr.push(settingData)
+
+      settingData = new SettingData()
+      settingData.settingName = $r('app.string.home_storage')
+      settingData.settingImage = $r('app.media.ic_storage')
+      this.settingArr.push(settingData)
+
+      settingData = new SettingData()
+      settingData.settingName = $r('app.string.home_privacy')
+      settingData.settingImage = $r('app.media.ic_privacy')
+      this.settingArr.push(settingData)
+
+      settingData = new SettingData()
+      settingData.settingName = $r('app.string.home_setting_the_font_size')
+      settingData.settingImage = $r('app.media.ic_setting_the_font_size')
+      this.settingArr.push(settingData)
     }
     return this.settingArr
   }
