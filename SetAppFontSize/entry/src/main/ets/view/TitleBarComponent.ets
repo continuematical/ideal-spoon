@@ -4,6 +4,10 @@ export default struct TitleBarComponent {
   private title: Resource
 
   build() {
+    Column(){
+      Text()
 
+      
+    }
   }
 }
