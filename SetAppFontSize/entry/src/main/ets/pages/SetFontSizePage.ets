@@ -1,10 +1,15 @@
+import ChatData from '../common/bean/ChatData'
+import { ItemDirection } from '../common/bean/ItemDirection'
 import CommonConstants from '../common/constants/CommonConstants'
 import StyleConstants from '../common/constants/StyleConstants'
+import ChatItemComponent from '../view/ChatItemComponent'
 import TitleBarComponent from '../view/TitleBarComponent'
+import SetViewModel from '../viewmodel/SetViewModel'
 
 @Entry
 @Component
 export default struct SetFontSizePage {
+  private chatArr: Array<ChatData> = SetViewModel.initChatData()
   @State changeFontSize: number = 0
   @State fontSizeText: Resource = $r('app.string.set_font_size')
 
@@ -17,7 +22,14 @@ export default struct SetFontSizePage {
 
       if (this.changeFontSize > 0) {
         List() {
-
+          ForEach(this.chatArr, (item, index) => {
+            ListItem() {
+              ChatItemComponent({
+                chatData: item,
+                changeFontSize: this.changeFontSize,
+              })
+            }
+          }, item => item.content.id.toString())
         }
       }
 
