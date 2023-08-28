@@ -78,6 +78,9 @@ struct Index {
       }
       .blockBackground(StyleConstants.BLOCK_TOP_MARGIN_SECOND_PERCENT)
     }
+    .width(StyleConstants.FULL_WIDTH)
+    .height(StyleConstants.FULL_HEIGHT)
+    .backgroundColor($r('sys.color.ohos_id_color_sub_background'))
   }
 }
 

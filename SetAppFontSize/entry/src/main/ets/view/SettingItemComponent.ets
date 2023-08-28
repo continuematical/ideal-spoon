@@ -25,7 +25,7 @@ export default struct SettingItemComponent {
     .width(StyleConstants.FULL_WIDTH)
     .height($r('app.float.setting_item_height'))
     .onClick(() => {
-      this.itemClick
+      this.itemClick()
     })
   }
 }
