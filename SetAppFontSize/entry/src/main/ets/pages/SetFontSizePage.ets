@@ -20,7 +20,7 @@ export default struct SetFontSizePage {
         isBack: true
       })
 
-      if (this.changeFontSize > 0) {
+      //if (this.changeFontSize > 0) {
         List() {
           ForEach(this.chatArr, (item, index) => {
             ListItem() {
@@ -31,7 +31,7 @@ export default struct SetFontSizePage {
             }
           }, item => item.content.id.toString())
         }
-      }
+      //}
 
       SlideLayout({
         fontSizeText: $fontSizeText,
