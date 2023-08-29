@@ -27,6 +27,11 @@ export default struct ChatItemComponent {
     }
     .alignItems(VerticalAlign.Top)
     .width(StyleConstants.FULL_WIDTH)
+    .margin({
+      top: StyleConstants.CHAT_TOP_MARGIN_PERCENT
+    })
+    .direction(this.chatData.itemDirection === ItemDirection.RIGHT
+      ? Direction.Rtl : Direction.Ltr)
   }
 }
 

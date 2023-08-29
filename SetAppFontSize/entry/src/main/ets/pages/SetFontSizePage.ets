@@ -11,7 +11,7 @@ import SetViewModel from '../viewmodel/SetViewModel'
 export default struct SetFontSizePage {
   private chatArr: Array<ChatData> = SetViewModel.initChatData()
   @State changeFontSize: number = 0
-  @State fontSizeText: Resource = $r('app.string.set_font_size')
+  @State fontSizeText: Resource = $r('app.string.set_size_normal')
 
   build() {
     Column() {
@@ -20,7 +20,7 @@ export default struct SetFontSizePage {
         isBack: true
       })
 
-      //if (this.changeFontSize > 0) {
+      if (this.changeFontSize > 0) {
         List() {
           ForEach(this.chatArr, (item, index) => {
             ListItem() {
@@ -31,7 +31,8 @@ export default struct SetFontSizePage {
             }
           }, item => item.content.id.toString())
         }
-      //}
+        .layoutWeight(StyleConstants.WEIGHT_FULL)
+      }
 
       SlideLayout({
         fontSizeText: $fontSizeText,
@@ -87,8 +88,11 @@ struct SlideLayout {
             .showSteps(true)
               //是否显示步数大小
             .width(StyleConstants.SLIDER_WIDTH_PERCENT)
+              //系统存储数据
             .onChange((value) => {
-              this.changeFontSize = value
+              this.changeFontSize = value === CommonConstants.SET_SLIDER_MAX
+                ? CommonConstants.SET_SIZE_HUGE : value
+              this.fontSizeText = SetViewModel.getTextByFontSize(this.changeFontSize)
             })
 
           Text($r('app.string.set_char_a'))
