@@ -1,3 +1,4 @@
+import preferences from '@ohos.data.preferences'
 import dataPreferences from '@ohos.data.preferences'
 import StyleConstants from '../constants/StyleConstants'
 import Logger from '../util/Logger'
@@ -33,15 +34,29 @@ export class PreferencesUtil {
   }
 
   saveChangeFontSize(fontSize: number) {
-
+    globalThis.getFontPreferences().then(async (preferences) => {
+      await preferences.put(KEY_APP_FONT_SIZE, fontSize);
+      preferences.flush()
+    }).error((error) => {
+      Logger.error(TAG, 'put the preferences failed,err: ' + error)
+    })
   }
 
   async getChangeFontSize() {
-
+    let fontSize: number = 0
+    const preferences = await globalThis.getFontPreferences()
+    fontSize = await preferences.get(KEY_APP_FONT_SIZE, fontSize)
+    return fontSize
   }
 
   async deleteChangeFontSize() {
-
+    const preferences: dataPreferences.Preferences = await globalThis.getFontPreferences()
+    let deleteValue = preferences.delete(KEY_APP_FONT_SIZE)
+    deleteValue.then(() => {
+      Logger.info(TAG, 'Succeeded in deleting the key appFontSize')
+    }).catch((error) => {
+      Logger.error(TAG, 'Failed to delete the key appFontSize. Cause: ' + error)
+    })
   }
 }
 
