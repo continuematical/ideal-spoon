@@ -64,51 +64,43 @@ struct Index {
 
 
   //进度条通知
-  publishNotification() {
-    //是否支持进度条模板
-    notification.isSupportTemplate('downloadTemplate').then((data) => {
-      console.info('[ANS] isSupportTemplate success')
-
-    }).catch((error) => {
-      console.error(`[ANS] isSupportTemplate failed,error[${error}]`)
-    })
-
+  // publishNotification() {
+  //   //是否支持进度条模板
+  //   notification.isSupportTemplate('downloadTemplate').then((data) => {
+  //     console.info('[ANS] isSupportTemplate success')
+  //
+  //   }).catch((error) => {
+  //     console.error(`[ANS] isSupportTemplate failed,error[${error}]`)
+  //   })
     //构造进度条模板
-    let template = {
-      name: 'downloadTemplate',
-      data: {
-        progressValue: 60,
-        progressMaxValue: 100
-      }
-    }
-
-    let notificationRequest: notification.NotificationRequest = {
-      id: 3,
-      content: {
-        contentType: notification.ContentType.NOTIFICATION_CONTENT_BASIC_TEXT,
-        normal: {
-          title: '文件下载',
-          text: 'senTemplate',
-          additionalText: '60%'
-        },
-      },
-      template: template,
-    }
-    notification.publish(notificationRequest).then(()=>{
-      console.info('publish success')
-    }).catch(error=>{
-      console.error(`publish failed,dcode:${error.code},message:${error.message}`)
-    })
-  }
+  //   let template = {
+  //     name: 'downloadTemplate',
+  //     data: {
+  //       progressValue: 60,
+  //       progressMaxValue: 100
+  //     }
+  //   }
+  //
+  //   let notificationRequest: notification.NotificationRequest = {
+  //     id: 3,
+  //     content: {
+  //       contentType: notification.ContentType.NOTIFICATION_CONTENT_BASIC_TEXT,
+  //       normal: {
+  //         title: '文件下载',
+  //         text: 'senTemplate',
+  //         additionalText: '60%'
+  //       },
+  //     },
+  //     template: template,
+  //   }
+  //   notification.publish(notificationRequest).then(()=>{
+  //     console.info('publish success')
+  //   }).catch(error=>{
+  //     console.error(`publish failed,dcode:${error.code},message:${error.message}`)
+  //   })
+  // }
 
   build() {
-    Column() {
-      Text("hello")
-        .fontSize('24fp')
-        .onClick(() => {
-          this.publishNotification()
-        })
-    }
-    .width('100%')
+
   }
 }
