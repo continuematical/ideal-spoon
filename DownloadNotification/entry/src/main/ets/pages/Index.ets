@@ -101,6 +101,14 @@ struct Index {
   // }
 
   build() {
+    Column(){
+      Text()
 
+      Row() {
+        Column()
+
+        Column()
+      }
+    }
   }
 }
