@@ -1,11 +1,13 @@
 import notification from '@ohos.notificationManager'
 import image from '@ohos.multimedia.image'
 import wantAgent from '@ohos.wantAgent'
+import CommonConstants from '../common/constants/CommonConstants'
 
 @Entry
 @Component
 struct Index {
   @State message: string = 'Hello World'
+  @State downloadProgress: number = 0
 
   //普通文字通知
   // publishNotification() {
@@ -72,7 +74,7 @@ struct Index {
   //   }).catch((error) => {
   //     console.error(`[ANS] isSupportTemplate failed,error[${error}]`)
   //   })
-    //构造进度条模板
+  //构造进度条模板
   //   let template = {
   //     name: 'downloadTemplate',
   //     data: {
@@ -101,14 +103,76 @@ struct Index {
   // }
 
   build() {
-    Column(){
+    Column() {
       Text($r('app.string.title'))
+        .fontSize($r('app.float.title_font_size'))
+        .fontWeight(CommonConstants.FONT_WEIGHT_LAGER)
+        .width(CommonConstants.TITLE_WIDTH)
+        .textAlign(TextAlign.Start)
+        .margin({
+          top: $r('app.float.title_margin_top'),
+          left: $r('app.float.title_margin_top')
+        })
 
       Row() {
         Column()
 
-        Column()
+        Column() {
+          Text(CommonConstants.DOWNLOAD_FILE)
+            .fontSize($r('app.float.name_font_size'))
+            .textAlign(TextAlign.Center)
+            .fontWeight(CommonConstants.FONT_WEIGHT_LAGER)
+            .lineHeight($r('app.float.name_font_height'))
+
+          Text(`${this.downloadProgress}`)
+            .fontSize($r('app.float.normal_font_size'))
+            .lineHeight($r('app.float.name_font_height'))
+            .opacity(CommonConstants.FONT_OPACITY)
+        }
+        .justifyContent(FlexAlign.SpaceBetween)
+        .width(CommonConstants.FULL_LENGTH)
+
+        Progress({
+          value: this.downloadProgress,
+          total: CommonConstants.PROGRESS_TOTAL
+        })
+          .width(CommonConstants.FULL_LENGTH)
+
+        Row() {
+          Text(CommonConstants.FILE_SIZE)
+            .fontSize($r('app.float.normal_font_size'))
+            .lineHeight($r('app.float.name_font_height'))
+            .opacity(CommonConstants.FONT_OPACITY)
+        }
+        .width(CommonConstants.FULL_LENGTH)
       }
     }
   }
+
+  async resume() {
+
+  }
+
+  async cancel() {
+
+  }
+
+  open() {
+
+  }
+
+  @Builder customButton(textResource: Resource, click: Function) {
+    Button(textResource)
+      .onClick(() => {
+        click()
+      })
+  }
+
+  @Builder cancelButton() {
+    Button($r('app.string.button_cancel'))
+  }
+}
+
+@Extend(Button) buttonStyle(){
+
 }
