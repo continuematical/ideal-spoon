@@ -102,7 +102,7 @@ struct Index {
 
   build() {
     Column(){
-      Text()
+      Text($r('app.string.title'))
 
       Row() {
         Column()
