@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+//一个进度对话框
 public class MainActivity extends AppCompatActivity {
     private Button dialog;
 
@@ -20,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        dialog=findViewById(R.id.dialog);
+        dialog = findViewById(R.id.dialog);
         dialog.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -29,8 +30,8 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    public void showDialog(){
-        ProgressDialog dialog=new ProgressDialog(MainActivity.this);
+    public void showDialog() {
+        ProgressDialog dialog = new ProgressDialog(MainActivity.this);
         dialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
         dialog.setIndeterminate(false);
         dialog.setProgress(0);//设置初始进度
@@ -39,13 +40,13 @@ public class MainActivity extends AppCompatActivity {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                int p=0;
-                while(p<100){
-                    try{
+                int p = 0;
+                while (p < 100) {
+                    try {
                         Thread.sleep(100);
                         p++;
                         dialog.setProgress(p);
-                    }catch (InterruptedException e){
+                    } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
                 }
