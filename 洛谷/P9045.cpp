@@ -1,4 +1,5 @@
 //https://www.luogu.com.cn/problem/P9045
+
 #include<bits/stdc++.h>
 using namespace std;
 long long n,k,a,ans,d;
