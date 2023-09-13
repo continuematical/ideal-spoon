@@ -42,6 +42,7 @@ class _MyHomePageState extends State<MyHomePage>
   var scorePosition = 0.0;
   var scoreOpacity = 0.0;
 
+  //初始化界面
   @override
   void initState() {
     // TODO: implement initState
