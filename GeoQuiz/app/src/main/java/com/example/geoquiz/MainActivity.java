@@ -34,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
 
     private final static String Answer_list = "answer_list";
 
+    //设置问题数组
     private Question[] mQuestionBank = new Question[]{
             new Question(R.string.question_africa, false),
             new Question(R.string.question_americas, true),
@@ -43,8 +44,8 @@ public class MainActivity extends AppCompatActivity {
             new Question(R.string.question_australia, true)
     };
 
-    private int mCurrentIndex = 0;
-    int correctAnswer = 0;
+    private int mCurrentIndex = 0;//当前问题的编号
+    int correctAnswer = 0;//正确回答计数
 
     private final static String TAG = "MainActivity";
     private final static String KEY_INDEX = "index";
@@ -178,6 +179,7 @@ public class MainActivity extends AppCompatActivity {
         //获取问题答案
         boolean answerIsTrue = mQuestionBank[mCurrentIndex].isAnswerTrue();
         int messageResId = 0;
+        //如果作弊
         if (mIsCheater[mCurrentIndex]) {
             Toast.makeText(this, R.string.judgeToast, Toast.LENGTH_SHORT).show();
         } else {
