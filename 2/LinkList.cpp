@@ -50,15 +50,13 @@ Status PriorElem(LinkList& L, ElemType cur_e, ElemType& pre_e){
 	LinkList p=L->next;
 	LNode* s=L;//保存前驱 
 	while(p){
-		s=p;p=p->next;
-		//cout<<s->data<<" "<<p->data<<endl; 
 		if(p->data==cur_e){
 			if(s==L)	return ERROR; 
 			pre_e=s->data;
 			return OK;
 		}
+		s=p;p=p->next;
 	}
-	//cout<<s->data<<endl;
 }
 
 //9.返回后继
