@@ -32,7 +32,11 @@ public class CircularCoverView extends View {
     public CircularCoverView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
 
+        //提取特性
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.CircularCoverView);
+        leftBottomRadius = typedArray.getDimensionPixelSize(R.styleable.CircularCoverView_left_bottom_radius, leftBottomRadius);
+        leftTopRadius = typedArray.getDimensionPixelSize(R.styleable.CircularCoverView_left_top_radius, leftTopRadius);
+
     }
 
     public void setCoverColor(@ColorInt int coverColor) {
