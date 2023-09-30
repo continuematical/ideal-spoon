@@ -1,4 +1,4 @@
-package com.example.star;
+package com.example.star.DataBase;
 
 public class MessageBean {
     private int id;

@@ -1,4 +1,4 @@
-package com.example.star;
+package com.example.star.DataBase;
 
 //历史直播
 public class HistoryBean {

@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_marginRight="16dp"
     android:gravity="center_vertical">
     <RelativeLayout
@@ -11,7 +12,17 @@
         android:layout_marginTop="20dp"
         android:layout_marginBottom="20dp"
         android:gravity="center">
-
+        <com.example.star.UI.CircularCoverView
+            android:id="@+id/head_over"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:layout_centerInParent="true"
+            app:left_top_radius="28dp"/>
+        <ImageView
+            android:id="@+id/head_img"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_centerInParent="true"/>
     </RelativeLayout>
     <LinearLayout
         android:layout_width="match_parent"
@@ -48,6 +59,7 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
             <View
+                android:id="@+id/item_msg"
                 android:layout_width="match_parent"
                 android:layout_height="30dp"
                 android:layout_weight="1"/>
@@ -55,11 +67,13 @@
                 android:id="@+id/item_count"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:background="@drawable/btn_style_red_normal"
                 android:text="0"
                 android:textColor="#ffffff"
                 android:textSize="14sp"
                 android:paddingLeft="5dp"
                 android:paddingRight="5dp"
+                android:layout_marginLeft="10dp"
                 android:gravity="right|center_vertical"/>
         </LinearLayout>
     </LinearLayout>

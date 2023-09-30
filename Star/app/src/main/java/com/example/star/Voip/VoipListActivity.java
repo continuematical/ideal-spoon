@@ -2,6 +2,7 @@ package com.example.star.Voip;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,8 +13,10 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.star.BaseActivity;
-import com.example.star.HistoryBean;
+import com.example.star.DataBase.HistoryBean;
 import com.example.star.R;
+import com.example.star.UI.CircularCoverView;
+import com.example.star.Utils.ColorUtils;
 
 import java.util.List;
 
@@ -69,7 +72,31 @@ public class VoipListActivity extends BaseActivity {
             final ViewHolder itemHolder;
             if (convertView == null) {
                 itemHolder = new ViewHolder();
+                convertView = inflater.inflate(R.layout.item_voip_list, null);
 
+                itemHolder.vUserId = (TextView) convertView.findViewById(R.id.item_id);
+                itemHolder.vCount = (TextView) convertView.findViewById(R.id.item_count);
+                itemHolder.vHeadImage = (ImageView) convertView.findViewById(R.id.head_img);
+                itemHolder.vHeadBg = convertView.findViewById(R.id.head_bg);
+                itemHolder.vTime = (TextView) convertView.findViewById(R.id.item_time);
+                itemHolder.vHeadCover = (CircularCoverView) convertView.findViewById(R.id.head_over);
+
+                convertView.setTag(itemHolder);
+            } else {
+                itemHolder = (ViewHolder) convertView.getTag();
+            }
+
+            String userID = mHistoryList.get(position).getConversationID();
+            itemHolder.vUserId.setText(userID);
+            itemHolder.vHeadCover.setCoverColor(Color.parseColor("#ffffff"));
+            itemHolder.vTime.setText(mHistoryList.get(position).getLastTime());
+            itemHolder.vHeadBg.setBackgroundColor(ColorUtils.getColor(VoipListActivity.this, userID));
+
+            if (mHistoryList.get(position).getNewMsgCount() == 0) {
+                itemHolder.vCount.setVisibility(View.INVISIBLE);
+            } else {
+                itemHolder.vCount.setText("" + mHistoryList.get(position).getNewMsgCount());
+                itemHolder.vCount.setVisibility(View.VISIBLE);
             }
             return null;
         }
@@ -81,5 +108,6 @@ public class VoipListActivity extends BaseActivity {
         public TextView vCount;
         public View vHeadBg;
         public ImageView vHeadImage;
+        public CircularCoverView vHeadCover;
     }
 }
