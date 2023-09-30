@@ -138,6 +138,7 @@
                 android:layout_weight="108"
                 android:background="@drawable/bg_main_loop">
                 <TextView
+                    android:id="@+id/btn_main_class"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="小班课"

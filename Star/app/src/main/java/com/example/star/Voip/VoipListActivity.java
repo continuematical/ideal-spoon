@@ -1,4 +1,4 @@
-package com.example.star;
+package com.example.star.Voip;
 
 import android.content.Context;
 import android.content.Intent;
@@ -10,6 +10,10 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import com.example.star.BaseActivity;
+import com.example.star.HistoryBean;
+import com.example.star.R;
 
 import java.util.List;
 
@@ -56,18 +60,22 @@ public class VoipListActivity extends BaseActivity {
 
         @Override
         public long getItemId(int position) {
-            if(mHistoryList==null)  return 0;
+            if (mHistoryList == null) return 0;
             return position;
         }
 
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
+            final ViewHolder itemHolder;
+            if (convertView == null) {
+                itemHolder = new ViewHolder();
 
+            }
             return null;
         }
     }
 
-    public class ViewHolder{
+    public class ViewHolder {
         public TextView vUserId;
         public TextView vTime;
         public TextView vCount;

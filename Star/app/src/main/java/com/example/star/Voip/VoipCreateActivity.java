@@ -1,8 +1,10 @@
-package com.example.star;
+package com.example.star.Voip;
 
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.star.R;
 
 public class VoipCreateActivity extends AppCompatActivity {
 
