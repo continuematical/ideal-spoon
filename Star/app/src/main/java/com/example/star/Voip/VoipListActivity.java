@@ -1,12 +1,15 @@
 package com.example.star.Voip;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -14,16 +17,19 @@ import android.widget.TextView;
 
 import com.example.star.BaseActivity;
 import com.example.star.DataBase.HistoryBean;
+import com.example.star.MLOC;
 import com.example.star.R;
 import com.example.star.UI.CircularCoverView;
 import com.example.star.Utils.ColorUtils;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class VoipListActivity extends BaseActivity {
     private String mTargetID;
     private List<HistoryBean> mHistoryList;
     private ListView vHistoryList;
+    private MyListAdapter myListAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +37,23 @@ public class VoipListActivity extends BaseActivity {
         setContentView(R.layout.activity_voip_list);
 
         init();
+
+        mHistoryList = new ArrayList<>();
+        myListAdapter = new MyListAdapter();
+        vHistoryList.setAdapter(myListAdapter);
+        vHistoryList.setOnItemClickListener((parent, view, position, id) -> {
+            mTargetID = (String) mHistoryList.get(position).getConversationID();
+
+            AlertDialog.Builder builder = new AlertDialog.Builder(VoipListActivity.this);
+            builder.setItems(new String[]{"视频通话", "音频通话"}, (dialog, which) -> {
+                if (which == 0) {
+
+                } else if (which == 1) {
+                    Intent intent = new Intent(VoipListActivity.this, VoipAudioActivity.class);
+                    intent.putExtra("targetID", mTargetID);
+                }
+            });
+        });
     }
 
     //初始化
@@ -38,6 +61,7 @@ public class VoipListActivity extends BaseActivity {
         ((TextView) findViewById(R.id.title_text)).setText("VOIP会话列表");
         findViewById(R.id.title_left_btn).setVisibility(View.VISIBLE);
         findViewById(R.id.title_right_btn).setOnClickListener(v -> finish());
+        vHistoryList = (ListView) findViewById(R.id.list);
 
         findViewById(R.id.create_btn).setOnClickListener(v -> startActivity(new Intent(VoipListActivity.this, VoipCreateActivity.class)));
     }
@@ -98,7 +122,7 @@ public class VoipListActivity extends BaseActivity {
                 itemHolder.vCount.setText("" + mHistoryList.get(position).getNewMsgCount());
                 itemHolder.vCount.setVisibility(View.VISIBLE);
             }
-            return null;
+            return convertView;
         }
     }
 

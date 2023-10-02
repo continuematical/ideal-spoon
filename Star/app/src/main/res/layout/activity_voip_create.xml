@@ -43,6 +43,7 @@
             android:layout_marginRight="36dp"
             android:background="#adadad"/>
         <RelativeLayout
+            android:id="@+id/yes_btn"
             android:layout_width="291dp"
             android:layout_height="49dp"
             android:background="@drawable/bg_btn_orange"
