@@ -8,6 +8,7 @@
     android:layout_marginLeft="12dp"
     android:layout_marginRight="12dp"
     android:orientation="vertical">
+    <include layout="@layout/ui_title_bar"/>
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="145dp"

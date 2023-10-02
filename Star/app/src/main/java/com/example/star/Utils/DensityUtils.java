@@ -3,7 +3,6 @@ package com.example.star.Utils;
 import android.content.Context;
 import android.content.res.Resources;
 import android.os.Build;
-import android.os.Message;
 import android.view.ViewConfiguration;
 
 import java.lang.reflect.Method;
