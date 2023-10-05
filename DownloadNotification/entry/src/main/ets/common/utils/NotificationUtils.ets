@@ -4,6 +4,7 @@ import notification from '@ohos.notificationManager'
 import CommonConstants from '../constants/CommonConstants'
 import Logger from '../utils/Logger'
 
+//创建
 export function createWantAgent(bundleName: string, abilityName: string): Promise<WantAgent> {
   let wantInfo: wantAgent.WantAgentInfo = {
     wants: [
@@ -19,6 +20,7 @@ export function createWantAgent(bundleName: string, abilityName: string): Promis
   return wantAgent.getWantAgent(wantInfo)
 }
 
+//发布通知
 export function publishNotification(progress: number, title: string, wantAgentObj: wantAgent) {
   let template: notification.NotificationTemplate = {
     name: 'downloadTemplate',
