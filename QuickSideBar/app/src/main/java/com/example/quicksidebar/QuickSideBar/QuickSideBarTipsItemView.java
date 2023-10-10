@@ -1,13 +1,19 @@
 package com.example.quicksidebar.QuickSideBar;
 
 import android.content.Context;
+import android.content.res.TypedArray;
+import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Path;
+import android.graphics.Rect;
 import android.graphics.RectF;
+import android.os.Build;
 import android.util.AttributeSet;
 import android.view.View;
 
 import androidx.annotation.Nullable;
+
+import com.example.quicksidebar.R;
 
 public class QuickSideBarTipsItemView extends View {
     private int mCornerRadius;
@@ -16,16 +22,16 @@ public class QuickSideBarTipsItemView extends View {
     private RectF mBackgroundRect = new RectF();
     private Paint mBackgroundPaint;
 
-    private String mText ="";
+    private String mText = "";
 
-    private Paint mTextPaint;
+    private Paint mTextPaint;//画笔
     private int mWidth;
     private int mItemHeight;
     private float mTextSize;
     private int mTextColor;
     private int mBackgroundColor;
-    private int mCenterTextStartX;
-    private int mCenterTextStartY;
+    private int mCenterTextStartX;//开始横坐标
+    private int mCenterTextStartY;//开始纵坐标
 
 
     public QuickSideBarTipsItemView(Context context) {
@@ -40,7 +46,54 @@ public class QuickSideBarTipsItemView extends View {
         super(context, attrs, defStyleAttr);
     }
 
-    private void init(Context context, AttributeSet attrs){
+    private void init(Context context, AttributeSet attrs) {
+        mTextColor = context.getResources().getColor(android.R.color.black);
+        mBackgroundColor = context.getResources().getColor(android.R.color.darker_gray);
+        mTextSize = context.getResources().getDimension(R.dimen.textSize_QuickSideBarTips);
+        if (attrs != null) {
+            TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.QuickSideBarView);
 
+            mTextColor = a.getColor(R.styleable.QuickSideBarView_sidebarTextColor, mTextColor);
+            mBackgroundColor = a.getColor(R.styleable.QuickSideBarView_sidebarBackgroundColor, mBackgroundColor);
+            mTextSize = a.getDimension(R.styleable.QuickSideBarView_sidebarTextSize, mTextSize);
+            a.recycle();
+        }
+
+        mBackgroundPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        mTextPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+
+        mBackgroundPaint.setColor(mBackgroundColor);
+        mTextPaint.setColor(mTextColor);
+        mTextPaint.setTextSize(mTextSize);
+    }
+
+    @Override
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+        mWidth = getWidth();
+        mItemHeight = mWidth;
+        mCornerRadius = (int) (mWidth * 0.5);
+    }
+
+    @Override
+    protected void onDraw(Canvas canvas) {
+        super.onDraw(canvas);
+
+    }
+
+    public void setText(String text) {
+        mText = text;
+
+        Rect rect = new Rect();
+        mTextPaint.getTextBounds(mText, 0, mText.length(), rect);
+        mCenterTextStartX = (int) ((mWidth - rect.width()) * 0.5);
+        mCenterTextStartY = mItemHeight - rect.height();
+
+        invalidate();
+    }
+
+    public boolean isRtl() {
+        return (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) &&
+                (getContext().getResources().getConfiguration().getLayoutDirection() == View.LAYOUT_DIRECTION_RTL);
     }
 }

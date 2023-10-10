@@ -18,12 +18,13 @@ import java.util.List;
 
 public class QuickSideBarView extends View {
 
-    //侧边栏字母
-    private List<String> mLetters;
+    private OnQuickSideBarTouchListener listener;
+
+    private List<String> mLetters;//侧边栏字母
     private int mChoose = -1;
-    private Paint mPaint = new Paint();
+    private Paint mPaint = new Paint();//画笔
     private float mTextSize;
-    private float mTextSizeChoose;
+    private float mTextSizeChoose;//选择字母的大小
     private int mTextColor;
     private int mTextColorChoose;
     private int mWidth;
@@ -94,7 +95,14 @@ public class QuickSideBarView extends View {
         }
 
         //计算位置
+    }
 
+    public OnQuickSideBarTouchListener getListener() {
+        return listener;
+    }
+
+    public void setListener(OnQuickSideBarTouchListener listener) {
+        this.listener = listener;
     }
 
     @Override
