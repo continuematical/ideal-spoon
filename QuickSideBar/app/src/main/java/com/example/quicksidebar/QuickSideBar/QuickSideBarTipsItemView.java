@@ -8,6 +8,7 @@ import android.graphics.Path;
 import android.graphics.Rect;
 import android.graphics.RectF;
 import android.os.Build;
+import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.View;
 
@@ -44,6 +45,7 @@ public class QuickSideBarTipsItemView extends View {
 
     public QuickSideBarTipsItemView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+        init(context, attrs);
     }
 
     private void init(Context context, AttributeSet attrs) {
@@ -78,7 +80,21 @@ public class QuickSideBarTipsItemView extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
+        if (TextUtils.isEmpty(mText)) return;
+        canvas.drawColor(getResources().getColor(android.R.color.transparent));
+        float[] radii;
 
+        mBackgroundRect.set(0, 0, mWidth, mItemHeight);
+        if (isRtl()) {
+            radii = new float[]{mCornerRadius, mCornerRadius, mCornerRadius, mCornerRadius, mCornerRadius, mCornerRadius, 0, 0};
+        } else {
+            radii = new float[]{mCornerRadius, mCornerRadius, mCornerRadius, mCornerRadius, 0, 0, mCornerRadius, mCornerRadius};
+        }
+
+        mBackgroundPath.addRoundRect(mBackgroundRect, radii, Path.Direction.CW);
+
+        canvas.drawPath(mBackgroundPath, mBackgroundPaint);
+        canvas.drawText(mText, mCenterTextStartX, mCenterTextStartY, mTextPaint);
     }
 
     public void setText(String text) {

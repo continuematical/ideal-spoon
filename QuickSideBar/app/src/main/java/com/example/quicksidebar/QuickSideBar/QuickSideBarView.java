@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Paint;
+import android.graphics.Rect;
 import android.graphics.Typeface;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
@@ -92,9 +93,16 @@ public class QuickSideBarView extends View {
                 mPaint.setTypeface(Typeface.DEFAULT_BOLD);
                 mPaint.setTextSize(mTextSizeChoose);
             }
-        }
 
-        //计算位置
+            //计算位置
+            Rect rect = new Rect();
+            mPaint.getTextBounds(mLetters.get(i), 0, mLetters.get(i).length(), rect);
+            float xPos = (int) ((mWidth - rect.width()) * 0.5);
+            float yPos = mItemHeight * i + (int) ((mItemHeight - rect.height() * 0.5) + mItemStartY);
+
+            canvas.drawText(mLetters.get(i), xPos, yPos, mPaint);
+            mPaint.reset();
+        }
     }
 
     public OnQuickSideBarTouchListener getListener() {
@@ -107,8 +115,46 @@ public class QuickSideBarView extends View {
 
     @Override
     public boolean dispatchTouchEvent(MotionEvent event) {
-        return super.dispatchTouchEvent(event);
+        final int action = event.getAction();
+        final float y = event.getY();
+        final int oldChoose = mChoose;
+        final int newChoose = (int) ((y - mItemStartY) / mItemHeight);
+        switch (action) {
+            case MotionEvent.ACTION_UP:
+                mChoose = -1;
+                if (listener != null) {
+                    listener.onLetterTouching(false);
+                }
+                invalidate();
+                break;
+            default:
+                if (oldChoose != newChoose) {
+                    if (newChoose >= 0 && newChoose < mLetters.size()) {
+                        mChoose = newChoose;
+                        if (listener != null) {
+                            //计算位置
+                            Rect rect = new Rect();
+                            mPaint.getTextBounds(mLetters.get(mChoose), 0, mLetters.get(mChoose).length(), rect);
+                            float yPos = mItemHeight * mChoose + (int) ((mItemHeight - rect.height()) * 0.5) + mItemStartY;
+                            listener.onLetterChanged(mLetters.get(newChoose), mChoose, yPos);
+                        }
+                    }
+                    invalidate();
+                }
+                //如果是cancel也要调用onLetterUpListener 通知
+                if (event.getAction() == MotionEvent.ACTION_CANCEL) {
+                    if (listener != null) {
+                        listener.onLetterTouching(false);
+                    }
+                } else if (event.getAction() == MotionEvent.ACTION_DOWN) {//按下调用 onLetterDownListener
+                    if (listener != null) {
+                        listener.onLetterTouching(true);
+                    }
+                }
 
+                break;
+        }
+        return true;
     }
 
     public List<String> getLetters() {
