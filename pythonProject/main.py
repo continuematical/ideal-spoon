@@ -210,4 +210,235 @@ def prac():
     print(deep_copy_data)
 
 
-prac()
+def index_demo():
+    import pandas as pd
+    import numpy as np
+    data = pd.Series(np.random.randn(9),
+                     index=[['a', 'a', 'a', 'b', 'b', 'c', 'c', 'd', 'd'], [1, 2, 3, 1, 3, 1, 2, 2, 3]])
+    # print(data)
+    # print(data.index)
+
+    # 将数据安排到 DataFrame 中
+    # print(data.unstack())
+
+    frame = pd.DataFrame(np.arange(12).reshape(4, 3), index=[['a', 'a', 'b', 'b'], [1, 2, 1, 2]]
+                         , columns=[['Oh', 'Oh', 'Color'], ['Green', 'Green', 'Red']])
+    # 命名
+    frame.index.names = ['key1', 'key2']
+    frame.columns.names = ['state', 'color']
+
+    # 级别和名称呼唤
+    frame.swaplevel('key1', 'key2')
+
+    # 根据单个级别的值进行排序
+    frame.sort_index(level=1)
+
+    # 级别汇总统计
+    # sum
+    print(frame.sum(level='color', axis=1))
+
+
+# number 数据集
+def create_answer(number_set, n):
+    import random
+    """
+    创建解集
+    :return:
+    """
+    # 产生随机解
+    result = []
+    for i in range(n):
+        result.append(random.sample(number_set, 10))
+
+
+# new_answer解
+def error_level(new_answer, number_set):
+    error = []
+    right_answer = sum(number_set) / 10
+    for i in new_answer:
+        value = abs(right_answer - sum(i))
+        if value == 0:
+            error.append(0)
+        else:
+            error.append(1 / value)
+    return error
+
+
+def choice_selected(old_answer, number_set):
+    """
+    选择优秀的交换：误差越小的解选择的几率越大，归一化
+    :return:
+    """
+    import random
+    # 计算误差系数
+    error = error_level(old_answer, number_set)
+    error_one = [item / sum(error) for item in error]
+
+    # 叠加
+    for i in range(1, len(error_one)):
+        error_one[i] += error_one[i - 1]
+    for i in range(len(old_answer) // 2):
+        temp = []
+        for j in range(2):
+            rand = random.uniform(0, 1)
+            # 在error_one 中进行寻找
+            for k in range(len(error_one)):
+                if k == 0:
+                    if rand < error_one[k]:
+                        temp.append(old_answer[k])
+
+                else:
+                    if old_answer[k - 1] <= rand < old_answer[k]:
+                        temp.append(old_answer[k])
+    return
+
+
+def GA():
+    import random
+
+    # 随机生成结果
+    number_set = random.sample(range(0, 1000), 50)
+    middle_set = create_answer(number_set, 100)
+    # 循环一千次
+    for i in range(1000):
+        middle_set = choice_selected()
+    print(middle_set)
+    return
+
+
+def PCA():
+    import pandas as pd
+    import numpy as np
+    # 读取数据集
+    df = pd.read_excel("aa.xlsx")
+    # 进行球状检验
+    from factor_analyzer.factor_analyzer import calculate_bartlett_sphericity
+    chi_square_value, p_value = calculate_bartlett_sphericity(df)
+    # print(chi_square_value, p_value)
+
+    # KMO相关性分析
+    from factor_analyzer.factor_analyzer import calculate_kmo
+    kmo_per_variable, kmo_all = calculate_kmo(df)
+    # print(kmo_per_variable, kmo_all)
+
+    # 数据不标准化
+    # 求平均值
+    average = np.mean(df, axis=0)
+    # 列数和行数
+    m, n = np.shape(df)
+    # 均值矩阵
+    data_adjust = []
+    av = np.tile(average, (m, 1))
+    # 对数据集进行去中心化
+    data_adjust = df - av
+    # 计算协方差矩阵
+    corr_two = np.cov(data_adjust.T)
+    # 求解特征值和向量值
+    featValue, featVec = np.linalg.eig(corr_two)
+
+    # 对特征值进行输出并排序
+    featValue = sorted(featValue)[::-1]
+
+    # 绘制散点图和折线图
+    import matplotlib.pyplot as plt
+    plt.scatter(range(1, df.shape[1] + 1), featValue)
+    plt.plot(range(1, df.shape[1] + 1), featValue)
+
+    # 显示图得标题和 xy 轴的名字
+    plt.title("Screen Plot")
+    plt.xlabel("Factors")
+    plt.ylabel("Eigenvalue")
+
+    plt.grid()
+    # plt.show()
+
+    # 求特征值的贡献度
+    gx = featValue / np.sum(featValue)
+    # print(gx)
+
+    # 求特征值的累计贡献度
+    lg = np.cumsum(gx)
+    # print(lg)
+
+    # 选出主成分
+    k = [i for i in range(len(lg)) if lg[i] < 0.85]
+    k = list(k)
+    # print(k)
+
+    # 选出主成分对应的特征向量矩阵
+    selectVec = np.matrix(featVec.T[k]).T
+    selectVec = selectVec * (-1)
+    # print(selectVec)
+
+    # 求主成分得分
+    finalData = np.dot(data_adjust, selectVec)
+    # print(finalData)
+
+    # 绘制热力图
+    import seaborn as sns
+    plt.figure(figsize=(14, 14))
+    ax = sns.heatmap(selectVec, annot=True, cmap="BuPu")
+
+    # 设置y轴字体大小
+    ax.yaxis.set_tick_params(labelsize=15)
+    plt.title("Factor Analysis", fontsize="xx-large")
+
+    # 设置y轴标签
+    plt.ylabel("Sepal Width", fontsize="xx-large")
+    # 显示图片
+    # plt.show()
+
+    # 保存图片
+    # plt.savefig("factorAnalysis", dpi=500)
+
+
+def CA():
+    """
+    聚类分析
+    :return:
+    """
+    # https://blog.csdn.net/tonydz0523/article/details/84659905
+    from sklearn.datasets import make_blobs
+    from sklearn import metrics
+    import pandas as pd
+
+    # 数据准备
+    data = make_blobs(n_samples=2000, centers=[[1, 1], [-1, -1]], cluster_std=0.7, random_state=2018)
+    x = data[0]
+    y = data[1]
+    # 聚类数量
+    number_cluster = 2
+    from sklearn.cluster import KMeans
+    # 建立聚类模型对象
+    k_means = KMeans(random_state=2018, n_clusters=number_cluster)
+    k_means.fit(x)  # 训练
+    pre_y = k_means.predict(x)  # 预测
+    # 模型效果评估
+    # 样本距离最近的聚类中心的总和
+    inertia = k_means.inertia_
+    # 调整后的兰德指数
+    adjust_rand_s = metrics.adjusted_rand_score(y, pre_y)
+    # 互信息
+    mutual_info_s = metrics.mutual_info_score(y, pre_y)
+
+    # 调整后的互信息
+    adjusted_mutual_info_s = metrics.adjusted_mutual_info_score(y, pre_y)
+
+    # 同质化得分
+    homogeneity_s = metrics.homogeneity_score(y, pre_y)
+
+    # 完整性得分
+    completeness_s = metrics.completeness_score(y, pre_y)
+
+    # V-measure得分
+    v_measure_s = metrics.v_measure_score(y, pre_y)
+
+    # 平均轮廓系数
+    silhouette_s = metrics.silhouette_score(X, pre_y, metric='euclidean')
+
+    # Calinski 和 Harabaz 得分
+    calinski_harabaz_s = metrics.calinski_harabaz_score(x, pre_y)
+
+    df_metrics = pd.DataFrame([[inertia, adjust_rand_s, mutual_info_s, adjusted_mutual_info_s, homogeneity_s,
+                                completeness_s, v_measure_s, silhouette_s, calinski_harabaz_s]],
+                              columns=['ine', 'tARI', 'tMI', 'tAMI', 'thomo', 'tcomp', 'tv_m', 'tsilh', 'tc&h'])
