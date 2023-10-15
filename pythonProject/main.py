@@ -1,3 +1,6 @@
+import math
+
+
 def datasets_demo():
     """
     数据集使用
@@ -434,7 +437,7 @@ def CA():
     v_measure_s = metrics.v_measure_score(y, pre_y)
 
     # 平均轮廓系数
-    silhouette_s = metrics.silhouette_score(X, pre_y, metric='euclidean')
+    silhouette_s = metrics.silhouette_score(x, pre_y, metric='euclidean')
 
     # Calinski 和 Harabaz 得分
     calinski_harabaz_s = metrics.calinski_harabaz_score(x, pre_y)
@@ -442,3 +445,122 @@ def CA():
     df_metrics = pd.DataFrame([[inertia, adjust_rand_s, mutual_info_s, adjusted_mutual_info_s, homogeneity_s,
                                 completeness_s, v_measure_s, silhouette_s, calinski_harabaz_s]],
                               columns=['ine', 'tARI', 'tMI', 'tAMI', 'thomo', 'tcomp', 'tv_m', 'tsilh', 'tc&h'])
+
+
+# DBSCAN
+
+import numpy as np
+
+
+# 读取文件
+def load_file(fileName, spiltChar='\t'):
+    dataset = []
+    with open(fileName) as fr:
+        for line in fr.readlines():
+            curLine = line.strip().split(spiltChar)
+            fltLine = list(map(float, curLine))
+            dataset.append(fltLine)
+    return dataset
+
+
+# 计算两个点之间的欧氏距离
+def dist(t1, t2):
+    dis = math.sqrt(np.power((t1[0] - t2[0]), 2) + np.power((t1[1] - t2[1]), 2))
+    return dis
+
+
+def dbscn(data, Eps, MinPoint):
+    num = len(data)
+    # 标记点是否被访问过
+    unvisited = [i for i in range(num)]
+    visited = []
+    C = [-1 for _ in range(num)]  # 输出结果
+    k = -1  # 标记不同的簇
+    while len(unvisited) > 0:
+        p = np.random.choice(unvisited)
+        unvisited.remove(p)
+        visited.append(p)
+        # N为p的epsilon领域中对象的集合
+        N = []
+        for i in range(num):
+            if dist(data[i], data[p]) <= Eps:
+                N.append(i)
+        # 如果p的epsilon邻域中的对象数大于指定阈值，说明p是一个核心对象
+        if len(N) >= MinPoint:
+            k = k + 1
+            C[p] = k
+            # 对于领域内每个对象pi
+            for pi in N:
+                if pi in unvisited:
+                    unvisited.remove(pi)
+                    visited.append(pi)
+                    # M是pi领域中的对象
+                    M = []
+                    for j in range(num):
+                        if dist(data[j], data[pi]) <= Eps:
+                            M.append(pi)
+                    if len(M) > MinPoint:
+                        for t in M:
+                            if t not in N:
+                                N.append(t)
+                if C[pi] == -1:
+                    C[pi] = k
+        else:
+            C[p] = -1
+    return C
+
+
+def clique_demo():
+    from pyclustering.cluster.clique import clique
+    # clique可视化
+    from pyclustering.cluster.clique import clique_visualizer
+    import numpy as np
+    # 构建训练数据集
+    f1 = np.array([37, 42, 49, 56, 61, 65])
+    f2 = np.array([147, 154, 161, 165, 172, 177])
+    f3 = np.array([450, 780, 1000, 324, 455, 578])
+
+    data = np.array([f1, f2, f3])
+    data = data.T
+
+    data_M = np.array(data)
+    intervals = 5  # 定义每个维度中网格单元的数量
+    threshold = 0  # 设定的阈值
+    clique_instance = clique(data_M, intervals, threshold)
+    # 开始聚类过程
+    clique_instance.process()
+    clique_cluster = clique_instance.get_clusters()
+    # 被认为是噪声点
+    noise = clique_instance.get_noise()
+    # clique形成的网格单元
+    cells = clique_instance.get_cells()
+
+    print(len(clique_cluster))
+    print(clique_cluster)
+
+    # 聚类结果可视化
+    clique_visualizer.show_grid(cells, data_M)
+    # 显示聚类结果
+    clique_visualizer.show_clusters(data_M, clique_cluster, noise)
+
+
+def prc():
+    from pyclustering.cluster.clique import clique, clique_visualizer
+    from pyclustering.utils import read_sample
+    from pyclustering.samples.definitions import FCPS_SAMPLES
+    # read two-dimensional input data 'Target'
+    data = read_sample(FCPS_SAMPLES.SAMPLE_TARGET)
+    interval = 10
+    threshold = 0
+    clique_instance = clique(data, interval, threshold)
+    # start clustering process and obtain results
+    clique_instance.process()
+    clusters = clique_instance.get_clusters()  # allocated clusters
+    noise = clique_instance.get_noise()  # points that are considered as outliers (in this example should be empty)
+    cells = clique_instance.get_cells()  # CLIQUE blocks that forms grid
+    print("Amount of clusters:", len(clusters))
+    # visualize clustering results
+    clique_visualizer.show_grid(cells, data)  # show grid that has been formed by the algorithm
+    clique_visualizer.show_clusters(data, clusters, noise)  # show clustering results
+
+prc()
