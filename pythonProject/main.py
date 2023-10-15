@@ -1,5 +1,7 @@
 import math
 
+import waveCluster
+
 
 def datasets_demo():
     """
@@ -563,4 +565,4 @@ def prc():
     clique_visualizer.show_grid(cells, data)  # show grid that has been formed by the algorithm
     clique_visualizer.show_clusters(data, clusters, noise)  # show clustering results
 
-prc()
+waveCluster.wave_cluster_iris()
