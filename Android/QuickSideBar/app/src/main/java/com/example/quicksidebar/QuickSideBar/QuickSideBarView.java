@@ -82,7 +82,7 @@ public class QuickSideBarView extends View {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
         //绘制 26 个字母
-        for (int i = 0; i < 26; i++) {
+        for (int i = 0; i < mLetters.size(); i++) {
             mPaint.setColor(mTextColor);
             mPaint.setAntiAlias(true);//抗锯齿
             mPaint.setTextSize(mTextSize);
@@ -141,17 +141,17 @@ public class QuickSideBarView extends View {
                     }
                     invalidate();
                 }
-                //如果是cancel也要调用onLetterUpListener 通知
+                //如果是cancel也要调用onLetterUpListener通知
                 if (event.getAction() == MotionEvent.ACTION_CANCEL) {
                     if (listener != null) {
                         listener.onLetterTouching(false);
                     }
-                } else if (event.getAction() == MotionEvent.ACTION_DOWN) {//按下调用 onLetterDownListener
+                } else if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                    //按下调用 onLetterDownListener
                     if (listener != null) {
                         listener.onLetterTouching(true);
                     }
                 }
-
                 break;
         }
         return true;

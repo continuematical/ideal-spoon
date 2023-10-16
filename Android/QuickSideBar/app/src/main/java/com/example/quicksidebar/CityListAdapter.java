@@ -1,12 +1,12 @@
 package com.example.quicksidebar;
-
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 
-public abstract class CityListAdapter<VH extends RecyclerView.ViewHolder> extends RecyclerView.Adapter<VH> {
+public abstract class CityListAdapter<VH extends RecyclerView.ViewHolder>
+        extends RecyclerView.Adapter<VH> {
     private ArrayList<City> items = new ArrayList<>();
 
     public CityListAdapter() {

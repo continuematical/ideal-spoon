@@ -1,4 +1,0 @@
-﻿  源.cpp
-D:\ideal-spoon\nine\nine\源.cpp(55,21): warning C4267: “初始化”: 从“size_t”转换到“int”，可能丢失数据
-D:\ideal-spoon\nine\nine\源.cpp(145,6): warning C4101: “n”: 未引用的局部变量
-  nine.vcxproj -> D:\ideal-spoon\nine\x64\Debug\nine.exe
