@@ -26,16 +26,23 @@ NEXT:
     mov ah,1
     int 21H
     ;如果输入数值不是在0-9之间，转ERROR
-    CMP	al, '0'
+    CMP	al,'0'
     JB ERR
     CMP al,'9'
     JA ERR
-    ;讲ASCII值转化为真值
+    ;将ASCII值转化为真值
     and al,0FH
+    add al,al
     mov bl,al
     mov bh,0
-    mov ax,[2*ebx]+TAB
+    mov ax,TAB[bx]
     mov XXX,ax
+    ;显示
+    
+    xor al,30H
+    mov dl,al
+    mov ah,2
+    int 21H
     MOV AH, 4CH
     INT 21H
 ERR:
@@ -44,4 +51,5 @@ ERR:
     int 21H
     JMP NEXT
 CODES ENDS
+
 END START
