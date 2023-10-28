@@ -591,4 +591,59 @@ def naive():
     plt.show()
 
 
-naive()
+DNA_size = 24
+pop_size = 80
+crossover_rate = 0.6
+mutation_rate = 0.01
+n_generations = 100
+x_bound = [-2.048, 2.048]
+y_bound = [-2.048, 2.048]
+
+import numpy as np
+import matplotlib.pyplot as plt
+
+
+# 以香蕉函数为例
+def F(x, y):
+    return 100.0 * (y - x ** 2) ** 2.0 + (1 - x) ** 2.0
+
+
+# 求解适应度
+def get_fitness(pop):
+    x, y = translateDNA(pop)
+    predict = F(x, y)
+    return (predict - np.min(predict)) * 1e-3
+
+
+# 减去最小的适应度，防止出现负数
+
+
+# 解码
+# pop表示种群矩阵，一行表示一个种群的二进制，行数表示种群数
+def translateDNA(pop):
+    x_pop = pop[:, 0:DNA_size]
+    y_pop = pop[:, DNA_size:]
+
+    x = x_pop.dot(2 ** np.arange(DNA_size)[::-1]) / float(2 ** DNA_size - 1) * (x_bound[1] - x_bound[0]) + x_bound[0]
+    y = y_pop.dot(2 ** np.arange(DNA_size)[::-1]) / float(2 ** DNA_size - 1) * (y_bound[1] - y_bound[0]) + y_bound[0]
+
+    return x, y
+
+
+def select(pop, fitness):
+    idx = np.random.choice(np.arange(pop_size), size=pop_size, replace=True, p=fitness / fitness.sum())
+    return pop[idx]
+
+
+# 交叉变异
+def crossover_and_mutation(pop, cross_over_rate=0.8):
+    new_pop = []
+    for father in pop:
+        child = father
+        if np.random.rand() < cross_over_rate:
+            mother = pop[np.random.randint(pop_size)]
+            cross_point = np.random.randint(low=0, high=DNA_size * 2)
+            child=
+
+
+plt.figure()
