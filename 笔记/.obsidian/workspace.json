@@ -1,0 +1,213 @@
+{
+  "main": {
+    "id": "9e4e2db4d732608d",
+    "type": "split",
+    "children": [
+      {
+        "id": "871114c8280ec9f3",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "c932e17e3f830302",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Matlab/模拟退火算法.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "b45018f0d88c10fc",
+    "type": "split",
+    "children": [
+      {
+        "id": "e80a214bdd94d47f",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "64a0818b87977b47",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Matlab/T检验.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "66e60f9dc8c49b73",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "3140b1ca6d33e783",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {}
+            }
+          },
+          {
+            "id": "d48be11305968934",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical"
+              }
+            }
+          }
+        ],
+        "currentTab": 3
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "68b4996b4b8609c3",
+    "type": "split",
+    "children": [
+      {
+        "id": "11aa87491513c994",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "2d2a6e3a27dbaa08",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "Matlab/模拟退火算法.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "00f24a0b40682f63",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "Matlab/模拟退火算法.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "14d8bfaf1681a09d",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true
+              }
+            }
+          },
+          {
+            "id": "be074d74718e146e",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "Matlab/模拟退火算法.md"
+              }
+            }
+          }
+        ],
+        "currentTab": 2
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:打开快速切换": false,
+      "graph:查看关系图谱": false,
+      "canvas:新建白板": false,
+      "daily-notes:打开/创建今天的日记": false,
+      "templates:插入模板": false,
+      "command-palette:打开命令面板": false,
+      "table-editor-obsidian:Advanced Tables Toolbar": false
+    }
+  },
+  "active": "c932e17e3f830302",
+  "lastOpenFiles": [
+    "MySQL/mysql基础篇笔记/第07章_单行函数.md",
+    "MySQL/mysql基础篇笔记/第00章_写在最后.md",
+    "MySQL/mysql高级篇笔记/第09章 性能分析工具的使用.md",
+    "MySQL/mysql高级篇笔记/第14章 MySQL事务日志.md",
+    "MySQL/mysql高级篇笔记/第10章 索引优化与查询优化.md",
+    "MySQL/mysql高级篇笔记/第04章 逻辑架构.md",
+    "MySQL/mysql高级篇笔记/第02章 MySQL的数据目录.md",
+    "MySQL/mysql高级篇笔记/第01章 Linux下MySQL的安装与使用.md",
+    "MySQL/mysql基础篇笔记/第09章_子查询.md",
+    "MySQL/mysql基础篇笔记/第08章_聚合函数.md",
+    "MySQL/mysql基础篇笔记/第06章_多表查询.md",
+    "MySQL/mysql基础篇笔记/images/1554974984600.png",
+    "MySQL/mysql基础篇笔记/images/1554910994523.png",
+    "MySQL/mysql高级篇笔记/第03章 用户与权限管理.md",
+    "MySQL/mysql基础篇笔记/第14章_视图.md",
+    "Matlab/遗传算法.md",
+    "MySQL/mysql高级篇笔记/images/降序索引2.png",
+    "MySQL/mysql高级篇笔记/images/降序索引1.png",
+    "MySQL/mysql高级篇笔记/images/独立表空间和系统表空间.png",
+    "MySQL/mysql高级篇笔记/images/最小最大记录具体.png",
+    "MySQL/mysql高级篇笔记/images/最小最大记录.png",
+    "MySQL/mysql高级篇笔记/images/InnoDB页结构.png",
+    "MySQL/mysql高级篇笔记/images/InnoDB逻辑存储结构.png",
+    "MySQL/mysql高级篇笔记/images/InnoDB_Page_size.png",
+    "MySQL/mysql高级篇笔记/第18章 主从复制.md",
+    "MySQL/mysql高级篇笔记/第19章 数据库备份与恢复.md",
+    "MySQL/mysql高级篇笔记/第17章 其它数据库日志.md",
+    "MySQL/mysql高级篇笔记/第16章 多版本并发控制.md",
+    "MySQL/mysql高级篇笔记/第15章 锁.md",
+    "MySQL/mysql高级篇笔记/第12章 数据库其它调优策略.md",
+    "MySQL/mysql高级篇笔记/第13章 事务基础知识.md",
+    "MySQL/mysql高级篇笔记/第11章 数据库的设计规范.md",
+    "MySQL/mysql高级篇笔记/第08章 索引的创建与设计原则.md",
+    "MySQL/mysql高级篇笔记/第07章 InnoDB数据存储结构.md",
+    "MySQL/mysql高级篇笔记/第06章 索引的数据结构.md",
+    "MySQL/mysql高级篇笔记/第05章 存储引擎.md",
+    "MySQL/mysql高级篇笔记/images",
+    "MySQL/mysql高级篇笔记",
+    "MySQL/mysql基础篇笔记/images",
+    "MySQL/mysql基础篇笔记",
+    "MySQL",
+    "新建文件夹",
+    "mysql基础篇笔记/images",
+    "mysql基础篇笔记",
+    "mysql高级篇笔记/images",
+    "mysql高级篇笔记"
+  ]
+}
