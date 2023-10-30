@@ -591,59 +591,228 @@ def naive():
     plt.show()
 
 
-DNA_size = 24
-pop_size = 80
-crossover_rate = 0.6
-mutation_rate = 0.01
-n_generations = 100
-x_bound = [-2.048, 2.048]
-y_bound = [-2.048, 2.048]
-
+# 遗传算法
 import numpy as np
 import matplotlib.pyplot as plt
+from matplotlib import cm
+from mpl_toolkits.mplot3d import Axes3D
+
+DNA_SIZE = 24
+POP_SIZE = 80
+CROSSOVER_RATE = 0.6
+MUTATION_RATE = 0.01
+N_GENERATIONS = 100
+X_BOUND = [-2.048, 2.048]
+Y_BOUND = [-2.048, 2.048]
 
 
-# 以香蕉函数为例
 def F(x, y):
-    return 100.0 * (y - x ** 2) ** 2.0 + (1 - x) ** 2.0
+    return 100.0 * (y - x ** 2.0) ** 2.0 + (1 - x) ** 2.0  # 以香蕉函数为例
 
 
-# 求解适应度
+def plot_3d(ax):
+    X = np.linspace(*X_BOUND, 100)
+    Y = np.linspace(*Y_BOUND, 100)
+    X, Y = np.meshgrid(X, Y)
+    Z = F(X, Y)
+    ax.plot_surface(X, Y, Z, rstride=1, cstride=1, cmap=cm.coolwarm)
+    ax.set_xlabel('x')
+    ax.set_ylabel('y')
+    ax.set_zlabel('z')
+    plt.pause(3)
+    plt.show()
+
+
 def get_fitness(pop):
     x, y = translateDNA(pop)
-    predict = F(x, y)
-    return (predict - np.min(predict)) * 1e-3
+    pred = F(x, y)
+    return pred
+    # return pred - np.min(pred)+1e-3  # 求最大值时的适应度
+    # return np.max(pred) - pred + 1e-3  # 求最小值时的适应度，通过这一步fitness的范围为[0, np.max(pred)-np.min(pred)]
 
 
-# 减去最小的适应度，防止出现负数
+def translateDNA(pop):  # pop表示种群矩阵，一行表示一个二进制编码表示的DNA，矩阵的行数为种群数目
+    x_pop = pop[:, 0:DNA_SIZE]  # 前DNA_SIZE位表示X
+    y_pop = pop[:, DNA_SIZE:]  # 后DNA_SIZE位表示Y
 
-
-# 解码
-# pop表示种群矩阵，一行表示一个种群的二进制，行数表示种群数
-def translateDNA(pop):
-    x_pop = pop[:, 0:DNA_size]
-    y_pop = pop[:, DNA_size:]
-
-    x = x_pop.dot(2 ** np.arange(DNA_size)[::-1]) / float(2 ** DNA_size - 1) * (x_bound[1] - x_bound[0]) + x_bound[0]
-    y = y_pop.dot(2 ** np.arange(DNA_size)[::-1]) / float(2 ** DNA_size - 1) * (y_bound[1] - y_bound[0]) + y_bound[0]
-
+    x = x_pop.dot(2 ** np.arange(DNA_SIZE)[::-1]) / float(2 ** DNA_SIZE - 1) * (X_BOUND[1] - X_BOUND[0]) + X_BOUND[0]
+    y = y_pop.dot(2 ** np.arange(DNA_SIZE)[::-1]) / float(2 ** DNA_SIZE - 1) * (Y_BOUND[1] - Y_BOUND[0]) + Y_BOUND[0]
     return x, y
 
 
-def select(pop, fitness):
-    idx = np.random.choice(np.arange(pop_size), size=pop_size, replace=True, p=fitness / fitness.sum())
+def crossover_and_mutation(pop, CROSSOVER_RATE=0.8):
+    new_pop = []
+    for father in pop:  # 遍历种群中的每一个个体，将该个体作为父亲
+        child = father  # 孩子先得到父亲的全部基因（这里我把一串二进制串的那些0，1称为基因）
+        if np.random.rand() < CROSSOVER_RATE:  # 产生子代时不是必然发生交叉，而是以一定的概率发生交叉
+            mother = pop[np.random.randint(POP_SIZE)]  # 再种群中选择另一个个体，并将该个体作为母亲
+            cross_points = np.random.randint(low=0, high=DNA_SIZE * 2)  # 随机产生交叉的点
+            child[cross_points:] = mother[cross_points:]  # 孩子得到位于交叉点后的母亲的基因
+        mutation(child)  # 每个后代有一定的机率发生变异
+        new_pop.append(child)
+
+    return new_pop
+
+
+def mutation(child, MUTATION_RATE=0.003):
+    if np.random.rand() < MUTATION_RATE:  # 以MUTATION_RATE的概率进行变异
+        mutate_point = np.random.randint(0, DNA_SIZE)  # 随机产生一个实数，代表要变异基因的位置
+        child[mutate_point] = child[mutate_point] ^ 1  # 将变异点的二进制为反转
+
+
+def select(pop, fitness):  # nature selection wrt pop's fitness
+    idx = np.random.choice(np.arange(POP_SIZE), size=POP_SIZE, replace=True,
+                           p=(fitness) / (fitness.sum()))
     return pop[idx]
 
 
-# 交叉变异
-def crossover_and_mutation(pop, cross_over_rate=0.8):
-    new_pop = []
-    for father in pop:
-        child = father
-        if np.random.rand() < cross_over_rate:
-            mother = pop[np.random.randint(pop_size)]
-            cross_point = np.random.randint(low=0, high=DNA_size * 2)
-            child=
+def print_info(pop):
+    fitness = get_fitness(pop)
+    max_fitness_index = np.argmax(fitness)
+    print("max_fitness:", fitness[max_fitness_index])
+    x, y = translateDNA(pop)
+    print("最优的基因型：", pop[max_fitness_index])
+    print("(x, y):", (x[max_fitness_index], y[max_fitness_index]))
+    print(F(x[max_fitness_index], y[max_fitness_index]))
 
 
-plt.figure()
+def color_bar():
+    import matplotlib.pyplot as plt
+    import numpy as np
+
+    vegetables = ["cucumber", "tomato", "lettuce", "asparagus",
+                  "potato", "wheat", "barley"]
+    farmers = ["Farmer Joe", "Upland Bros.", "Smith Gardening",
+               "Agrifun", "Organiculture", "BioGoods Ltd.", "Cornylee Corp."]
+
+    harvest = np.array([[0.8, 2.4, 2.5, 3.9, 0.0, 4.0, 0.0],
+                        [2.4, 0.0, 4.0, 1.0, 2.7, 0.0, 0.0],
+                        [1.1, 2.4, 0.8, 4.3, 1.9, 4.4, 0.0],
+                        [0.6, 0.0, 0.3, 0.0, 3.1, 0.0, 0.0],
+                        [0.7, 1.7, 0.6, 2.6, 2.2, 6.2, 0.0],
+                        [1.3, 1.2, 0.0, 0.0, 0.0, 3.2, 5.1],
+                        [0.1, 2.0, 0.0, 1.4, 0.0, 1.9, 6.3]])
+
+    plt.xticks(np.arange(len(farmers)), labels=farmers,
+               rotation=45, rotation_mode="anchor", ha="right")
+    plt.yticks(np.arange(len(vegetables)), labels=vegetables)
+    plt.title("Harvest of local farmers (in tons/year)")
+
+    for i in range(len(vegetables)):
+        for j in range(len(farmers)):
+            text = plt.text(j, i, harvest[i, j], ha="center", va="center", color="w")
+
+    plt.imshow(harvest)
+    plt.colorbar()
+    plt.tight_layout()
+    plt.show()
+
+
+# if __name__ == "__main__":
+#     fig = plt.figure()
+#     ax = Axes3D(fig)
+#     plt.ion()  # 将画图模式改为交互模式，程序遇到plt.show不会暂停，而是继续执行
+#     plot_3d(ax)
+#
+#     pop = np.random.randint(2, size=(POP_SIZE, DNA_SIZE * 2))  # matrix (POP_SIZE, DNA_SIZE)
+#     for _ in range(N_GENERATIONS):  # 迭代N代
+#         x, y = translateDNA(pop)
+#         if 'sca' in locals():
+#             sca.remove()
+#         sca = ax.scatter(x, y, F(x, y), c='black', marker='o')
+#         plt.show()
+#         plt.pause(0.1)
+#         pop = np.array(crossover_and_mutation(pop, CROSSOVER_RATE))
+#         fitness = get_fitness(pop)
+#         pop = select(pop, fitness)  # 选择生成新的种群
+#
+#     print_info(pop)
+#     plt.ioff()
+#     plot_3d(ax)
+
+
+# 模拟退火算法求解TSP
+
+# 31个城市的坐标
+city_loc = [(1304, 2312), (3639, 1315), (4177, 2244), (3712, 1399), (3488, 1535),
+            (3326, 1556), (3238, 1229), (4196, 1004), (4312, 790), (4380, 570),
+            (3007, 1970), (2562, 1756), (2788, 1491), (2381, 1676), (1332, 695),
+            (3715, 1678), (3918, 2179), (4061, 2370), (3780, 2212), (3676, 2578),
+            (4029, 2838), (4263, 2931), (3429, 1908), (3507, 2367), (3394, 2643),
+            (3439, 3201), (2935, 3240), (3140, 3550), (2545, 2357), (2778, 2826), (2370, 2975)]
+
+T_0 = 50000  # 初始温度
+T_end = 15  # 结束温度
+k = 0.98  # 比例系数
+N = 1000  # 迭代次数
+
+
+# 求解两个城市的距离
+def dist(a, b):
+    x1 = city_loc[a][0]
+    y1 = city_loc[a][1]
+    x2 = city_loc[b][0]
+    y2 = city_loc[b][1]
+    distance = ((x1 - x2) ** 2 + (y1 - y2) ** 2) ** 0.5
+    return distance
+
+
+# 初始化解
+def init_ans():
+    ans = []
+    for i in range(31):
+        ans.append(i)
+    return ans
+
+
+# 路程总长
+def total_distance(a):
+    value = 0
+    for j in range(30):
+        value += dist(a[j], a[j + 1])
+    value += dist(a[0], a[30])
+    return value
+
+
+# 迭代过程
+def create_new(ans_before):
+    ans_after = []
+    for i in range(len(ans_before)):
+        ans_after.append(ans_before[i])
+    cityA = np.random.randint(0, 30)
+    cityB = np.random.randint(0, 30)
+    # 随机交换两个城市的坐标
+    ans_after[cityA], ans_after[cityB] = ans_after[cityB], ans_after[cityA]
+    return ans_after
+
+
+# if __name__ == '__main__':
+#     ans0 = init_ans()
+#     T = T_0
+#     cnt = 0
+#     trend = []  # 保存迭代的每一次路线
+#     while T > T_end:
+#         for i in range(N):
+#             new_ans = create_new(ans0)
+#             old_dist = total_distance(ans0)
+#             new_dist = total_distance(ans0)
+#             df = new_dist - old_dist
+#             if df >= 0:
+#                 rand = np.random.uniform(0, 1)
+#                 if rand < 1 / (math.exp(df / T)):
+#                     ans0 = new_ans
+#             else:
+#                 ans0 = new_ans
+#         T = T * k
+#         cnt += 1
+#         now_dist = total_distance(ans0)
+#         trend.append(now_dist)
+#     distance = total_distance(ans0)
+#     print(distance, ans0)
+#     plt.plot(trend)
+#     plt.show()
+
+def prac():
+    
+
+prac()
