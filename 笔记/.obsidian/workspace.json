@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Matlab/模拟退火算法.md",
+                "file": "Matlab/库.md",
                 "mode": "source",
                 "source": false
               }
@@ -98,7 +98,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Matlab/模拟退火算法.md",
+                "file": "Matlab/库.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -115,7 +115,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Matlab/模拟退火算法.md",
+                "file": "Matlab/库.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -138,7 +138,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Matlab/模拟退火算法.md"
+                "file": "Matlab/库.md"
               }
             }
           }
@@ -163,6 +163,14 @@
   },
   "active": "c932e17e3f830302",
   "lastOpenFiles": [
+    "Matlab/绘图.md",
+    "Matlab/方差分析.md",
+    "Matlab/图/模拟退火算法步骤.png",
+    "Matlab/遗传算法.md",
+    "Matlab/模拟退火算法.md",
+    "Matlab/库.md",
+    "Matlab/图/viridis.png",
+    "Matlab/图/plasma.png",
     "MySQL/mysql基础篇笔记/第07章_单行函数.md",
     "MySQL/mysql基础篇笔记/第00章_写在最后.md",
     "MySQL/mysql高级篇笔记/第09章 性能分析工具的使用.md",
@@ -178,15 +186,11 @@
     "MySQL/mysql基础篇笔记/images/1554910994523.png",
     "MySQL/mysql高级篇笔记/第03章 用户与权限管理.md",
     "MySQL/mysql基础篇笔记/第14章_视图.md",
-    "Matlab/遗传算法.md",
     "MySQL/mysql高级篇笔记/images/降序索引2.png",
     "MySQL/mysql高级篇笔记/images/降序索引1.png",
     "MySQL/mysql高级篇笔记/images/独立表空间和系统表空间.png",
     "MySQL/mysql高级篇笔记/images/最小最大记录具体.png",
     "MySQL/mysql高级篇笔记/images/最小最大记录.png",
-    "MySQL/mysql高级篇笔记/images/InnoDB页结构.png",
-    "MySQL/mysql高级篇笔记/images/InnoDB逻辑存储结构.png",
-    "MySQL/mysql高级篇笔记/images/InnoDB_Page_size.png",
     "MySQL/mysql高级篇笔记/第18章 主从复制.md",
     "MySQL/mysql高级篇笔记/第19章 数据库备份与恢复.md",
     "MySQL/mysql高级篇笔记/第17章 其它数据库日志.md",
@@ -195,10 +199,6 @@
     "MySQL/mysql高级篇笔记/第12章 数据库其它调优策略.md",
     "MySQL/mysql高级篇笔记/第13章 事务基础知识.md",
     "MySQL/mysql高级篇笔记/第11章 数据库的设计规范.md",
-    "MySQL/mysql高级篇笔记/第08章 索引的创建与设计原则.md",
-    "MySQL/mysql高级篇笔记/第07章 InnoDB数据存储结构.md",
-    "MySQL/mysql高级篇笔记/第06章 索引的数据结构.md",
-    "MySQL/mysql高级篇笔记/第05章 存储引擎.md",
     "MySQL/mysql高级篇笔记/images",
     "MySQL/mysql高级篇笔记",
     "MySQL/mysql基础篇笔记/images",
