@@ -4,22 +4,35 @@
     "type": "split",
     "children": [
       {
-        "id": "871114c8280ec9f3",
+        "id": "700a232199e5e3d9",
         "type": "tabs",
         "children": [
           {
-            "id": "c932e17e3f830302",
+            "id": "5b04696bc3c29e5e",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Matlab/库.md",
+                "file": "Matlab/2023 B.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "373f3d45544bb627",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Matlab/优化算法/飞蛾火焰算法.md",
                 "mode": "source",
                 "source": false
               }
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -98,7 +111,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Matlab/库.md",
+                "file": "Matlab/优化算法/飞蛾火焰算法.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -115,7 +128,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Matlab/库.md",
+                "file": "Matlab/优化算法/飞蛾火焰算法.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -138,7 +151,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Matlab/库.md"
+                "file": "Matlab/优化算法/飞蛾火焰算法.md"
               }
             }
           }
@@ -161,14 +174,26 @@
       "table-editor-obsidian:Advanced Tables Toolbar": false
     }
   },
-  "active": "c932e17e3f830302",
+  "active": "d48be11305968934",
   "lastOpenFiles": [
+    "Matlab/2023 B.md",
+    "Matlab/文件/CUMCM-2023-B.pdf",
+    "Matlab/优化算法/遗传算法.md",
+    "Matlab/优化算法/模拟退火算法.md",
+    "Matlab/优化算法/飞蛾火焰算法.md",
+    "Matlab/多元分析.md",
+    "Matlab/优化算法",
     "Matlab/绘图.md",
     "Matlab/方差分析.md",
-    "Matlab/图/模拟退火算法步骤.png",
-    "Matlab/遗传算法.md",
-    "Matlab/模拟退火算法.md",
+    "Android/多线程.md",
+    "Android/Binder.md",
+    "Android/Handler.md",
     "Matlab/库.md",
+    "数据结构/队列.md",
+    "Matlab/T检验.md",
+    "Android/未命名.md",
+    "Android/图/Handler消息机制.png",
+    "Matlab/图/模拟退火算法步骤.png",
     "Matlab/图/viridis.png",
     "Matlab/图/plasma.png",
     "MySQL/mysql基础篇笔记/第07章_单行函数.md",
@@ -184,21 +209,10 @@
     "MySQL/mysql基础篇笔记/第06章_多表查询.md",
     "MySQL/mysql基础篇笔记/images/1554974984600.png",
     "MySQL/mysql基础篇笔记/images/1554910994523.png",
-    "MySQL/mysql高级篇笔记/第03章 用户与权限管理.md",
-    "MySQL/mysql基础篇笔记/第14章_视图.md",
     "MySQL/mysql高级篇笔记/images/降序索引2.png",
     "MySQL/mysql高级篇笔记/images/降序索引1.png",
     "MySQL/mysql高级篇笔记/images/独立表空间和系统表空间.png",
     "MySQL/mysql高级篇笔记/images/最小最大记录具体.png",
-    "MySQL/mysql高级篇笔记/images/最小最大记录.png",
-    "MySQL/mysql高级篇笔记/第18章 主从复制.md",
-    "MySQL/mysql高级篇笔记/第19章 数据库备份与恢复.md",
-    "MySQL/mysql高级篇笔记/第17章 其它数据库日志.md",
-    "MySQL/mysql高级篇笔记/第16章 多版本并发控制.md",
-    "MySQL/mysql高级篇笔记/第15章 锁.md",
-    "MySQL/mysql高级篇笔记/第12章 数据库其它调优策略.md",
-    "MySQL/mysql高级篇笔记/第13章 事务基础知识.md",
-    "MySQL/mysql高级篇笔记/第11章 数据库的设计规范.md",
     "MySQL/mysql高级篇笔记/images",
     "MySQL/mysql高级篇笔记",
     "MySQL/mysql基础篇笔记/images",
@@ -206,8 +220,6 @@
     "MySQL",
     "新建文件夹",
     "mysql基础篇笔记/images",
-    "mysql基础篇笔记",
-    "mysql高级篇笔记/images",
-    "mysql高级篇笔记"
+    "mysql基础篇笔记"
   ]
 }
