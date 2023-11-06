@@ -152,19 +152,48 @@ using namespace std;
 
 
 //Ì°ĞÄ
+//int main(){
+//	int n;
+//	vector<int> start,ends; 
+//	for(int i=0;i<n;i++){
+//		cin>>start[i]>>ends[i];
+//	} 
+//	sort(start.begin(), start.end());
+//	sort(ends.begin(), ends.end());
+//	int res=0,j=0;
+//	for(int i=0;i<n;i++){
+//		if(start[i]>=ends[j])	j++;
+//		else	res++;
+//	}
+//	cout<<res<<endl;
+//	return 0;
+//} 
+
+
+//Ñ­»·Êä³ö×Ö·û´® 
+//int main(){
+//	int ch;cin>>ch;
+//	for(int i=1;i<=ch;i++){
+//		for(int j=0;j<ch-i;j++)	cout<<" ";
+//		for(int j=0;j<i;j++)	cout<<(char)(j+'A');
+//		for(int j=i-2;j>=0;j--)	cout<<(char)(j+'A');
+//		for(int j=0;j<ch-i;j++)	cout<<" ";
+//		cout<<endl; 
+//	} 
+//	return 0;
+//} 
+
 int main(){
-	int n;
-	vector<int> start,ends; 
-	for(int i=0;i<n;i++){
-		cin>>start[i]>>ends[i];
-	} 
-	sort(start.begin(), start.end());
-	sort(ends.begin(), ends.end());
-	int res=0,j=0;
-	for(int i=0;i<n;i++){
-		if(start[i]>=ends[j])	j++;
-		else	res++;
+	int r,c;cin>>r>>c;
+	for(int i=1;i<=r;i++){
+		for(int j=1;j<=c;j++)	cout<<"+-";
+		cout<<"+"<<endl;
+		for(int j=1;j<=c;j++)	cout<<"|*";
+		cout<<"|"<<endl;
+		if(i==r){
+			for(int j=1;j<=c;j++)	cout<<"+-";
+			cout<<"+"<<endl;
+		}
 	}
-	cout<<res<<endl;
 	return 0;
 } 
