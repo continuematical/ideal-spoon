@@ -2,7 +2,7 @@
 
 DATA SEGMENT
     INPUT db 'please input x(0-9):$'
-    TAB dw 0,1,8,27,64,125,216,343,512,729
+    TAB db '0  ','1  ','8  ','27 ','64 ','125','216','343','512','729','$'
     XXX dw ?
     ERROR db 0AH,0DH,'input error, try again',0AH,0DH,'$'
 DATA ENDS
@@ -33,15 +33,14 @@ NEXT:
     ;将ASCII值转化为真值
     and al,0FH
     add al,al
+    add al,al
     mov bl,al
     mov bh,0
     mov ax,TAB[bx]
     mov XXX,ax
     ;显示
-    
-    xor al,30H
-    mov dl,al
-    mov ah,2
+    mov dx, ax
+    mov ah, 9
     int 21H
     MOV AH, 4CH
     INT 21H
