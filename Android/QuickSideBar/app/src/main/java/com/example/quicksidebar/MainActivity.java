@@ -2,6 +2,8 @@ package com.example.quicksidebar;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Message;
+import android.os.MessageQueue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
