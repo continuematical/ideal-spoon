@@ -2,13 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0c81b69b-91d6-4e93-bc2a-a8141022627e" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/kotlinc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/KotlinJavaRuntime.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/kotlinText.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/kotlin/main.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../Android/QuickSideBar/app/src/main/java/com/example/quicksidebar/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../Android/QuickSideBar/app/src/main/java/com/example/quicksidebar/MainActivity.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../Android/侧栏快速分类.md" beforeDir="false" afterPath="$PROJECT_DIR$/../../Android/侧栏快速分类.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../HarmonyOS/SetAppFontSize/entry/src/main/ets/common/database/PreferencesUtil.ets" beforeDir="false" afterPath="$PROJECT_DIR$/../../HarmonyOS/SetAppFontSize/entry/src/main/ets/common/database/PreferencesUtil.ets" afterDir="false" />
@@ -375,7 +368,7 @@
       <change beforePath="$PROJECT_DIR$/../../数据结构/队列/head.h.gch" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../../数据结构/队列/text.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../数据结构/队列/text.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../数据结构/队列/text.exe" beforeDir="false" afterPath="$PROJECT_DIR$/../../数据结构/队列/text.exe" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../汇编demo/demo7.asm" beforeDir="false" afterPath="$PROJECT_DIR$/../../汇编demo/demo7.asm" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../笔记/.obsidian/workspace.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../笔记/.obsidian/workspace.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -387,6 +380,7 @@
       <list>
         <option value="Kotlin Class" />
         <option value="Kotlin File" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -402,16 +396,16 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "dart.analysis.tool.window.visible": "false",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.0"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;dart.analysis.tool.window.visible&quot;: &quot;false&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;
   }
-}]]></component>
+}</component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">

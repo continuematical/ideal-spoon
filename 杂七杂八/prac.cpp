@@ -183,17 +183,77 @@ using namespace std;
 //	return 0;
 //} 
 
+//int main(){
+//	int r,c;cin>>r>>c;
+//	for(int i=1;i<=r;i++){
+//		for(int j=1;j<=c;j++)	cout<<"+-";
+//		cout<<"+"<<endl;
+//		for(int j=1;j<=c;j++)	cout<<"|*";
+//		cout<<"|"<<endl;
+//		if(i==r){
+//			for(int j=1;j<=c;j++)	cout<<"+-";
+//			cout<<"+"<<endl;
+//		}
+//	}
+//	return 0;
+//} 
+
+//ÖÊÊýÉ¸ 
+//const int N=1e7+1;
+//int arr[N], primes[N], cnt=0;
+//int main(){
+//	for(int i=2;i<=N;i++){
+//		if(!arr[i])	primes[cnt++]=i;
+//		for(int j=0;primes[j]<=N/i;j++){
+//			arr[primes[j]*i]=1;
+//			if(i%primes[j]==0)	break;
+//		}
+//	}
+//	
+//	cout<<primes[2018]<<endl;
+//}interesting 
+
+//int main(){
+//	int num[100]={5650,4542, 3554, 473, 946, 4114 ,3871, 9073, 90, 4329,
+//                   2758, 7949, 6113, 5659, 5245, 7432, 3051, 4434, 6704, 3594,
+//                   9937, 1173, 6866, 3397, 4759, 7557 ,3070, 2287, 1453, 9899,
+//                   1486 ,5722, 3135, 1170, 4014, 5510, 5120, 729, 2880, 9019,
+//                   2049, 698, 4582, 4346, 4427, 646, 9742, 7340, 1230, 7683,
+//                   5693, 7015, 6887, 7381, 4172, 4341, 2909, 2027, 7355, 5649,
+//                   6701 ,6645, 1671, 5978, 2704, 9926, 295, 3125, 3878, 6785,
+//                   2066 ,4247, 4800, 1578, 6652, 4616, 1113, 6205, 3264, 2915,
+//                   3966 ,5291 ,2904 ,1285, 2193, 1428 ,2265 ,8730 ,9436, 7074,
+//                   689,5510 ,8243, 6114, 337, 4096, 8199 ,7313 ,3685, 211};
+//    int a=0,b=0;
+//	for(int i=0;i<100;i++){
+//		int ret=num[i];
+//		while(ret%2==0){
+//			a++;ret/=2;
+//		}
+//		while(ret%5==0){
+//			b++;ret/=5;
+//		}
+//	}
+//	cout<<min(a,b)<<endl;
+//	return 0;
+//} 
+
+int num, temp[8];
 int main(){
-	int r,c;cin>>r>>c;
-	for(int i=1;i<=r;i++){
-		for(int j=1;j<=c;j++)	cout<<"+-";
-		cout<<"+"<<endl;
-		for(int j=1;j<=c;j++)	cout<<"|*";
-		cout<<"|"<<endl;
-		if(i==r){
-			for(int j=1;j<=c;j++)	cout<<"+-";
-			cout<<"+"<<endl;
+	int N=10;
+	while(N--){
+		for(int i=1;i<=32;i++){
+			if(i%2)	cout<<endl;
+			cin>>num;
+			int cnt=0;
+			while(num){
+				temp[cnt++]=num%2;
+				num/=2;
+			}
+			for(int i=7;i>=0;i--)
+				if(temp[i])	cout<<temp[i];
+				else	cout<<" ";
 		}
 	}
 	return 0;
-} 
+}
