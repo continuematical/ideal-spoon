@@ -238,22 +238,4 @@ using namespace std;
 //	return 0;
 //} 
 
-int num, temp[8];
-int main(){
-	int N=10;
-	while(N--){
-		for(int i=1;i<=32;i++){
-			if(i%2)	cout<<endl;
-			cin>>num;
-			int cnt=0;
-			while(num){
-				temp[cnt++]=num%2;
-				num/=2;
-			}
-			for(int i=7;i>=0;i--)
-				if(temp[i])	cout<<temp[i];
-				else	cout<<" ";
-		}
-	}
-	return 0;
-}
+
