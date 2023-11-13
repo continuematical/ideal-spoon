@@ -330,6 +330,7 @@ public static void loop() {
     }
 ```
 `loop()`中处理消息是一个死循环，拿不到`Message`就会一直阻塞，是否会导致`ANR`？
+
 >在应用程序的入口`ActivityThread`里面的`main` 方法中会创建一个主线程的`looper`对象和一个大`Handler`。
 >
 >`Android`是基于事件驱动的，通过`looper.looper()`不断接收事件，处理事件，每一个触摸事件或者是`Activity`的生命周期都是运行在`Looper.looper()`的控制之下，当收到不同`Message` 时则采用相应措施：在`H.handleMessage(msg)`方法中，根据接收到不同的msg，执行相应的生命周期。如果它停止了，应用也就停止了。也就是说我们的代码其实就是运行在这个循环里面去执行的，当然就不会阻塞。
