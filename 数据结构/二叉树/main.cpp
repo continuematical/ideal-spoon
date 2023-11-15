@@ -1,25 +1,23 @@
 #include "BiTreeFun.cpp"
 
 int depth; 
-BiTNode* p;char ch; 
+char ch; 
+vector<TElemType> s;
+vector<TElemType> res; 
 
 int main(){
 	BiTree T;
 	InitBiTree(T);
-	CreateBiTree(T); //AB#DE###C##
-	BiTreeDepth(T,1,depth);
-	printf("树的层次为："); 
-	cout<<depth<<endl;
-	getchar(); 
-	scanf("%c",&ch);
-	p=Parent(T,ch);
-	if(p==NULL) cout<<"无双亲节点"<<endl;
-	else	cout<<p->data<<endl;
-	getchar();
-	scanf("%c",&ch);
-	p=LeftSibling(T,ch);
-	if(p==NULL) cout<<"无右孩子节点"<<endl;
-	else	cout<<p->data<<endl;
+	CreateBiTree(T, s); //ABDH##I##EJ###CF##G##
+	//AB#DE###C## 
+	Traverse(T);
+	printf("二叉树的中序遍历：\n");
+	preTraversal(T, res); 
+	show(res);
 	
+	printf("二叉树的层次遍历：\n");
+	res.clear();
+	levelTraversal(T, res);
+	show(res); 
 	return 0;
 } 
