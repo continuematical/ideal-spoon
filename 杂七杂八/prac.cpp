@@ -238,4 +238,87 @@ using namespace std;
 //	return 0;
 //} 
 
+//
+//int main(){
+//	int i=0,cnt=0;
+//	while(1){
+//		int t=0;
+//		for(int j=0;i<30;j++){
+//			if((i>>j)&1)	t++;
+//		}
+//		if(t==3){
+//			++cnt;
+//			cout<<i<<endl;
+//			if(cnt>23)	break;
+//		}
+//		i++;
+//	}
+//	return 0;
+//}
+
+//int getHex(int num){
+//	int a;
+//	while(num){
+//		a=num%16;
+//		if(a<=9)	return 0;
+//		num=num/16;
+//	}
+//	return 1; 
+//}
+//int main(){
+//	int num=2023;
+//	while(1){
+//		if(getHex(num))	break;
+//		else	num++;
+//	}
+//	cout<<num<<endl;
+//	return 0;
+//}
+
+//int main(){
+//	int res=0;
+//	int num[30]={99, 22, 51, 63, 72, 61, 20, 88, 40, 21, 63, 30, 11, 18, 99, 12, 93, 16, 7, 53, 64, 9, 28, 84, 34, 96, 52, 82, 51, 77};
+//	for(int i=0;i<30;i++){
+//		for(int j=i+1;j<30;j++){
+//			if(num[i]*num[j]>=2022)	res++;
+//		}
+//	}
+//	cout<<res<<endl;
+//	return 0;
+//}
+
+//int main(){
+//	int n,m,t,r1,c1,r2,c2,res=0;
+//	cin>>n>>m;
+//	cin>>t;
+//	int max[n+1][m+1];
+//	for(int i=1;i<=n;i++)
+//		for(int j=1;j<=m;j++)
+//			max[i][j]=0; 
+//	while(t--){
+//		cin>>r1>>c1>>r2>>c2;
+//		for(int i=r1;i<=r2;i++){
+//			for(int j=c1;j<=c2;j++){
+//				if(!max[i][j]){
+//					max[i][j]=1;
+//					res++;
+//				}
+//			}
+//		}
+//	}
+//	cout<<n*m-res<<endl;
+//	return 0;
+//} 
+
+//int main(){
+//	int n;cin>>n;
+//	int num[n+1];
+//	for(int i=1;i<=n;i++){
+//		cin>>num[i];
+//		if(i>=3){
+//			sort(num+1,num+i+1);
+//			cout<<num[3]<<" ";
+//		}
+//	}
+//}
 
