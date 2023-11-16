@@ -83,4 +83,102 @@ inline fun <T> Composer.cache(invalid: Boolean, block: @DisallowComposableCalls 
 _**mutableStateOf创建可变状态变量**_。`mutableStateOf` 函数用于创建可变状态`（mutable state）`。它接受一个初始值作为参数，并返回一个包含此值的可变状态变量。可变状态变量的值可以更改，在 `Compose` 中需要在 `Composable` 函数内部使用。
 
 _**remember记录可变状态变量并保证使用时的统一和重建时状态的恢复**_。`remember` 函数用于将值保留在 `Composable` 函数内。它可以用来在 `Composable` 函数的多次调用之间保留不变的值，以避免因组件重组而导致的数据混乱和丢失。`remember` 函数接受一个 `lambda` 表达式作为参数，这个 `lambda` 表达式通常包含对 `mutableStateOf` 的调用，用于创建和保留一个可变状态的变量。
+# 常用UI
+## Modifier
+### 基础用法
+`Modifier.size()` 设置组件的高度和宽度。
+`Modifier.background()` 背景色。支持纯色背景，也可以使用`Brush` 设置渐变色。
+`Modifier.fillMaxSize()` 填满整个父空间。
+`Modifier.border()` 添加边框。
+`Modifier.offset()` 移动被修饰组件的位置。添加偏移量。
+注：调用顺序会影响页面渲染效果。
+### 实现原理
+#### 接口
+```kotlin
+interface Modifier {
+	interface Element : Modifier {  
+	    override fun <R> foldIn(initial: R, operation: (R, Element) -> R): R =  
+	        operation(initial, this)  
+		override fun <R> foldOut(initial: R, operation: (Element, R) -> R): R =  
+	        operation(this, initial)  
+		override fun any(predicate: (Element) -> Boolean): Boolean =  predicate(this)  
+	    override fun all(predicate: (Element) -> Boolean): Boolean = predicate(this)  
+	}
+
+	companion object : Modifier {  
+	    override fun <R> foldIn(initial: R, operation: (R, Element) -> R): R = initial  
+	    override fun <R> foldOut(initial: R, operation: (Element, R) -> R): R = initial  
+	    override fun any(predicate: (Element) -> Boolean): Boolean = false  
+	    override fun all(predicate: (Element) -> Boolean): Boolean = true  
+	    override infix fun then(other: Modifier): Modifier = other  
+	    override fun toString() = "Modifier"  
+	}
+}
+
+class CombinedModifier(  
+    private val outer: Modifier,  
+    private val inner: Modifier  
+) : Modifier {  
+    override fun <R> foldIn(initial: R, operation: (R, Modifier.Element) -> R): R =  
+        inner.foldIn(outer.foldIn(initial, operation), operation)  
+  
+    override fun <R> foldOut(initial: R, operation: (Modifier.Element, R) -> R): R =  
+        outer.foldOut(inner.foldOut(initial, operation), operation)  
+  
+    override fun any(predicate: (Modifier.Element) -> Boolean): Boolean =  
+        outer.any(predicate) || inner.any(predicate)  
+  
+    override fun all(predicate: (Modifier.Element) -> Boolean): Boolean =  
+        outer.all(predicate) && inner.all(predicate)  
+  
+    override fun equals(other: Any?): Boolean =  
+        other is CombinedModifier && outer == other.outer && inner == other.inner  
+  
+    override fun hashCode(): Int = outer.hashCode() + 31 * inner.hashCode()  
+  
+    override fun toString() = "[" + foldIn("") { acc, element ->  
+        if (acc.isEmpty()) element.toString() else "$acc, $element"  
+    } + "]"  
+}
+```
+具体实现分别是`Modifier` 伴生对象，`Modifier.Element` 和`CombinedModifier` 。
+伴生对象：链式调用的起点；
+`Element` ：代表具体的修饰符；
+`CombinedModifier`：连接每个链式调用的`Modifier` 对象。
+#### 链的构建
+调用如下方法时：
+```kotlin
+modifier = Modifier.size(100.dp)
+```
+会创建一个`SizeModifier` 实例，并使用`then` 进行连接。
+```kotlin
+@Stable  
+fun Modifier.size(width: Dp, height: Dp) = this.then(  
+    SizeModifier(  
+        minWidth = width,  
+        maxWidth = width,  
+        minHeight = height,  
+        maxHeight = height,  
+        enforceIncoming = true,  
+        inspectorInfo = debugInspectorInfo {  
+            name = "size"  
+            properties["width"] = width  
+            properties["height"] = height  
+        }  
+    )  
+)
+```
+`then` 返回一个`CombinedModifier` 。
+```kotlin
+infix fun then(other: Modifier): Modifier =  
+    if (other === Modifier) this else CombinedModifier(this, other)
+```
+其用来连接的两个组件分别存储在`outer` 和`innner` 中。可以使用`foldIn()` 和`foldOut()` 来访问和遍历。
+>`composed` 是另一个用来连接`Modifier` 的方法，可以调用`remember` 来保存状态，因此可以创建`Stateful` 的`Modifier` 。
+#### 链的解析
+## 基础组件
+### 文字组件
+
+
+
 
