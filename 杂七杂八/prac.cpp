@@ -352,4 +352,27 @@ using namespace std;
 //	return 0;
 //}
 
-
+int w[101], sum=0, dp[101][100001];
+//dp[i][j]表示前i个砝码是否能测量出重量j 
+int main(){
+	int n;cin>>n;
+	for(int i=1;i<=n;i++){
+		cin>>w[i];
+		sum+=w[i];
+	}
+	for(int i=1;i<=n;i++){
+		for(int j=1;j<=sum;j++){
+			dp[i][j]=dp[i-1][j];
+			if(!dp[i][j]){
+				if(j==w[i])	dp[i][j]=1;
+				if(dp[i-1][j+w[i]]==1)	dp[i][j]=1;
+				if(dp[i-1][abs(j-w[i])]==1)	dp[i][j]=1;
+			}
+		}
+	}
+	int res=0;
+	for(int i=1;i<=sum;i++)
+		if(dp[n][i]==1)	res++;
+	cout<<res<<endl;
+	return 0;
+}
