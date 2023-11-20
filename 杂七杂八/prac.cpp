@@ -322,3 +322,34 @@ using namespace std;
 //	}
 //}
 
+//int main()
+//{
+//  // 请在此输入您的代码
+//  string s;cin>>s;
+//  int res[10];
+//  for(int i=0;i<10;i++) res[i]=0;
+//  for(int i=0;i<s.length();i++)
+//    res[s[i]-'0']++;
+//  for(int i=0;i<10;i++)
+//    cout<<res[i]<<" ";
+//  return 0;
+//}
+
+
+//int main(){
+//	int p;cin>>p;
+//	switch((p+1)%3){
+//		case 0:
+//			cout<<"high"<<endl;
+//			break;
+//		case 1:
+//			cout<<"low"<<endl;
+//			break;
+//		case 2:
+//			cout<<"mid"<<endl;
+//			break;
+//	}
+//	return 0;
+//}
+
+
