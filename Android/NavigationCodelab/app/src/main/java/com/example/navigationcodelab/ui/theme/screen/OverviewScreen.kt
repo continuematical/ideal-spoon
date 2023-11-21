@@ -2,6 +2,7 @@ package com.example.navigationcodelab.ui.theme.screen
 
 import UserData
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -30,13 +31,18 @@ import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.example.navigationcodelab.ui.theme.components.AccountRow
 
 private val RallyDefaultPadding = 12.dp
 private const val SHOWN_ITEMS = 3
 
 @Preview(showBackground = true)
 @Composable
-fun OverviewScreen() {
+fun OverviewScreen(
+    onClickSeeAllAccounts: () -> Unit = {},
+    onClickSeeAllBills: () -> Unit = {},
+    onAccountClick: (String) -> Unit = {}
+) {
     Column(
         modifier = Modifier
             .padding(16.dp)
@@ -45,7 +51,14 @@ fun OverviewScreen() {
     ) {
         AlertedCard()
         Spacer(modifier = Modifier.height(RallyDefaultPadding))
-        AccountCard(onClickSeeAll = {}, onClickAccount = {})
+        AccountCard(
+            onClickSeeAll = onClickSeeAllAccounts,
+            onClickAccount = onAccountClick
+        )
+        Spacer(modifier = Modifier.height(RallyDefaultPadding))
+        BillsCard(
+            onClick = onClickSeeAllBills
+        )
     }
 }
 
@@ -131,7 +144,7 @@ private fun AlertItem(message: String) {
 
 @Composable
 private fun AccountCard(onClickSeeAll: () -> Unit, onClickAccount: (String) -> Unit) {
-    val amount = UserData.accounts.map { it -> it.balance }.sum()
+    val amount = UserData.accounts.map { it.balance }.sum()
     OverviewScreenCard(
         title = "Accounts",
         amount = amount,
@@ -140,7 +153,13 @@ private fun AccountCard(onClickSeeAll: () -> Unit, onClickAccount: (String) -> U
         colors = { it.color },
         data = UserData.accounts,
     ) {
-
+        AccountRow(
+            modifier = Modifier.clickable { onClickAccount(it.name) },
+            name = it.name,
+            number = it.number,
+            amount = it.balance,
+            color = it.color
+        )
     }
 }
 
