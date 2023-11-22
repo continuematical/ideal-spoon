@@ -78,13 +78,15 @@ void twelve(){
 		cerr<<"record.txt open wrong"<<endl;
 		exit(1);
 	}
-//	while(!txtfile.eof()){
-//		txtfile>>name>>score;
-//		cout<<name<<'\t'<<score<<endl;
-//	}
-	char line[100];
-	while(txtfile.getline(line, 100))
-		cout<<line<<endl;
+	while(!txtfile.eof()){
+		txtfile>>name>>score;
+		cout<<name<<'\t'<<score<<endl;
+	}
+	
+	//getline() 
+//	char line[100];
+//	while(txtfile.getline(line, 100))
+//		cout<<line<<endl;
 	txtfile.close();
 } 
 
