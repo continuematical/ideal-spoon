@@ -245,20 +245,20 @@ Status preTraversal(BiTree T, vector<TElemType>& res){
 	return 1;
 }
 
-Status inTraversal(BiTree T){
-	if(T!=NULL){
-		inTraversal(T->lchild);
-		cout<<T->data<<" ";
-		inTraversal(T->rchild);
-	}
-	return 1;
-}
-
 Status postTraversal(BiTree T){
 	if(T!=NULL){
 		postTraversal(T->lchild);
 		postTraversal(T->rchild);
 		cout<<T->data<<" "; 
+	}
+	return 1;
+}
+
+Status inTraversal(BiTree T){
+	if(T!=NULL){
+		inTraversal(T->lchild);
+		cout<<T->data<<" ";
+		inTraversal(T->rchild);
 	}
 	return 1;
 }
@@ -314,7 +314,7 @@ Status Traverse_R(BiTree T, int depth, int right, int tap) {
 	if (T == NULL) return 1;
 
 	// 获取一次树的初始高度，用于计算相对偏移数量
-	static int treeDepth = BiTreeDepth(T) + 1;
+	static int treeDepth = BiTreeDepth(T);
 	// 记录当前光标位置，用于在递归中记录当前递归时树的位置
 	int x, y;
 	// 拆分树，将树的左右子树拆分开来
@@ -322,50 +322,46 @@ Status Traverse_R(BiTree T, int depth, int right, int tap) {
 	breakTree(T, L, R);
 
 	// 计算父树的偏移量
-	int tap1 = tap * pow(2, treeDepth - depth);
+	int tap1 = tap*pow(2, treeDepth-depth);
 	// 计算子树的偏移量
-	int tap2 = right * (pow(2, treeDepth - depth));
+	int tap2 = right*(pow(2, treeDepth- depth));
 	// 计算半偏移量
-	int tap3 = pow(2, treeDepth - depth - 1);
+	int tap3 = pow(2, treeDepth-depth-1);
 
 	// 获取根的坐标
-	// x 计算方法为：父偏移量 + 子偏移量 + 半偏移量 - 1
-	// y 计算方法为：目前打印的层数 * 2
-	x = tap1 + tap2 + tap3 ;
-	y = depth * 2 + 1;
+	x = tap1+tap2+tap3;
+	y = depth*2+1;
 
 	// 打印根的位置
-	gotoxy(x * 2, y);
+	gotoxy(x*2, y);
 	printf("%c", T->data);
 
 	// 在打印子树时，当前层数+1
 	depth++;
 	// 计算子树的父偏移量
-	tap = tap * 2 + (right == 1 ? 2 : 0);
-	if (L == NULL && R == NULL) return 1;
-	else if (R == NULL) {
+	tap=tap*2+(right==1?2:0);
+	if (L==NULL&&R==NULL) return 1;
+	else if (R==NULL) {
 		// 打印左子树的位置
-		gotoxy(x * 2 - tap3, y + 1);
+		gotoxy(x*2-tap3,y+1);
 		printf("┏");
-		for (int i = 0; i < tap3-1; i++) printf("━");
+		for (int i=0;i<tap3-1; i++) printf("━");
 		printf("┛");
-		Traverse_R(L, depth, 0, tap);
-	}
-	else if (L == NULL) {
+		Traverse_R(L,depth,0,tap);
+	} else if (L==NULL) {
 		// 打印右子树的位置
-		gotoxy(x * 2, y + 1);
+		gotoxy(x*2, y+1);
 		printf("┗");
-		for (int i = 0; i < tap3-1; i++) printf("━");
+		for (int i = 0;i<tap3-1; i++) printf("━");
 		printf("┓");
-		Traverse_R(R, depth, 1, tap);
-	}
-	else {
+		Traverse_R(R,depth,1,tap);
+	} else {
 		// 打印左右子树的位置
-		gotoxy(x * 2 - tap3, y + 1);
+		gotoxy(x*2-tap3, y+1);
 		printf("┏");
-		for (int i = 0; i < tap3 - 1; i++) printf("━");
+		for (int i = 0; i<tap3-1; i++) printf("━");
 		printf("┻");
-		for (int i = 0; i < tap3 - 1; i++) printf("━");
+		for (int i = 0; i<tap3-1; i++) printf("━");
 		printf("┓");
 		Traverse_R(L, depth, 0, tap);
 		Traverse_R(R, depth, 1, tap);

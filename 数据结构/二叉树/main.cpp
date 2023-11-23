@@ -11,6 +11,8 @@ int main(){
 	CreateBiTree(T, s); //ABDH##I##EJ###CF##G##
 	//AB#DE###C## 
 	Traverse(T);
+	printf("二叉树的深度：\n");
+	cout<<BiTreeDepth(T)<<endl;
 	printf("二叉树的中序遍历：\n");
 	preTraversal(T, res); 
 	show(res);
