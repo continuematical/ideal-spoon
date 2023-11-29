@@ -8,6 +8,7 @@ typedef int VertexType;//顶线信息
 typedef int Status;
 
 const int OK=1;
+const int ERROR=-1;
 
 bool DFSVisited[MAX_VERTEX_NUM];
 bool BFSVisited[MAX_VERTEX_NUM];
@@ -37,62 +38,7 @@ int LocateVex(ALGraph& G, VertexType data){
 	for(int i=0;i<G.vexnum;i++)
 		if(G.vertices[i].data==data)
 			return i;
-	return -1;
-}
-
-Status CreateGraph(ALGraph& G){
-	printf("请输入节点数目和边数目：\n");
-	cin>>G.vexnum>>G.arcnum;
-	printf("请输入顶点信息：\n");
-	for(int i=0;i<G.vexnum;i++){
-		cin>>G.vertices[i].data;
-		G.vertices[i].firstarc=NULL;
-	}
-	printf("请输入边信息：\n");
-	for(int i=0;i<G.arcnum;i++){
-		VertexType v1,v2;cin>>v1>>v2;
-		int pi=LocateVex(G, v1);
-		int pj=LocateVex(G, v2);
-		//然后插入链表头部
-		ArcNode* p1=new ArcNode(); 
-		p1->adjvex=pj;
-		p1->nextarc=G.vertices[pi].firstarc;
-		G.vertices[i].firstarc=p1;
-		
-		ArcNode* p2=new ArcNode(); 
-		p2->adjvex=pi;
-		p2->nextarc=G.vertices[pj].firstarc;
-		G.vertices[pj].firstarc=p2;
-	}
-	return OK;
-} 
-
-//添加新节点
-Status InsertVex(ALGraph& G, VertexType& v){
-	G.vertices[G.vexnum].data=v;
-	printf("请输入与顶点相连的节点数量：\n");
-	int number;cin>>number;
-	for(int i=0;i<number;i++){
-		VertexType j;cin>>j;
-		int pj=LocateVex(G, j);
-		
-		ArcNode* p1=new ArcNode();
-		p1->adjvex=G.vexnum;
-		p1->nextarc=G.vertices[pj].firstarc;
-		G.vertices[pj].firstarc=p1;
-		
-		ArcNode* p2=new ArcNode();
-		p2->adjvex=pj;
-		p2->nextarc=G.vertices[G.vexnum].firstarc;
-		G.vertices[G.vexnum].firstarc=p2;
-	}
-	G.vexnum++;
-	return OK;
-} 
-
-//删除节点
-Status DeleteVex(ALGraph& G, VertexType& v){
-	
+	return ERROR;
 }
 
 //添加边
@@ -112,6 +58,67 @@ Status InsertArc(ALGraph& G, VertexType& v, VertexType& w){
 	G.vertices[j].firstarc=pj;
 	return OK;
 } 
+
+Status CreateGraph(ALGraph& G){
+	printf("请输入节点数目和边数目：\n");
+	cin>>G.vexnum>>G.arcnum;
+	printf("请输入顶点信息：\n");
+	for(int i=0;i<G.vexnum;i++){
+		cin>>G.vertices[i].data;
+		G.vertices[i].firstarc=NULL;
+	}
+	printf("请输入边信息：\n");
+	for(int i=0;i<G.arcnum;i++){
+		VertexType v1,v2;cin>>v1>>v2;
+		InsertArc(G, v1, v2);
+	}
+	return OK;
+} 
+
+//添加新节点
+Status InsertVex(ALGraph& G, VertexType& v){
+	G.vertices[G.vexnum++].data=v;
+	printf("请输入与顶点相连的节点数量：\n");
+	int number;cin>>number;
+	for(int i=0;i<number;i++){
+		VertexType j;cin>>j;
+		InsertArc(G, v, j);
+	}
+	return OK;
+} 
+
+//删除节点
+Status DeleteVex(ALGraph& G, VertexType& v){
+	int i=LocateVex(G, v);
+	//将节点对应的链表销毁
+	ArcNode* p=G.vertices[i].firstarc;
+	ArcNode* q;
+	while(p){
+		q=p;p=p->nextarc;
+		delete q;
+	}
+	//数组移位
+	for(int k=i;k<G.vexnum;k++){
+		G.vertices[k]=G.vertices[k+1];
+	} 
+	p=G.vertices[G.vexnum-1].firstarc;
+	while(p){
+		q=p;p=p->nextarc;
+		delete q;
+	}
+	G.vexnum--;
+	//遍历数组，将其他点与该节点连的边删除 
+	for(int k=0;k<G.vexnum;k++){
+		ArcNode* p=G.vertices[k].firstarc;
+		while(p){
+			if(p->adjvex==i){
+				p->nextarc=p->nextarc->nextarc;
+				delete p;
+				break;
+			} 
+		}
+	}
+}
 
 //删除边
 //删除节点v和节点w之间的边
@@ -155,9 +162,73 @@ void DFSTraverse(ALGraph& G){
 	for(int i=0;i<G.vexnum;i++)
 		if(!DFSVisited[i])
 			DFS(G, i);
+	cout<<endl;
 }
 
 //广度优先搜索
 void BFSTraverse(ALGraph& G){
-	
+	for(int i=0;i<G.vexnum;i++)
+		BFSVisited[i]=false;
+	queue<VertexType> q;
+	for(int i=0;i<G.vexnum;i++){
+		if(!BFSVisited[i]){
+			BFSVisited[i]=true;
+			cout<<G.vertices[i].data<<" ";
+			q.push(i);
+			while(!q.empty()){
+				int count=q.front();q.pop();
+				ArcNode* p=G.vertices[count].firstarc;
+				while(p){
+					if(!BFSVisited[p->adjvex]){
+						q.push(p->adjvex);
+						BFSVisited[p->adjvex]=true;
+						cout<<G.vertices[p->adjvex].data<<" ";
+					}
+					p=p->nextarc;
+				}
+			}
+		}
+	}
+	cout<<endl;
 } 
+
+void showGraph(ALGraph& G){
+	for(int i=0;i<G.vexnum;i++){
+		cout<<G.vertices[i].data<<":";
+		ArcNode* p=G.vertices[i].firstarc;
+		while(p->nextarc!=NULL){
+			cout<<p->adjvex<<" ";
+			p=p->nextarc;
+		}
+	}
+} 
+
+VertexType FirstAdjVex(ALGraph& G, VertexType v){
+	int i=LocateVex(G, v);
+	ArcNode* p=G.vertices[i].firstarc;
+	return p->adjvex;
+}
+
+int NextAdjVex(ALGraph& G, VertexType v, VertexType w){
+	int i=LocateVex(G, v);
+	ArcNode* p=G.vertices[i].firstarc;
+	while(p){
+		if(LocateVex(G, p->adjvex)==w)	break;
+		p=p->nextarc;
+	}
+	if(p==NULL)	return ERROR;
+	else	p->nextarc->adjvex;
+}
+
+Status GetVex(ALGraph& G, VNode v){
+	if(LocateVex(G, v.data)==ERROR)	return ERROR;
+	else	return v.data;
+}
+
+Status PutVex(ALGraph& G, VNode v, VertexType value){
+	VertexType old_value=GetVex(G, v);
+	int i=LocateVex(G, old_value);
+	G.vertices[i].data=value; 
+	return OK; 
+}
+
