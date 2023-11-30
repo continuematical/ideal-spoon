@@ -352,27 +352,68 @@ using namespace std;
 //	return 0;
 //}
 
-int w[101], sum=0, dp[101][100001];
-//dp[i][j]表示前i个砝码是否能测量出重量j 
+//
+//int w[101], sum=0, dp[101][100001];
+////dp[i][j]表示前i个砝码是否能测量出重量j 
+//int main(){
+//	int n;cin>>n;
+//	for(int i=1;i<=n;i++){
+//		cin>>w[i];
+//		sum+=w[i];
+//	}
+//	for(int i=1;i<=n;i++){
+//		for(int j=1;j<=sum;j++){
+//			dp[i][j]=dp[i-1][j];
+//			if(!dp[i][j]){
+//				if(j==w[i])	dp[i][j]=1;
+//				if(dp[i-1][j+w[i]]==1)	dp[i][j]=1;
+//				if(dp[i-1][abs(j-w[i])]==1)	dp[i][j]=1;
+//			}
+//		}
+//	}
+//	int res=0;
+//	for(int i=1;i<=sum;i++)
+//		if(dp[n][i]==1)	res++;
+//	cout<<res<<endl;
+//	return 0;
+//}
+
+
+
+//https://www.lanqiao.cn/problems/1460/learning/
+//int gcd(int x, int y){
+//	return !y ? x : gcd(y, x%y);
+//}
+//
+//int main(){
+//	int f[2022];//存储1-i的最大公倍数
+//	memset(f, 0, sizeof(f));
+//	for(int i=1;i<=2021;i++) {
+//        for(int j=i+1;j<=i+21;j++) {
+//            if(j>2021)	break;
+//            if(f[j]==0)	f[j]=f[i]+j*i/gcd(j,i);
+//            else    f[j]=min(f[j],f[i]+j*i/gcd(j,i));
+//        }
+//    } 
+//    cout<<f[2021]<<endl;
+//	return 0;
+//}
+
+//https://www.lanqiao.cn/problems/8735/learning/?contest_id=147
+int check(int x, int y, int z){
+	if(x+y>z && x+z>y && y+z>x && x-y<z && x-z<y && y-z<x)	return 1;
+	else	return 0;
+} 
+ 
 int main(){
-	int n;cin>>n;
-	for(int i=1;i<=n;i++){
-		cin>>w[i];
-		sum+=w[i];
+	int x,y,z;cin>>x>>y>>z;
+	if(!check(x,y,z)){
+		cout<<-1<<endl;
+		return 0;
 	}
-	for(int i=1;i<=n;i++){
-		for(int j=1;j<=sum;j++){
-			dp[i][j]=dp[i-1][j];
-			if(!dp[i][j]){
-				if(j==w[i])	dp[i][j]=1;
-				if(dp[i-1][j+w[i]]==1)	dp[i][j]=1;
-				if(dp[i-1][abs(j-w[i])]==1)	dp[i][j]=1;
-			}
-		}
-	}
-	int res=0;
-	for(int i=1;i<=sum;i++)
-		if(dp[n][i]==1)	res++;
-	cout<<res<<endl;
+	int s=(x+y+z)/2;
+	int S=s*(s-x)*(s-y)*(s-z);
+	cout<<S<<endl;
 	return 0;
 }
+ 
