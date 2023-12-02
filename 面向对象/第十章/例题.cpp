@@ -70,6 +70,24 @@ void ten(){
 	binfile.close();
 } 
 
+void nine(){
+	int number;
+	cout<<"cin.rdstate()="<<cin.rdstate()<<endl;
+	while(true){
+		cin>>number;
+		if(cin.rdstate()==ios::goodbit){
+			cout<<"Input is correct!"<<endl;
+			break;
+		}
+		if(cin.rdstate()==ios_base::failbit){
+			cout<<"Input is error!"<<endl;
+			cin.clear(ios::goodbit);
+			cout<<"cin.rdstate()="<<cin.rdstate()<<endl;
+			break;
+		}
+	}
+} 
+
 //文本文件的输入 
 void twelve(){
 	char name[8], score[6];
@@ -91,6 +109,6 @@ void twelve(){
 } 
 
 int main(){
-	twelve();
+	nine();
 	return 0;
 } 
