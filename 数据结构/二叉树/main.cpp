@@ -5,7 +5,7 @@ char ch;
 vector<TElemType> s;
 vector<TElemType> res; 
 
-int main(){
+void BiTreeTest(){
 	BiTree T;
 	InitBiTree(T);
 	CreateBiTree(T, s); //ABDH##I##EJ###CF##G##
@@ -21,5 +21,9 @@ int main(){
 	res.clear();
 	levelTraversal(T, res);
 	show(res); 
+}
+
+int main(){
+	BiTreeTest();
 	return 0;
 } 

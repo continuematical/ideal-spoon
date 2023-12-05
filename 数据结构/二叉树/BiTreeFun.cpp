@@ -1,8 +1,11 @@
 #include <bits/stdc++.h>
 #include<windows.h>
 using namespace std;
-#define TElemType char
+
 #define Status int
+#define TElemType char
+#define OK 1
+#define ERROR 0
 
 const int N=100;
 
@@ -46,8 +49,8 @@ Status DestroyBiTree(BiTree &T){
     return 1;
 }
 
+//中序遍历建树
 Status CreateBiTree(BiTree &T, vector<TElemType>& v){ 
-    //算法6.4
     TElemType ch;
     scanf("%c", &ch);v.push_back(ch);
     if (ch == '#') 	T = NULL;
@@ -64,10 +67,8 @@ Status CreateBiTree(BiTree &T, vector<TElemType>& v){
 
 void ClearBiTree(BiTree &T){
     if (T){
-        if ((T)->lchild)             
-            ClearBiTree(T->lchild); 
-        if ((T)->rchild)                 
-            ClearBiTree(T->rchild); 
+        if (T->lchild)    ClearBiTree(T->lchild); 
+        if (T->rchild)    ClearBiTree(T->rchild); 
         free(T);                        
         T = NULL;                
     }
@@ -81,12 +82,10 @@ Status BiTreeEmpty(BiTree T){
 int BiTreeDepth(BiTree T){
     int i, j;
     if (!T)	return 0;
-    
     if (T->lchild)	i = BiTreeDepth(T->lchild);
     else	i = 0;
     if (T->rchild)	j = BiTreeDepth(T->rchild);
     else	j = 0;
-    
     return i > j ? i + 1 : j + 1;
 }
 
@@ -140,12 +139,8 @@ Status Parent(BiTree T,TElemType e){
 	    return 1;
 	}
 	else{
-		if(T->lchild){
-			Parent(T->lchild,e);
-		}
-		if(T->rchild){
-			Parent(T->rchild,e);
-		}
+		if(T->lchild)	Parent(T->lchild,e);
+		if(T->rchild)	Parent(T->rchild,e);
 	}
 	return 0;
 }
@@ -188,12 +183,8 @@ Status LeftSibling(BiTree T,TElemType e){
 		return 1;
 	}
 	else{
-		if(T->lchild){
-			LeftSibling(T->lchild,e);
-		}
-		if(T->rchild){
-			LeftSibling(T->rchild,e);
-		}
+		if(T->lchild)	LeftSibling(T->lchild,e); 
+		if(T->rchild)	LeftSibling(T->rchild,e);
 	}
 	return 0;
 }
@@ -245,20 +236,20 @@ Status preTraversal(BiTree T, vector<TElemType>& res){
 	return 1;
 }
 
-Status postTraversal(BiTree T){
+Status postTraversal(BiTree T, vector<TElemType>& res){
 	if(T!=NULL){
-		postTraversal(T->lchild);
-		postTraversal(T->rchild);
-		cout<<T->data<<" "; 
+		postTraversal(T->lchild, res);
+		postTraversal(T->rchild, res);
+		res.push_back(T->data);
 	}
 	return 1;
 }
 
-Status inTraversal(BiTree T){
+Status inTraversal(BiTree T, vector<TElemType>& res){
 	if(T!=NULL){
-		inTraversal(T->lchild);
-		cout<<T->data<<" ";
-		inTraversal(T->rchild);
+		inTraversal(T->lchild, res);
+		res.push_back(T->data); 
+		inTraversal(T->rchild, res);
 	}
 	return 1;
 }

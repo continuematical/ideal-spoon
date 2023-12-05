@@ -77,13 +77,40 @@ Status CreateGraph(ALGraph& G){
 
 //添加新节点
 Status InsertVex(ALGraph& G, VertexType& v){
-	G.vertices[G.vexnum++].data=v;
+	G.vertices[G.vexnum].data=v;
+	G.vertices[G.vexnum++].firstarc=NULL;
 	printf("请输入与顶点相连的节点数量：\n");
 	int number;cin>>number;
 	for(int i=0;i<number;i++){
 		VertexType j;cin>>j;
 		InsertArc(G, v, j);
 	}
+	return OK;
+} 
+
+//删除边
+//删除节点v和节点w之间的边
+Status DeleteArc(ALGraph& G, VertexType& v, VertexType& w){
+	int i=LocateVex(G, v);
+	int j=LocateVex(G, w);
+	//节点v 
+	ArcNode* p=G.vertices[i].firstarc;
+	ArcNode* pre=p;
+	while(p->nextarc && p->adjvex!=j){
+		pre=p;p=p->nextarc;
+	}
+	if(pre==p)	G.vertices[i].firstarc=p->nextarc;
+	else	pre->nextarc=p->nextarc;
+	delete p;
+	//节点w 
+	p=G.vertices[j].firstarc;
+	pre=p;
+	while(p->nextarc && p->adjvex!=i){
+		pre=p;p=p->nextarc;
+	}
+	if(pre==p)	G.vertices[j].firstarc=p->nextarc;
+	else	pre->nextarc=p->nextarc;
+	delete p;
 	return OK;
 } 
 
@@ -96,11 +123,9 @@ Status DeleteVex(ALGraph& G, VertexType& v){
 	while(p){
 		q=p;p=p->nextarc;
 		delete q;
-	}
-	//数组移位
-	for(int k=i;k<G.vexnum;k++){
-		G.vertices[k]=G.vertices[k+1];
 	} 
+	//数组移位
+	for(int k=i;k<G.vexnum;k++)	G.vertices[k]=G.vertices[k+1]; 
 	p=G.vertices[G.vexnum-1].firstarc;
 	while(p){
 		q=p;p=p->nextarc;
@@ -109,40 +134,9 @@ Status DeleteVex(ALGraph& G, VertexType& v){
 	G.vexnum--;
 	//遍历数组，将其他点与该节点连的边删除 
 	for(int k=0;k<G.vexnum;k++){
-		ArcNode* p=G.vertices[k].firstarc;
-		while(p){
-			if(p->adjvex==i){
-				p->nextarc=p->nextarc->nextarc;
-				delete p;
-				break;
-			} 
-		}
+		DeleteArc(G, v, G.vertices[k].data); 
 	}
 }
-
-//删除边
-//删除节点v和节点w之间的边
-Status DeleteArc(ALGraph& G, VertexType& v, VertexType& w){
-	int i=LocateVex(G, v);
-	int j=LocateVex(G, w);
-	//节点v 
-	ArcNode* p=G.vertices[i].firstarc;
-	ArcNode* pre=p;
-	while(p->nextarc && p->adjvex!=w){
-		pre=p;p=p->nextarc;
-	}
-	pre->nextarc=p->nextarc;
-	delete p;
-	//节点w 
-	p=G.vertices[j].firstarc;
-	pre=p;
-	while(p->nextarc && p->adjvex!=v){
-		pre=p;p=p->nextarc;
-	}
-	pre->nextarc=p->nextarc;
-	delete p;
-	return OK;
-} 
 
 //深度优先搜索
 void DFS(ALGraph& G, int i){
@@ -193,14 +187,17 @@ void BFSTraverse(ALGraph& G){
 } 
 
 void showGraph(ALGraph& G){
+	cout<<"邻接表为："<<endl;
 	for(int i=0;i<G.vexnum;i++){
 		cout<<G.vertices[i].data<<":";
 		ArcNode* p=G.vertices[i].firstarc;
-		while(p->nextarc!=NULL){
-			cout<<p->adjvex<<" ";
+		while(p!=NULL){
+			cout<<G.vertices[p->adjvex].data<<" ";
 			p=p->nextarc;
 		}
+		cout<<endl;
 	}
+	cout<<endl;
 } 
 
 VertexType FirstAdjVex(ALGraph& G, VertexType v){
