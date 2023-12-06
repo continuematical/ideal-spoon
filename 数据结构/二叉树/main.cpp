@@ -1,6 +1,6 @@
 #include "BiTreeFun.cpp"
 
-int depth; 
+int num=0; 
 char ch; 
 vector<TElemType> s;
 vector<TElemType> res; 
@@ -21,6 +21,10 @@ void BiTreeTest(){
 	res.clear();
 	levelTraversal(T, res);
 	show(res); 
+	
+	printf("二叉树的节点个数：\n");
+	countNode(T, num);
+	cout<<num<<endl;
 }
 
 int main(){

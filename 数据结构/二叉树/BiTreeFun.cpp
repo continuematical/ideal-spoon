@@ -366,3 +366,25 @@ Status Traverse(BiTree T) {
 	gotoxy(x,y);
 	return 1;
 }
+
+//判断此树是否为平衡二叉树 
+Status isBalancedTree(BiTree T){
+	if(T==NULL)	return OK;
+	int leftDepth=BiTreeDepth(T->lchild);
+	int rightDepth=BiTreeDepth(T->rchild);
+	if(abs(leftDepth-rightDepth)>1)	return ERROR;
+	else{
+		Status left=isBalancedTree(T->lchild);
+		Status right=isBalancedTree(T->rchild);
+		if(left && right)	return OK;	
+	}
+} 
+
+//判断结点总数 
+Status countNode(BiTree& T, int& count){
+	if(T){
+		count++;
+		countNode(T->lchild, count);
+		countNode(T->rchild, count);
+	}
+}
