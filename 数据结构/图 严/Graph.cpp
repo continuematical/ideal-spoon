@@ -93,6 +93,7 @@ Status InsertVex(ALGraph& G, VertexType& v){
 Status DeleteArc(ALGraph& G, VertexType& v, VertexType& w){
 	int i=LocateVex(G, v);
 	int j=LocateVex(G, w);
+	if(i == ERROR || j == ERROR)	return ERROR;
 	//节点v 
 	ArcNode* p=G.vertices[i].firstarc;
 	ArcNode* pre=p;
@@ -117,25 +118,23 @@ Status DeleteArc(ALGraph& G, VertexType& v, VertexType& w){
 //删除节点
 Status DeleteVex(ALGraph& G, VertexType& v){
 	int i=LocateVex(G, v);
-	//将节点对应的链表销毁
+	if(i == ERROR)	cout<<"不存在该节点\n"<<endl;
+	//遍历数组，将其他点与该节点连的边删除 
+	for(int k=0;k<G.vexnum;k++){
+		if(k==i)	continue;
+		DeleteArc(G, v, G.vertices[k].data);
+	} 
+	//删除对应节点的链表 
 	ArcNode* p=G.vertices[i].firstarc;
 	ArcNode* q;
-	while(p){
+	while(p != NULL){
 		q=p;p=p->nextarc;
 		delete q;
 	} 
+	G.vertices[i].firstarc=NULL;
 	//数组移位
 	for(int k=i;k<G.vexnum;k++)	G.vertices[k]=G.vertices[k+1]; 
-	p=G.vertices[G.vexnum-1].firstarc;
-	while(p){
-		q=p;p=p->nextarc;
-		delete q;
-	}
 	G.vexnum--;
-	//遍历数组，将其他点与该节点连的边删除 
-	for(int k=0;k<G.vexnum;k++){
-		DeleteArc(G, v, G.vertices[k].data); 
-	}
 }
 
 //深度优先搜索
