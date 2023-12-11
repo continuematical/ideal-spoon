@@ -400,20 +400,298 @@ using namespace std;
 //}
 
 //https://www.lanqiao.cn/problems/8735/learning/?contest_id=147
-int check(int x, int y, int z){
-	if(x+y>z && x+z>y && y+z>x && x-y<z && x-z<y && y-z<x)	return 1;
-	else	return 0;
-} 
- 
+//int check(int x, int y, int z){
+//	if(x+y>z && x+z>y && y+z>x && x-y<z && x-z<y && y-z<x)	return 1;
+//	else	return 0;
+//} 
+// 
+//int main(){
+//	int x,y,z;cin>>x>>y>>z;
+//	if(!check(x,y,z)){
+//		cout<<-1<<endl;
+//		return 0;
+//	}
+//	int s=(x+y+z)/2;
+//	int S=s*(s-x)*(s-y)*(s-z);
+//	cout<<S<<endl;
+//	return 0;
+//}
+
+
+//https://leetcode.cn/problems/find-the-town-judge/
+//int findJudge(int n, vector<vector<int> >& trust) {
+//        //第i个人信任的人数，有多少个人信任第i个人
+//        vector<int> a(n+1), b(n+1); 
+//        for(int i=0;i<n;i++){
+//            a[trust[i][0]]++;
+//            b[trust[i][1]]++;
+//        }
+//        for(int i=1;i<=n;i++)
+//            if(a[i]==0 && b[i]==n)  return i;
+//        return -1;
+//}
+//
+//int main(){
+//	int n;cin>>n;
+//	vector<vector<int> > trust;
+//	cout<<findJudge(n, trust)<<endl;
+//	return 0;
+//}
+
+//https://leetcode.cn/problems/next-greater-element-i/ 
+//vector<int> nextGreaterElement(vector<int>& nums1, vector<int>& nums2) {
+//        int m = nums1.size();
+//        int n = nums2.size();
+//        vector<int> res(m);
+//        for (int i = 0; i < m; ++i) {
+//            int j = 0;
+//            while (j < n && nums2[j] != nums1[i]) {
+//                ++j;
+//            }
+//            int k = j + 1;
+//            while (k < n && nums2[k] < nums2[j]) {
+//                ++k;
+//            }
+//            res[i] = k < n ? nums2[k] : -1;
+//        }
+//        return res;
+//    }
+//    
+//void init(vector<int>& nums1, vector<int>& nums2){
+//	nums1.push_back(4);
+//	nums1.push_back(1);
+//	nums1.push_back(2);
+//	
+//	nums1.push_back(1);
+//	nums1.push_back(3);
+//	nums1.push_back(4);
+//	nums1.push_back(2);
+//	return;
+//}
+//    
+//int main(){
+//	vector<int> nums1, nums2;
+//	init(nums1, nums2);
+//	vector<int> res=nextGreaterElement(nums1, nums2);
+//	for(int i=0;i<res.size();i++)	cout<<res[i]<<" "; 
+//	return 0;
+//} 
+
+
+//https://www.lanqiao.cn/problems/3711/learning/
+//#define N 998244353
+//int a[100050];
+//long long dp[100050][64];
+//int main(){ 
+//    int n,x;
+//    scanf("%d%d",&n,&x);
+//    for(int i=0;i<n;i++)
+//    scanf("%d",&a[i]);
+//    dp[0][a[0]]=dp[0][0]=1;
+//    for(int i=1;i<n;i++)
+//    {
+//        for(int j=0;j<64;j++)
+//        {
+//            dp[i][j]=dp[i-1][j]+dp[i-1][j^a[i]];
+//            dp[i][j]%=N;
+//        }
+//    }
+//    printf("%lld",dp[n-1][x]);
+//}
+
+
+//https://www.lanqiao.cn/problems/1121/learning/?page=1&first_category_id=1&second_category_id=8
+//typedef long long ll;
+//ll dis[401][401];
+//const int N=0x3f3f3f3f3f3f3f3f;
+//int main(){
+//	ll n,m,q;cin>>n>>m>>q;
+//	memset(dis, 0x3f, sizeof(dis));
+//	for(ll i=1;i<=n;i++)	dis[i][i]=0;
+//	for(ll i=1;i<=m;i++){
+//		ll u,v,st;cin>>u>>v>>st;
+//		dis[u][v]=dis[v][u]=min(dis[u][v], st);
+//	}
+//	for(int k=1;k<=n;k++)
+//		for(int i=1;i<=n;i++)
+//			for(int j=1;j<=n;j++)
+//				dis[i][j]=min(dis[i][j], dis[i][k]+dis[k][j]);
+//	for(int i=1;i<=q;i++){
+//		int u,v;cin>>u>>v;
+//		if(dis[u][v]==N)	cout<<-1<<endl;
+//		else	cout<<dis[u][v]<<endl;
+//	}
+//	return 0;
+//} 
+
+
+//https://www.lanqiao.cn/problems/1122/learning/?page=1&first_category_id=1&second_category_id=8
+//typedef long long ll;
+//const ll N=1e6+1;
+//const ll M=0x3f3f3f3f3f3f3f3f;
+//
+//struct Edge{
+//	ll from;
+//	ll to;
+//	ll val;
+//};
+//
+//struct Node{
+//	ll id;
+//	ll dis;
+//	bool operator < (const Node& n) const{
+//		return n.dis<dis;
+//	}
+//};
+//
+//vector<Edge> e[N]; 
+//ll dist[N];
+//bool done[N];
+//
+//void dijkstra(){
+//	memset(dist, 0x3f, sizeof(dist)); 
+//	dist[1]=0;
+//	priority_queue<Node> q;
+//	q.push({1,0});
+//	while(!q.empty()){
+//		Node u=q.top();q.pop();
+//		if(done[u.id])	continue;
+//		done[u.id]=1;
+//		for(int i=0;i<e[u.id].size();i++){
+//			Edge v=e[u.id][i];
+//			if(done[v.to])	continue;
+//			if(dist[v.to]>u.dis+v.val){
+//				dist[v.to]=u.dis+v.val;
+//				q.push({v.to, dist[v.to]});
+//			}
+//		}
+//	}
+//}
+//int main(){
+//	int m,n;cin>>n>>m;
+//	for(int i=1;i<=m;i++){
+//		int from,to,val;cin>>from>>to>>val;
+//		e[from].push_back({from, to, val});
+//	}
+//	dijkstra();
+//	for(int i=1;i<=n;i++)
+//		if(dist[i]==M)	cout<<-1<<" ";
+//		else	cout<<dist[i]<<" ";
+//	return 0;
+//} 
+
+
+//https://www.lanqiao.cn/problems/1151/learning/?page=1&first_category_id=1&second_category_id=8
+//typedef long long ll;
+//const ll N=3e6+1;
+//ll arr[N], primes[N], f[N], cnt=0;
+//int main(){
+//	for(ll i=2;i<=N;i++){
+//		if(!arr[i])	primes[cnt++]=i, f[i]=i;
+//		for(ll j=0;primes[j]<=N/i;j++){
+//			arr[primes[j]*i]=1;
+//			f[primes[j]*i]=primes[j];
+//			if(i%primes[j]==0)	break;
+//		}
+//	}
+//	for(ll i=2;i<=N;i++){
+//		f[i]+=f[i-1];
+//	}
+//	ios::sync_with_stdio(false);
+//  	cin.tie(0);cout.tie(0);
+//	int n;cin>>n;
+//	while(n--){
+//		int t;cin>>t;
+//		cout<<f[t]<<"\n"; 
+//	} 
+//	return 0; 
+//}
+
+
+//https://www.lanqiao.cn/problems/7936/learning/?problem_list_id=25&page=1
+//int get(int x, int radix){
+//	int sum=0;
+//	while(x){
+//		sum+=x%radix;
+//		x=x/radix;
+//	}
+//	return sum;
+//}
+//
+//int main(){
+//	int flag=0;
+//	for(int i=1;i<=10000;i++)
+//		if(get(i, 2)==get(i, 8)){
+//			flag++;
+//			if(flag==23)	cout<<i<<endl;
+//		}
+//	return 0;
+//}
+
+
+//https://www.lanqiao.cn/problems/7944/learning/?problem_list_id=25&page=1 
+//const int N=1e3+1;
+//int main(){
+//	int x=0;
+//	int n;int arr[N];
+//	cin>>n;
+//	for(int i=1;i<=n;i++){
+//		cin>>arr[i];
+//		if(i>1 && arr[i]<arr[i-1])	x=max(x, arr[i-1]-arr[i]);
+//	} 
+//	cout<<x<<endl;
+//	return 0;
+//}
+
+
+//https://www.lanqiao.cn/problems/7940/learning/?problem_list_id=25&page=1 
+//int main(){
+//	string s;cin>>s;
+//	int len=s.length();
+//	for(int i=len-1;i>=0;i--){
+//		if(s[i]=='a' || s[i]=='e' || s[i]=='i' || s[i]=='o' || s[i]=='u'){
+//			cout<<s[i]<<endl;
+//			break;	
+//		}
+//	}
+//	return 0;
+//} 
+
+
+//https://www.lanqiao.cn/problems/7938/learning/?problem_list_id=25&page=1
+//char arr[35][45];
+//int vis[35][45]={0};
+//int dis[4][2]={{-1,0},{1,0},{0,1},{0,-1}};
+//int sum=0;
+//
+//void dfs(int x, int y){
+//	if(x<1 || x>30 || y<1 || y>40 || vis[x][y] || arr[x][y]=='1')	return;
+//	vis[x][y]=1;
+//	sum++;
+//	for(int i=0;i<4;i++){
+//		int tx=x+dis[i][0];
+//		int ty=y+dis[i][1];
+//		dfs(tx, ty);
+//	}
+//}
+//
+//int main(){
+//	for(int i=1;i<=30;i++){
+//		for(int j=1;j<=40;j++){
+//			cin>>arr[i][j];
+//		}
+//	}
+//	dfs(1,1);
+//	cout<<sum;
+//	return 0;
+//}
+
+
+//https://www.lanqiao.cn/problems/2407/learning/?problem_list_id=23&page=1
 int main(){
-	int x,y,z;cin>>x>>y>>z;
-	if(!check(x,y,z)){
-		cout<<-1<<endl;
-		return 0;
-	}
-	int s=(x+y+z)/2;
-	int S=s*(s-x)*(s-y)*(s-z);
-	cout<<S<<endl;
+	int sum=2023-26*27;
+	int x=sum/26/26;
+	int y=sum%26;
+	cout<<x<<" "<<y<<endl;
 	return 0;
-}
- 
+} 
