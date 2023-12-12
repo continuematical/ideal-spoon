@@ -24,6 +24,7 @@ Status visit(TElemType e){
 	return OK; 
 } 
 
+BiThrTree pre;//全局变量 
 
 //建立二叉链表
 Status createBiThrTree(BiThrTree& T){
@@ -38,8 +39,6 @@ Status createBiThrTree(BiThrTree& T){
 	}
 	return OK;
 } 
-
-BiThrTree pre;//全局变量 
 
 //以p为节点的中序线索初始化 
 void InThreading(BiThrTree p){
@@ -94,7 +93,7 @@ int main(){
 	pre->rchild = NULL;
 	BiThrTree tree, head;
 	//测试样例
-	//ABCD E   F  GHI   J K&& 
+	//ABCD E   F  GHI   J K
 	cout << "请输入建立二叉链表的序列：\n";
 	createBiThrTree(tree);                 //建树
 	InOrderThreading(head, tree);       //线索化

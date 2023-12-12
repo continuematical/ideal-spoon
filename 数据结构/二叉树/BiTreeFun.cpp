@@ -10,8 +10,7 @@ using namespace std;
 const int N=100;
 
 //------------二叉树的二叉链表存储表示-------------
-typedef struct BiTNode
-{
+typedef struct BiTNode{
     TElemType data;
     struct BiTNode *lchild, *rchild; //左右孩子指针
 } BiTNode, *BiTree;
@@ -49,7 +48,7 @@ Status DestroyBiTree(BiTree &T){
     return 1;
 }
 
-//中序遍历建树
+//先序遍历建树
 Status CreateBiTree(BiTree &T, vector<TElemType>& v){ 
     TElemType ch;
     scanf("%c", &ch);v.push_back(ch);
@@ -80,13 +79,8 @@ Status BiTreeEmpty(BiTree T){
 }
 
 int BiTreeDepth(BiTree T){
-    int i, j;
-    if (!T)	return 0;
-    if (T->lchild)	i = BiTreeDepth(T->lchild);
-    else	i = 0;
-    if (T->rchild)	j = BiTreeDepth(T->rchild);
-    else	j = 0;
-    return i > j ? i + 1 : j + 1;
+	if(!T)	return 0;
+	else	return max(BiTreeDepth(T->lchild), BiTreeDepth(T->rchild))+1;
 }
 
 Status Root(BiTree T){
@@ -360,7 +354,7 @@ Status Traverse_R(BiTree T, int depth, int right, int tap) {
 }
 
 // 打印树形接口
-Status Traverse(BiTree T) {
+Status Traverse(BiTree& T) {
 	Traverse_R(T, 0, 0, 0);
 	int x=0;int y=BiTreeDepth(T)*2+1; 
 	gotoxy(x,y);
@@ -378,6 +372,7 @@ Status isBalancedTree(BiTree T){
 		Status right=isBalancedTree(T->rchild);
 		if(left && right)	return OK;	
 	}
+	return OK; 
 } 
 
 //判断结点总数 
@@ -388,3 +383,24 @@ Status countNode(BiTree& T, int& count){
 		countNode(T->rchild, count);
 	}
 }
+
+//递归
+void get_paths(BiTree& T, vector<string>& res, string path){
+	if(T){
+		path+=T->data;
+		if(T->lchild==NULL && T->rchild==NULL){
+			res.push_back(path);
+			return;
+		}else{
+			get_paths(T->lchild, res, path);
+			get_paths(T->rchild, res, path);
+		}
+	}
+} 
+
+//求二叉树从根节点到叶子结点的所有路径 
+void BiTreePaths(BiTree& T, vector<string>& res){
+	get_paths(T, res, "");
+	for(int i=0;i<res.size();i++)
+		cout<<res[i]<<endl;
+} 
