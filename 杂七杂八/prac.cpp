@@ -686,12 +686,77 @@ using namespace std;
 //	return 0;
 //}
 
+//https://www.lanqiao.cn/problems/7942/learning/?problem_list_id=25&page=1 
+//struct Node{
+//	int x;
+//	int y;
+//};
+//
+//const int N=101;
+//int n,m,r,c,arr[N][N], sum=0;
+//int dis[4][2]={{-1,0},{1,0},{0,1},{0,-1}}, vis[N][N]={0}; 
+//queue<Node> q;
+//
+//int check(int i, int j){
+//	if(!j)	return i;
+//	else	return check(j, i%j);
+//}
+//
+//void dfs(int x, int y){
+//	q.push({x,y});
+//	while(!q.empty()){
+//		Node node=q.front();q.pop();
+//		int xx=node.x;int yy=node.y;
+//		for(int i=0;i<4;i++){
+//			int tx=xx+dis[i][0];
+//			int ty=yy+dis[i][1];
+//			if(tx<1 || tx>n || ty<1 || ty>m || vis[tx][ty])	continue;
+//			if(check(arr[xx][yy], arr[tx][ty])>1){
+//				q.push({tx, ty});
+//				vis[tx][ty]=1;
+//				sum++;
+//			} 
+//		}
+//	}
+//}
+//
+//int main(){
+//	cin>>n>>m;
+//	for(int i=1;i<=n;i++)
+//		for(int j=1;j<=m;j++)
+//			cin>>arr[i][j];
+//	cin>>r>>c;
+//	dfs(r,c);
+//	cout<<sum<<endl;
+//	return 0;
+//}
 
-//https://www.lanqiao.cn/problems/2407/learning/?problem_list_id=23&page=1
+
+//https://www.lanqiao.cn/problems/6276/learning/?problem_list_id=23&page=2 
+//int main(){
+//	
+//	return 0;
+//}
+
+//https://www.lanqiao.cn/problems/6277/learning/?problem_list_id=23&page=1
+int check(int x){
+	int sum=0;
+	while(x){
+		sum+=x%10;
+		x=x/10;
+	}
+	return sum;
+}
+
 int main(){
-	int sum=2023-26*27;
-	int x=sum/26/26;
-	int y=sum%26;
-	cout<<x<<" "<<y<<endl;
+	int minn=60, num=0;
+	for(int i=1;i<=64;i++){
+		int x;cin>>x;
+		if(check(x)<minn){
+			minn=check(x);
+			num=x;
+		} 
+	}
+	cout<<num<<endl;
 	return 0;
 } 
