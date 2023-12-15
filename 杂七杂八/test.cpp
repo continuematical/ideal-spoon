@@ -97,29 +97,184 @@ using namespace std;
 
 //https://www.lanqiao.cn/problems/1135/learning/?page=1&first_category_id=1&second_category_id=8
 //并查集
-const int N=2e5+1; 
-int f[N];
+//const int N=2e5+1; 
+//int f[N];
+//
+//int find(int x){
+//	if(f[x]==x)	return x;
+//	else	return find(f[x]);
+//}
+//
+//void merge(int x, int y){
+//	f[find(x)]=find(y);
+//}
+//
+//int main(){
+//	int n,m;cin>>n>>m;
+//	for(int i=1;i<=n;i++)	f[i]=i;
+//	while(m--){
+//		int op,a,b;cin>>op>>a>>b;
+//		if(op==1){
+//			merge(a,b);
+//		}else{
+//			if(find(a)==find(b))	cout<<"YES"<<endl;
+//			else	cout<<"NO"<<endl;
+//		}
+//	}
+//	return 0;
+//} 
 
-int find(int x){
-	if(f[x]==x)	return x;
-	else	return find(f[x]);
-}
 
-void merge(int x, int y){
-	f[find(x)]=find(y);
-}
+//https://www.luogu.com.cn/problem/P3367 
+//const int N=5001;
+//int f[N];
+//
+//int find(int x){
+//	if(f[x]==x)	return x;
+//	else	return find(f[x]);
+//}
+//
+//void merge(int x, int y){
+//	f[find(x)]=find(y);
+//}
+//
+//int main(){
+//	int n,m,p;
+//	cin>>n>>m>>p;
+//	for(int i=1;i<=n;i++)	f[i]=i;
+//	while(m--){
+//		int x,y;cin>>x>>y;
+//		merge(x,y);
+//	}
+//	while(p--){
+//		int x,y;cin>>x>>y;
+//		if(find(x)==find(y))	cout<<"Yes"<<endl;
+//		else	cout<<"No"<<endl;
+//	}
+//	return 0;
+//}
 
+
+//https://www.luogu.com.cn/problem/P1536
+//const int N=1001;
+//int f[N], n, m, x, y; 
+//
+//int find(int x){
+//	if(f[x]==x)	return x;
+//	else	return find(f[x]);
+//}
+//
+//void merge(int x, int y){
+//	f[find(x)]=find(y);
+//}
+//
+//void init(int n){
+//	for(int i=1;i<=n;i++)	f[i]=i;
+//}
+//
+//int main(){
+//	while(true){
+//		int ans=0;//答案
+//		cin>>n;
+//		if(!n)	break;
+//		cin>>m;
+//		init(n);
+//		//合并
+//		for(int i=1;i<=m;i++){
+//			cin>>x>>y;
+//			merge(x,y);
+//		} 
+//		for(int i=1;i<=n;i++)
+//			if(f[i]==i)	ans++;
+//		cout<<ans-1<<endl;
+//	} 
+//	return 0;
+//}
+
+
+//https://www.lanqiao.cn/problems/141/learning/?page=3&first_category_id=1&second_category_id=3
+//char ch[101][101];
+//int dir[4][2]={{-1,0},{1,0},{0,-1},{0,1}}, vis[101][101], n, ax,ay;
+//
+//int dfs(int x, int y){
+//	vis[x][y]=1;
+//	int res=n*n;
+//	if(ch[x][y]=='B')	return 0;
+//	for(int i=0;i<4;i++){ 
+//		int tx=x+dir[i][0];
+//		int ty=y+dir[i][1];
+//		if(tx<1 || tx>n || ty<1 || ty>n || vis[tx][ty])	continue; 
+//		if(ch[x][y] != ch[tx][ty]){
+//			int num=dfs(tx, ty)+1;
+//			res=res<num ? res : num;
+//			vis[tx][ty]=0;
+//		}
+//	}
+//	return res;
+//}
+//
+//void init(int n){
+//	for(int i=1;i<=n;i++)
+//		for(int j=1;j<=n;j++)
+//			vis[i][j]=0;
+//}
+//
+//int main(){
+//	cin>>n;
+//	for(int i=1;i<=n;i++)
+//		for(int j=1;j<=n;j++){
+//			cin>>ch[i][j]; 
+//			if(ch[i][j]=='A'){
+//				ax=i,ay=j;
+//			}
+//		}
+//	init(n);
+//	int res=dfs(ax, ay);
+//	if(res==n*n)	cout<<-1<<endl;
+//	else	cout<<res<<endl;
+//	return 0;
+//}
+
+
+//char ch[101][101];
+//int dir[4][2]={{-1,0},{1,0},{0,-1},{0,1}}, vis[101][101], res, n, ax,ay;
+//
+//void dfs(int x, int y, int num){
+//	vis[x][y]=1;
+//	if(ch[x][y]=='B'){ 
+//		res=min(res, num);
+//		return;
+//	}
+//	for(int i=0;i<4;i++){ 
+//		int tx=x+dir[i][0];
+//		int ty=y+dir[i][1];
+//		if(tx<1 || tx>n || ty<1 || ty>n || vis[tx][ty])	continue; 
+//		if(ch[x][y] != ch[tx][ty]){
+//			dfs(tx, ty, num+1);
+//			vis[tx][ty]=0;
+//		}
+//	}
+//}
+//
+//int main(){
+//	cin>>n;
+//	for(int i=1;i<=n;i++)
+//		for(int j=1;j<=n;j++){
+//			cin>>ch[i][j]; 
+//			if(ch[i][j]=='A'){
+//				ax=i,ay=j;
+//			}
+//		}
+//	res=n*n;
+//	dfs(ax, ay, 0);
+//	if(res==n*n)	cout<<-1<<endl;
+//	else	cout<<res<<endl;
+//	return 0;
+//}
+
+
+//https://www.lanqiao.cn/problems/1136/learning/?page=1&first_category_id=1&second_category_id=8
 int main(){
-	int n,m;cin>>n>>m;
-	for(int i=1;i<=n;i++)	f[i]=i;
-	while(m--){
-		int op,a,b;cin>>op>>a>>b;
-		if(op==1){
-			merge(a,b);
-		}else{
-			if(find(a)==find(b))	cout<<"YES"<<endl;
-			else	cout<<"NO"<<endl;
-		}
-	}
+	
 	return 0;
 } 
