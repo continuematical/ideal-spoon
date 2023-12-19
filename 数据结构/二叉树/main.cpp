@@ -12,7 +12,11 @@ void BiTreeTest(){
 	printf("请输入节点：");
 	CreateBiTree(T, s); //ABDH##I##EJ###CF##G##
 	//AB#DE###C## 
-	Traverse(T);
+	Traverse(T, 1);
+	
+	swap(T);
+	Traverse(T, 2*BiTreeDepth(T));
+		
 	printf("二叉树的深度：\n");
 	cout<<BiTreeDepth(T)<<endl;
 	printf("二叉树的中序遍历：\n");
@@ -34,6 +38,11 @@ void BiTreeTest(){
 	
 	printf("遍历输出二叉树的所有路径：\n");
 	BiTreePaths(T, path); 
+	
+	printf("带权路径长度为：\n");
+	int WPL=0;
+	BiTreeWPL(T, 1, WPL);
+	cout<<WPL<<endl;
 }
 
 int main(){

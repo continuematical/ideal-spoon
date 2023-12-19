@@ -3,44 +3,46 @@ using namespace std;
 
 typedef char TElemType;
 const int N=100;
-TElemType g[N];
 
 //23+[87a-45b(a*b)] 17 
 //(23+45) 7 
-//23+[87a- (45b]5*6) 18 
-bool bracketCheck(TElemType num[], int n){
+//23+[87a-(45b]5*6) 18 
+bool bracketCheck(string g){
 	stack<TElemType> s;
 	TElemType v; 
-	for(int i=0;i<n;i++){
-		switch(num[i]){
-			case '(':s.push(num[i]);break;
-			case '[':s.push(num[i]);break;
-			case '{':s.push(num[i]);break;
+	int len=g.length();
+	for(int i=0;i<len;i++){ 
+		switch(g[i]){
+			case '(':
+			case '[':
+			case '{':
+				s.push(g[i]);break; 
 			case ')':
+				if(s.empty())	return false;
 				v=s.top();s.pop();
 				if(v!='(')	return false;
 				break;
 			case ']':
+				if(s.empty())	return false;
 				v=s.top();s.pop();
 				if(v!='[')	return false;
 				break;
 			case '}':
+				if(s.empty())	return false;
 				v=s.top();s.pop();
 				if(v!='{')	return false;
 				break;
+			default:
+				break; 
 		}
 	}
 	return true;
 }
 
 void test1(){
-	printf("请输入你的字母组合数字：\n");
-	int n;cin>>n;
-	for(int i=0;i<n;i++){
-		char ch;scanf("%c", &ch);
-		g[i]=ch;
-	}
-	if(bracketCheck(g, n))	cout<<"Yes";
+	string g;
+	cin>>g; 
+	if(bracketCheck(g))	cout<<"Yes";
 	else	cout<<"No"<<endl;
 } 
 
@@ -68,10 +70,6 @@ void test2(){
 	if(flag)	cout<<"No"<<endl;
 	else	cout<<"Yes"<<endl;
 }
-
-void test3(){
-	
-} 
 
 int main(){
 	test1();

@@ -4,6 +4,8 @@ using namespace std;
 
 #define Status int
 #define TElemType char
+#define WType int 
+
 #define OK 1
 #define ERROR 0
 
@@ -12,6 +14,7 @@ const int N=100;
 //------------二叉树的二叉链表存储表示-------------
 typedef struct BiTNode{
     TElemType data;
+    WType weight;
     struct BiTNode *lchild, *rchild; //左右孩子指针
 } BiTNode, *BiTree;
 
@@ -57,7 +60,8 @@ Status CreateBiTree(BiTree &T, vector<TElemType>& v){
         T = (BiTree)malloc(sizeof(BiTNode));
         if (!T)
             exit(_OVERFLOW);
-        T->data = ch;             
+        T->data = ch; 
+		T->weight = ch-'A';            
         CreateBiTree(T->lchild, v); 
         CreateBiTree(T->rchild, v);
     }
@@ -295,7 +299,7 @@ BiTNode* L,R;
 * right	该子树是否为右子树
 * tap	目前子树需要的相对偏移数量
 */
-Status Traverse_R(BiTree T, int depth, int right, int tap) {
+Status Traverse_R(BiTree T, int depth, int right, int tap, int h) {
 	if (T == NULL) return 1;
 
 	// 获取一次树的初始高度，用于计算相对偏移数量
@@ -315,7 +319,7 @@ Status Traverse_R(BiTree T, int depth, int right, int tap) {
 
 	// 获取根的坐标
 	x = tap1+tap2+tap3;
-	y = depth*2+1;
+	y = depth*2+h;
 
 	// 打印根的位置
 	gotoxy(x*2, y);
@@ -332,14 +336,14 @@ Status Traverse_R(BiTree T, int depth, int right, int tap) {
 		printf("┏");
 		for (int i=0;i<tap3-1; i++) printf("━");
 		printf("┛");
-		Traverse_R(L,depth,0,tap);
+		Traverse_R(L,depth,0,tap, h);
 	} else if (L==NULL) {
 		// 打印右子树的位置
 		gotoxy(x*2, y+1);
 		printf("┗");
 		for (int i = 0;i<tap3-1; i++) printf("━");
 		printf("┓");
-		Traverse_R(R,depth,1,tap);
+		Traverse_R(R,depth,1,tap, h);
 	} else {
 		// 打印左右子树的位置
 		gotoxy(x*2-tap3, y+1);
@@ -348,15 +352,15 @@ Status Traverse_R(BiTree T, int depth, int right, int tap) {
 		printf("┻");
 		for (int i = 0; i<tap3-1; i++) printf("━");
 		printf("┓");
-		Traverse_R(L, depth, 0, tap);
-		Traverse_R(R, depth, 1, tap);
+		Traverse_R(L, depth, 0, tap, h);
+		Traverse_R(R, depth, 1, tap, h);
 	}
 }
 
 // 打印树形接口
-Status Traverse(BiTree& T) {
-	Traverse_R(T, 0, 0, 0);
-	int x=0;int y=BiTreeDepth(T)*2+1; 
+Status Traverse(BiTree& T, int h) {
+	Traverse_R(T, 0, 0, 0, h);
+	int x=0;int y=BiTreeDepth(T)*3+3; 
 	gotoxy(x,y);
 	return 1;
 }
@@ -403,4 +407,28 @@ void BiTreePaths(BiTree& T, vector<string>& res){
 	get_paths(T, res, "");
 	for(int i=0;i<res.size();i++)
 		cout<<res[i]<<endl;
+} 
+
+//求解WPL
+void BiTreeWPL(BiTree& T, int deep, int& WPL){
+	if(T){
+		if(!T->lchild && !T->rchild){
+			WPL+=deep*T->weight;
+		} else {
+			BiTreeWPL(T->lchild, deep+1, WPL);
+			BiTreeWPL(T->rchild, deep+1, WPL); 
+		} 
+	}
+} 
+
+//交换二叉树的左右孩子
+void swap(BiTree& T){
+	//二叉树没有左右节点 
+	if(!T->lchild && !T->rchild)	return;
+	BiTree temp;
+	temp=T->lchild;
+	T->lchild=T->rchild;
+	T->rchild=temp;
+	if(T->lchild)	swap(T->lchild);
+	if(T->rchild)	swap(T->rchild);
 } 
