@@ -52,7 +52,6 @@ LinkList find(LinkList L1, LinkList L2){
 		head1=head1->next;
 		head2=L2;
 	}
-	
 	return NULL;
 }
 
