@@ -274,7 +274,188 @@ using namespace std;
 
 
 //https://www.lanqiao.cn/problems/1136/learning/?page=1&first_category_id=1&second_category_id=8
+//int main(){
+//	
+//	return 0;
+//} 
+
+
+//https://www.lanqiao.cn/problems/1124/learning/?page=1&first_category_id=1&second_category_id=8
+//typedef struct Edge{
+//	int u;
+//	int v;
+//	int w;
+//}Edge;
+//
+//vector<Edge> edges;
+//const int N=1e5+1;
+//int n,m, f[N], cnt=0, ans=0;
+////cnt表示总路个数，ans表示总长度 
+//
+//bool compare(Edge x, Edge y){
+//	return x.w<y.w;
+//}
+//
+//int find(int x){
+//	if(f[x]=x)	return x;
+//	else	return f[x]=find(f[x]);
+//}
+//
+//void merge(int x, int y){
+//	f[find(x)]=find(y);
+//}
+//
+//int main(){
+//	cin>>n>>m;
+//	for(int i=0;i<m;i++){
+//		int u,v,w;cin>>u>>v>>w;
+//		edges.emplace_back(Edge{u,v,w});
+//	}
+//	sort(edges.begin(), edges.end(), compare);
+//	for(int i=1;i<=n;i++)	f[i]=i;
+//	for(int i=0;i<m;i++){
+//		int u=edges[i].u;
+//		int v=edges[i].v;
+//		int w=edges[i].w;
+//		if(find(u) != find(v)){
+//			merge(u, v);
+//			cnt++;
+//			ans+=w;
+//			if(cnt+1 >= n)	break;
+//		}
+//	}
+//	
+//	if(cnt+1 >= n)	cout<<ans<<endl;
+//	else	cout<<-1<<endl;
+//	return 0;
+//}
+
+
+//https://www.lanqiao.cn/problems/1159/learning/?page=2&first_category_id=1&second_category_id=8
+//卢卡斯算法 
+//typedef long long ll;
+//ll n, m, p;
+//
+//ll fast(ll a, ll b){
+//	ll res=1;
+//	while(b){
+//		if(b&1)	res=res*a%p;
+//		a=a*a%p;
+//		b>>=1;	
+//	}
+//	return res; 
+//}
+//
+//ll C(ll n, ll m){
+//	if(n<m)	return 0;
+//	if(m>n-m)	m=n-m;
+//	ll a=1, b=1;
+//	for(int i=0;i<m;i++){
+//		a=(a*(n-i))%p;
+//		b=(b*(i+1))%p;
+//	}
+//	return a*fast(b, p-2)%p;// a/b
+//}
+//
+//ll Lucas(ll n, ll m){
+//	if(m==0)	return 1;
+//	return Lucas(n/p,m/p)*C(n%p, m%p)%p;
+//}
+//
+//int main(){
+//	ll T;cin>>T;
+//	while(T--){
+//		scanf("%lld%lld%lld", &n, &m, &p); 
+//		printf("%lld\n", Lucas(n, m));
+//	} 
+//	return 0;
+//}
+
+
+//https://www.lanqiao.cn/problems/1231/learning/?page=2&first_category_id=1&second_category_id=8
+//double x_1, y_1, x_2, y_2, x_3, y_3;
+//
+//double getDis(double x1, double y1, double x2, double y2){
+//	return sqrt((x1-x2)*(x1-x2)+(y1-y2)*(y1-y2));
+//} 
+//
+//double getS(double a, double b, double c){
+//	double p=(a+b+c)/2;
+//	return sqrt(p*(p-a)*(p-b)*(p-c));
+//}
+//
+//int main(){
+//	int T;cin>>T;
+//	while(T--){
+//		scanf("%lf %lf %lf %lf %lf %lf", &x_1, &y_1, &x_2, &y_2, &x_3, &y_3);
+//		double a=getDis(x_1, y_1, x_2, y_2);
+//		double b=getDis(x_2, y_2, x_3, y_3);
+//		double c=getDis(x_1, y_1, x_3, y_3);
+//		printf("%.2lf\n", getS(a, b, c));
+//	}
+//	return 0;
+//} 
+
+
+//https://www.lanqiao.cn/problems/309/learning/?page=2&first_category_id=1&second_category_id=6 
+//int f[40];
+//
+//int main(){
+//	int N;cin>>N;
+//	f[0]=1,f[1]=1,f[2]=2;
+//	for(int i=3;i<=N;i++)	f[i]=f[i-1]+f[i-2]+f[i-3];
+//	cout<<f[N]<<endl;
+//	return 0;
+//} 
+
+
+//https://www.lanqiao.cn/problems/324/learning/?page=2&first_category_id=1&second_category_id=6
+//int main(){
+//	int N;cin>>N;
+//	int h=1;
+//	for(int i=1;i<=N;i++){
+//		if(i%2)	h*=2;
+//		else	h+=1;
+//	}
+//	cout<<h<<endl;
+//	return 0;
+//}
+
+//https://www.lanqiao.cn/problems/153/learning/?page=2&first_category_id=1&second_category_id=3
+
+//int get(int x){
+//	while(x){
+//		int a=x%10;
+//		if(a==2)	return 0;
+//		x/=10;
+//	}
+//	return 1;
+//}
+//
+//int main(){
+//	int n, res=0;cin>>n;
+//	for(int i=1;i<=n;i++){
+//		if(get(i))	res++;
+//	}
+//	cout<<res<<endl;
+//	return 0;
+//}
+
+//https://www.lanqiao.cn/problems/191/learning/?page=2&first_category_id=1&second_category_id=3 
+int get(int x){
+	while(x){
+		int a=x%10;
+		if(a==2 || a==0 || a==1 || a==9)	return 1;
+		x/=10;
+	}
+	return 0;
+}
+
 int main(){
-	
+	int n, res=0;cin>>n;
+	for(int i=1;i<=n;i++){
+		if(get(i))	res+=i;
+	}
+	cout<<res<<endl;
 	return 0;
 } 
