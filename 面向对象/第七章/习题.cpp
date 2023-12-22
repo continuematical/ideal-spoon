@@ -72,7 +72,7 @@ class Date{
 		} 
 };
 
-//定义Location类，重载运算符
+//2.定义Location类，重载运算符
 class Location{
 	private:
 		int x;

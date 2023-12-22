@@ -60,7 +60,10 @@ dependencies {
     implementation("androidx.compose.ui:ui-tooling-preview")
     implementation("androidx.compose.material3:material3")
     implementation("androidx.appcompat:appcompat:1.6.1")
+    //插件
     implementation("com.jakewharton:butterknife:10.2.3")
+    //基于TabLayout增加的新功能，可以更改字体大小
+    implementation("com.androidkun:XTabLayout:1.1.5")
     implementation("com.google.android.material:material:1.8.0")
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
     testImplementation("junit:junit:4.13.2")

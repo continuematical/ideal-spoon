@@ -8,6 +8,7 @@ const KEY_APP_FONT_SIZE = 'appFontSize'
 
 const TAG = '[PreferencesUtil]'
 
+//向外
 export class PreferencesUtil {
   createPreferences(context) {
     globalThis.getFontPreferences = (() => {
@@ -17,6 +18,7 @@ export class PreferencesUtil {
     })
   }
 
+  //保存默认的字体
   saveDefaultFontSize(fontSize: number) {
     globalThis.getFontPreferences().then((preferences) => {
       preferences.has(KEY_APP_FONT_SIZE).then(async (isExist) => {

@@ -66,9 +66,18 @@ warpAffine(src, M, dsize, flag, mode, value)
 `flag`：插值算法标志；
 `mode`：边界外推法标志；
 `value`：填充边界值；
+如果沿着`(x,y)` 方向移动，移动的距离为$(t_x, t_y)$ ，构建的移动矩阵为：
+$$
+M=
+\begin{bmatrix}
+1 & 0 & t_x\\
+0 & 1 & t_y
+\end{bmatrix}
+$$
 ```python
 def tran():
 	h, w, s = img.shape  
+	# 水平右移200单位
 	M = np.float32([[1, 0, 200], [0, 1, 0]])  
 	new_img = cv2.warpAffine(img, M, (w, h), flags=cv2.INTER_NEAREST)  
 	cv_show('new_img', new_img)
@@ -108,9 +117,9 @@ def rotate_getM():
 # 滤波器
 ### 卷积
 #### 基本概念
-图像卷积
+##### 图像卷积
 又称为核操作，就是卷积核按步长对图像局部像素块进行加权求和的操作。
-卷积核大小
+##### 卷积核大小
 通常情况下，卷积核大小为奇数，用于设置卷积核中心作为锚点。
 二维离散卷积公式如下：
 $$
@@ -413,18 +422,105 @@ def canny_test():
 基本是对二进制图像进行处理，即黑白图像。
 常用基本操作：
 1. 膨胀和腐蚀；
-2. 开运算；
-3. 闭运算；
+2. 开运算和闭运算；
 4. 顶帽；
 5. 黑帽。
-## 图像全局二值化
+## 二值化
+### 图像全局二值化
 图像二值化就是把让图像的像素点只有`0`和`1`（只有黑白两各种颜色，黑是背景，白是前景），关键点是寻找一个阈值`T`，使图像中小于阈值`T`的像素点变为`0`，大于`T`的像素点变为`255`。
 ```python
 retval = cv2.threshold(src, des, thresh, maxval, type)
 ```
-1. retval：返回的阈值，double类型；
-2. dst：阈值分割结果图像(也可以写到函数参数里面)；
-3. src：原图像， 最好是灰度图；
-4. thresh：要设定的阈值；
-5. maxval：当type类型是`THRESH_BINARY` 时，需要设定的最大值；
-6. type：阈值分割的方式。
+1. `retval`：返回的阈值，double类型；
+2. `des`：阈值分割结果图像(也可以写到函数参数里面)；
+3. `src`：原图像， 最好是灰度图；
+4. `thresh`：要设定的阈值；
+5. `maxval`：当type类型是`THRESH_BINARY` 时，需要设定的最大值；
+6. `type`：阈值分割的方式。
+```python
+def threshold():  
+    img = cv2.imread('img2.png')  
+    des, number = cv2.threshold(img, 0, 255, cv2.THRESH_BINARY)  
+    cv_show('des', des)
+```
+### 自适应阈值二值化
+前面的部分我们采取的是全局阈值，但是当一幅图像上有不同的亮度时，采取自适应阈值。
+```python
+dst = cv2.adaptiveThreshold(src, maxValue, adaptiveMethod, thresholdType, blockSize, C)
+```
+1. `src`：源图像，8位的灰度图；
+2. `maxValue`：用于指定满足条件的像素设定的灰度值；
+3. `adaptiveMethod`：使用的自适应阈值算法，有2种类型`ADAPTIVE_THRESH_MEAN_C`算法（局部邻域块均值）或`ADAPTIVE_THRESH_GAUSSIAN_C`（局部邻域块高斯加权和）。
+`ADAPTIVE_THRESH_MEAN_C`的计算方法是计算出邻域的平均值再减去第六个参数C的值；
+`ADAPTIVE_THRESH_GAUSSIAN_C`的计算方法是计算出邻域的高斯均匀值再减去第六个参数C的值。
+处理边界时使用BORDER_REPLICATE | BORDER_ISOLATED模式。
+4. `thresholdType`：阈值类型，只能是`THRESH_BINARY`或`THRESH_BINARY_INV`二者之一；
+5. `blockSize`：表示邻域块大小，用来计算区域阈值，一般选择3、5、7等；
+6. `C`：表示常数，它是一个从均匀或加权均值提取的常数，通常为正数，但也可以是负数或零；
+注：只有一个返回值。
+## 腐蚀和膨胀
+### 腐蚀操作
+腐蚀操作是将物体的边缘加以腐蚀。
+用结构元素的中心点，从左到右从上到下，依次扫描灰度图的像素点，图片上该像素点的值取为结构元素所覆盖区域中像素点的**最小值**，扫描一遍后会得到一张新图，就是原图的腐蚀图。
+大部分时候卷积操作使用的是全为`1`的卷积核。
+```python
+dst = cv2.erode(src, kernel, iterations)
+```
+`iterations`表示迭代次数。次数越多，腐蚀效果越明显。
+```python
+import cv2
+import numpy as np
+ 
+#读取图片
+image = cv2.imread("E:/pythonProject/02.jpg",cv2.IMREAD_UNCHANGED)
+ 
+#设置卷积核
+kernel = np.ones((10, 10), np.uint8)
+ 
+#图像腐蚀处理
+erosion = cv2.erode(image, kernel)
+ 
+#显示窗口
+cv2.imshow("erosion", erosion)
+cv2.imshow("image", image)
+ 
+#窗口等待
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+```
+#### 获取形态学卷积核
+```python
+kernel = cv2.getStructuringElement(shape, ksize, anchor)
+```
+其中，`shape`设定卷积核的形状，`ksize`设定卷积核的大小，`anchor`表示描点的位置，一般 `anchor = 1`，表示描点位于中心。
+卷积核形状：
+1. MORPH_RECT(函数返回矩形卷积核)  ；
+2. MORPH_CROSS(函数返回十字形卷积核)；  
+3. MORPH_ELLIPSE(函数返回椭圆形卷积核)。
+```python
+kernel = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (9, 9))  
+print(kernel)
+```
+### 膨胀操作
+```python
+dst = cv2.dilate(src, kernel, iterations)
+```
+## 开运算和闭运算
+### 开运算
+先腐蚀，再膨胀。
+```python
+cv2.morphologyEx(src, cv2.MORPH_OPEN, kernel)
+```
+### 闭运算
+先膨胀，再腐蚀。它经常被用来填充前景物体中的小洞，或者前景物体上的小黑点。
+```python
+cv2.morphologyEx(src, cv2.MORPH_CLOSE, kernel)
+```
+### 形态学梯度
+梯度计算主要显示的是边缘信息。计算的方法：
+
+> 膨胀的图像 - 腐蚀的图像。
+
+```python
+cv2.morphologyEx(img, cv2.MORPH_GRADIENT, kernel)
+```

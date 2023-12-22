@@ -29,6 +29,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:scaleType="centerCrop"/>
+
+                    <include layout="@layout/personal_home_header"/>
                 </RelativeLayout>
 
             </com.google.android.material.appbar.CollapsingToolbarLayout>

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <com.example.tiktok.view.IconFontTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/icon_location_fill"
+                android:textSize="13sp"
+                android:textColor="@color/white"/>
+
+            <com.example.tiktok.view.IconFontTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="10km"
+                android:layout_marginLeft="2dp"
+                android:textSize="13sp"
+                android:textColor="@color/white"/>
+
+            <com.example.tiktok.view.CircleImageView
+                android:id="@+id/iv_head"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                app:ease_shape_type="round"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentBottom="true"
+                android:layout_margin="10dp"/>
+
+        </LinearLayout>
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/tv_content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="能看得出来什么情况吗？"
+        android:textColor="@color/white"
+        android:textSize="14sp"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+        android:paddingBottom="30dp"
+        android:paddingTop="5dp"/>
+</LinearLayout>

@@ -442,20 +442,246 @@ using namespace std;
 //}
 
 //https://www.lanqiao.cn/problems/191/learning/?page=2&first_category_id=1&second_category_id=3 
-int get(int x){
-	while(x){
-		int a=x%10;
-		if(a==2 || a==0 || a==1 || a==9)	return 1;
-		x/=10;
-	}
-	return 0;
-}
+//int get(int x){
+//	while(x){
+//		int a=x%10;
+//		if(a==2 || a==0 || a==1 || a==9)	return 1;
+//		x/=10;
+//	}
+//	return 0;
+//}
+//
+//int main(){
+//	int n, res=0;cin>>n;
+//	for(int i=1;i<=n;i++){
+//		if(get(i))	res+=i;
+//	}
+//	cout<<res<<endl;
+//	return 0;
+//} 
+
+
+//https://www.lanqiao.cn/problems/1142/learning/?page=1&first_category_id=1&second_category_id=8
+//µ¥µ÷Õ» 
+//const int N=7e5+1;
+//int n, f[N], res[N];
+//
+//void show(){
+//	for(int i=1;i<=n;i++){
+//		cout<<res[i]<<" ";
+//	}
+//	cout<<endl;
+//}
+//
+//void solve1(){
+//	stack<pair<int, int> > s;
+//	memset(res, 0, sizeof(res));
+//	res[1]=-1; s.push(make_pair(1, f[1])); 
+//	for(int i=2;i<=n;i++){
+//		while(!s.empty() && s.top().second < f[i])	s.pop();
+//		if(!s.empty())	res[i]=s.top().first;
+//		else	res[i]=-1;
+//		s.push(make_pair(i, f[i]));
+//	}
+//	show();
+//}
+//
+//void solve2(){
+//	stack<pair<int, int> > s;
+//	memset(res, 0, sizeof(res));
+//	res[n]=-1; s.push(make_pair(n, f[n])); 
+//	for(int i=n-1;i>=1;i--){
+//		while(!s.empty() && s.top().second < f[i])	s.pop();
+//		if(!s.empty())	res[i]=s.top().first;
+//		else	res[i]=-1;
+//		s.push(make_pair(i, f[i]));
+//	}
+//	show();
+//} 
+//
+//int main(){
+//	cin>>n;
+//	for(int i=1;i<=n;i++)	cin>>f[i];
+//	//×ó±ß 
+//	solve1();
+//	//ÓÒ±ß
+//	solve2();
+//	return 0;
+//} 
+
+
+//https://www.luogu.com.cn/problem/P3379
+//LCA
+//#define int long long
+//const int N=5e5+1;
+//
+//struct e{
+//	int next;
+//	int to;
+//}e[N<<1];
+//
+//int n,m,s, cnt=0, f[N][21], head[N], depth[N];
+//
+//void add(int u, int v){
+//	e[++cnt].next=head[u];
+//	head[u]=cnt;
+//	e[cnt].to=v;
+//}
+//
+//void dfs(int now, int fath){
+//	f[now][0]=fath;depth[now]=depth[fath]+1;
+//	for(int i=1;(1<<i)<=depth[now];i++)
+//		f[now][i]=f[f[now][i-1]][i-1];
+//	for(int i=head[now];i;i=e[i].next)
+//		if(e[i].to != fath)	dfs(e[i].to, now);
+//}
+//
+//int LCA(int u, int v){
+//	if(depth[u]<depth[v])	swap(u,v);
+//	for(int i=20;i>=0;i--)
+//		if(depth[v]<=depth[u]-(1<<i))
+//			u=f[u][v];
+//	if(u==v)	return u;
+//	for(int k=20;k>=0;k--)
+//		if(f[u][k]!=f[v][k])
+//			u=f[u][k], v=f[u][k];
+//	return f[u][0];
+//} 
+//
+//void init(){
+//	for(int i=1;i<n;i++){
+//		int u,v;cin>>u>>v;
+//		add(u, v);add(u, v);
+//	}
+//} 
+//
+//signed main(){
+//	cin>>n>>m>>s;
+//	init();
+//	dfs(s,0);
+//	for(int i=1;i<=m;i++){
+//		int u,v;cin>>u>>v;
+//		cout<<LCA(u,v)<<endl;
+//	}
+//	return 0;
+//} 
+
+
+//https://www.lanqiao.cn/problems/1226/learning/?page=1&first_category_id=1&second_category_id=8
+//Íþ×ô·ò²©ÞÄ 
+//int main(){
+//	int T;cin>>T;
+//	while(T--){
+//		int a,b;cin>>a>>b;
+//		if(a>b)	swap(a,b);
+//		double c=(sqrt(5.0)+1)/2;
+//		if(int((b-a)*c)==a)	cout<<"YES\n"<<endl;
+//		else	cout<<"NO\n"<<endl;
+//	}
+//	return 0;
+//} 
+
+
+//https://www.lanqiao.cn/problems/1371/learning/?page=1&first_category_id=1&second_category_id=8
+//int main(){
+//	string st;cin>>st;
+//	int s=0, e=st.length()-1;
+//	while(s<e){
+//		if(st[s] != st[e]){
+//			cout<<"N"<<endl;
+//			return 0;
+//		}
+//		s++;
+//		e--;
+//	}
+//	cout<<"Y"<<endl;
+//	return 0;
+//} 
+
+
+//https://www.lanqiao.cn/problems/1174/learning/?page=1&first_category_id=1&second_category_id=8 
+//int N, V, w, v, dp[1001]; 
+//int main(){
+//	cin>>N>>V;
+//	for(int i=1;i<=N;i++){
+//		cin>>w>>v;
+//		for(int j=V;j>=w;j--)	dp[j]=max(dp[j], dp[j-w]+v);
+//	} 
+//	cout<<dp[V]<<endl;
+//	return 0;
+//}
+
+
+//https://www.lanqiao.cn/problems/108/learning/?page=1&first_category_id=1&second_category_id=3
+//const int N=1e5+1;
+//vector<int> ins[N];
+//int g[N]; 
+//
+//int add(int u, int v){
+//	g[u]++;
+//	g[v]++;
+//	ins[u].push_back(v);
+//	ins[v].push_back(u);
+//}
+//
+//int main(){
+//	int n;cin>>n;
+//	for(int i=1;i<=n;i++){
+//		int u, v;cin>>u>>v;
+//		add(u,v);
+//	}
+//	queue<int> q;
+//	for(int i=1;i<=n;i++)
+//		if(g[i]==1)
+//			q.push(i);
+//	
+//	while(!q.empty()){
+//		int x=q.front();q.pop();
+//		for(int i=0;i<ins[i].size();i++){
+//			g[ins[x][i]]--;
+//			if(g[ins[x][i]]==1)	q.push(ins[x][i]);
+//		}
+//	}
+//	
+//	for(int i=1;i<=n;i++){
+//		if(g[i]>1)	cout<<i<<" ";
+//	}
+//	return 0;
+//} 
+
+
+//https://www.lanqiao.cn/problems/110/learning/?page=1&first_category_id=1&second_category_id=3
+//const int N=1e6+1;
+//int f[N], m, n, k;
+//set<int> s;
+//
+//int find(int x){
+//	return f[x]==x ? x : f[x]=find(f[x]);
+//}
+//
+//void merge(int x, int y){
+//	f[find(x)]=find(y);
+//}
+//
+//void init(){
+//	for(int i=1;i<=m*n;i++)	f[i]=i;
+//}
+//
+//int main(){
+//	cin>>m>>n>>k;
+//	init();
+//	while(k--){
+//		int x, y;cin>>x>>y;
+//		merge(x, y);
+//	}
+//	for(int i=1;i<=m*n;i++)
+//		s.insert(find(i));
+//	cout<<s.size()<<endl;
+//	return 0;
+//}
+
 
 int main(){
-	int n, res=0;cin>>n;
-	for(int i=1;i<=n;i++){
-		if(get(i))	res+=i;
-	}
-	cout<<res<<endl;
+	
 	return 0;
 } 
