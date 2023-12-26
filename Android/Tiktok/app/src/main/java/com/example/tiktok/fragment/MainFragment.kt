@@ -1,6 +1,7 @@
 package com.example.tiktok.fragment
 
 import androidx.fragment.app.Fragment
+import butterknife.BindView
 import com.example.tiktok.R
 import com.example.tiktok.base.BaseFragment
 import com.example.tiktok.base.CommPagerAdapter
@@ -17,7 +18,7 @@ class MainFragment : BaseFragment() {
     private var pagerAdapter: CommPagerAdapter? = null
 
     override fun setLayoutId(): Int {
-        return 1
+        return R.layout.fragment_main
     }
 
     override fun init() {
@@ -30,7 +31,6 @@ class MainFragment : BaseFragment() {
         fragments.add(currentLocationFragment!!)
 
         pagerAdapter = CommPagerAdapter(childFragmentManager, fragments, arrayOf("海淀"))
-
 
     }
 
