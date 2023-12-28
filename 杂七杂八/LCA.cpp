@@ -50,6 +50,5 @@ void init(){
 signed main(){
 	cin>>n>>q;
 	init();
-	
 	return 0;
 } 
