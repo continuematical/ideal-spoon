@@ -1,25 +1,23 @@
 package com.example.tiktok.base
 
 import android.os.Bundle
+import android.os.PersistableBundle
+import android.view.View
 import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
-import butterknife.Unbinder
 
 /**
  * 基本页面
  */
 
 abstract class BaseActivity : AppCompatActivity() {
-    protected var unbinder: Unbinder? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(getLayoutId())
-        init()
+        setContentView(init())
     }
 
-    protected abstract fun getLayoutId(): Int
-    protected abstract fun init()
+    protected abstract fun init(): View
 
     /**
      * 设置状态栏颜色
@@ -54,10 +52,5 @@ abstract class BaseActivity : AppCompatActivity() {
      */
     protected fun setFullScreen() {
         //ImmersionBar.with(this).init()
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        unbinder!!.unbind()
     }
 }

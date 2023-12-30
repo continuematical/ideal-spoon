@@ -1,4 +1,4 @@
-package com.example.tiktok.base
+package com.example.tiktok.bean
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -12,7 +12,8 @@ abstract class BaseFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return init(inflater, container)
+        var rootView = init(inflater, container)
+        return rootView
     }
 
     abstract fun init(inflater: LayoutInflater, container: ViewGroup?): View?

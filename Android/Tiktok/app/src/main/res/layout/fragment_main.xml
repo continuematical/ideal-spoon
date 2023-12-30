@@ -22,18 +22,17 @@
             android:layout_marginLeft="12dp"
             android:padding="10dp"
             android:text="直播"
-            android:textColor="#cccccc"
-            android:textSize="14sp" />
+            android:textAppearance="@style/MyTabLayout" />
 
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tab_title"
             android:layout_width="160dp"
             android:layout_height="44dp"
             android:layout_centerInParent="true"
+            app:tabIndicatorHeight="0dp"
             app:tabIndicatorColor="@color/white"
-            app:tabIndicatorWidth="20dp"
             app:tabSelectedTextColor="@color/white"
-            app:tabTextColor="#CCCCCC" />
+            app:tabTextAppearance="@style/MyTabLayout" />
 
         <ImageView
             android:layout_width="20dp"
@@ -46,15 +45,17 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true">
 
         <com.google.android.material.tabs.TabLayout
-            android:id="@+id/tabMainMenu"
+            android:id="@+id/tab_main_menu"
             android:layout_width="match_parent"
             android:layout_height="50dp"
+            android:background="@color/black"
+            app:tabIndicatorHeight="0dp"
             app:tabSelectedTextColor="@color/white"
-            app:tabTextColor="#8f8f94"
-            android:background="@color/black"/>
+            app:tabTextColor="#8f8f94" />
 
         <ImageView
             android:layout_width="50dp"

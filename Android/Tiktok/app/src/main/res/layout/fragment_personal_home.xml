@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools">
+    android:layout_height="match_parent">
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
@@ -21,23 +21,27 @@
                 android:background="@color/transparent"
                 app:contentScrim="@color/color_bg_theme"
                 app:layout_scrollFlags="scroll|exitUntilCollapsed">
-                
+
                 <RelativeLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content">
+
                     <ImageView
+                        android:id="@+id/ivBg"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:scaleType="centerCrop"/>
+                        android:scaleType="centerCrop" />
 
-                    <include layout="@layout/personal_home_header"/>
+                    <include layout="@layout/personal_home_header" />
                 </RelativeLayout>
 
             </com.google.android.material.appbar.CollapsingToolbarLayout>
 
             <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
                 android:layout_width="match_parent"
-                android:layout_height="48dp">
+                android:layout_height="48dp"
+                app:layout_collapseMode="pin">
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -47,37 +51,43 @@
                         android:id="@+id/ivReturn"
                         android:layout_width="32dp"
                         android:layout_height="32dp"
-                        android:src="@mipmap/return_white"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="10dp"
                         android:background="@drawable/shape_circle_half_white"
                         android:padding="8dp"
-                        android:layout_marginLeft="10dp"
-                        android:layout_centerVertical="true"/>
+                        android:src="@mipmap/return_white" />
 
                     <TextView
                         android:id="@+id/tvTitle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        tools:text="小橘子衣橱"
+                        android:layout_centerInParent="true"
                         android:textColor="@color/white"
                         android:textSize="18sp"
                         android:visibility="gone"
-                        android:layout_centerInParent="true"/>
+                        tools:text="小橘子衣橱" />
 
                     <TextView
                         android:id="@+id/tvFocus"
                         android:layout_width="60dp"
                         android:layout_height="30dp"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="10dp"
                         android:background="@drawable/shape_round_red"
+                        android:gravity="center"
                         android:text="关注"
                         android:textColor="@color/white"
                         android:textSize="14sp"
-                        android:layout_centerVertical="true"
-                        android:layout_marginRight="10dp"
-                        android:visibility="gone"
-                        android:gravity="center"/>
+                        android:visibility="gone" />
+
                 </RelativeLayout>
             </androidx.appcompat.widget.Toolbar>
 
         </com.google.android.material.appbar.AppBarLayout>
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/viewPager"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 </RelativeLayout>
