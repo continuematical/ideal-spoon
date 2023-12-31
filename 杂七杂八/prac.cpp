@@ -732,31 +732,89 @@ using namespace std;
 //}
 
 
-//https://www.lanqiao.cn/problems/6276/learning/?problem_list_id=23&page=2 
-//int main(){
-//	
-//	return 0;
-//}
 
 //https://www.lanqiao.cn/problems/6277/learning/?problem_list_id=23&page=1
-int check(int x){
-	int sum=0;
-	while(x){
-		sum+=x%10;
-		x=x/10;
+//int check(int x){
+//	int sum=0;
+//	while(x){
+//		sum+=x%10;
+//		x=x/10;
+//	}
+//	return sum;
+//}
+//
+//int main(){
+//	int minn=60, num=0;
+//	for(int i=1;i<=64;i++){
+//		int x;cin>>x;
+//		if(check(x)<minn){
+//			minn=check(x);
+//			num=x;
+//		} 
+//	}
+//	cout<<num<<endl;
+//	return 0;
+//} 
+
+
+// https://www.luogu.com.cn/problem/P3884
+#include<bits/stdc++.h>
+using namespace std;
+const int maxN=1000;
+
+inline int read(){
+	int n=0;char ch=getchar();
+	while(!isdigit(ch))	ch=getchar();
+	while(isdigit(ch)){
+		n=n*10+ch-'0';
+		ch=getchar();
 	}
-	return sum;
+	return n;
 }
 
+struct Node{
+	int to,next,value;
+}edge[2*maxN];
+
+int dis[maxN+1], vis[maxN+1], tot, head[maxN+1], box[maxN+1];
+
+void addEdge(int x, int y, int w){
+	edge[++tot]={y,head[x],w};
+	head[x]=tot;
+}
+
+void spfa(int s){
+	queue<int> q;q.push(s);
+	memset(dis,0x3f,sizeof(dis));
+	memset(vis,0,sizeof(vis));
+	vis[s]=1;dis[s]=0;
+	while(!q.empty()){
+		int x=q.front();q.pop();vis[x]=0;
+		for(int i=head[x];i;i=edge[i].next){
+			if(dis[edge[i].to]>dis[x]+edge[i].value){
+				dis[edge[i].to]=dis[x]+edge[i].value;
+				if(!vis[edge[i].to]){
+					vis[edge[i].to]=1;
+					q.push(edge[i].to);
+				}
+			}
+		}
+	} 
+}
+
+int n,u,v,ans;
+
 int main(){
-	int minn=60, num=0;
-	for(int i=1;i<=64;i++){
-		int x;cin>>x;
-		if(check(x)<minn){
-			minn=check(x);
-			num=x;
-		} 
+	n=read();
+	for(int i=1;i<n;i++){
+		u=read();v=read();
+		addEdge(u,v,1);addEdge(v,u,2);
 	}
-	cout<<num<<endl;
+	u=read();v=read();spfa(1);
+	for(int i=1;i<=n;i++)	box[dis[i]]++,ans=max(ans,dis[i]);
+	printf("%d\n",ans+1);ans=0;
+	for(int i=1;i<=n;i++)	ans=max(ans,box[i]);
+	printf("%d\n",ans);
+	spfa(u);printf("%d\n",dis[v]);
 	return 0;
-} 
+}
