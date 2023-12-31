@@ -79,18 +79,114 @@
 //}
 
 
+//https://www.lanqiao.cn/problems/2417/learning/?page=1&first_category_id=1&second_category_id=3&tags=2023
+//#include<bits/stdc++.h>
+//using namespace std;
+//
+//int main(){
+//	string t="lanqiao";
+//	string s;cin>>s;
+//	int flag=0;
+//	for(int i=0;i<s.length();i++)
+//		if(tolower(s[i])!=t[i])	flag=1;
+//	if(flag)	cout<<"no"<<endl;
+//	else	cout<<"yes"<<endl;
+//	return 0;
+//}
+
+//https://www.lanqiao.cn/problems/3505/learning/?page=1&first_category_id=1&second_category_id=3&tags=2023 
+//#include<bits/stdc++.h>
+//using namespace std;
+//int n,m,w[31],f[31],ans=31;
+//
+//void dfs(int sum, int pos, int cnt){
+//	if(cnt>=ans)	return;
+//	if(sum==m)	ans=min(ans,cnt); 
+//	if(pos>n || sum>=m || sum+f[pos]<m)	return; 
+//	dfs(sum,pos+1,cnt);
+//	dfs(sum+w[pos]/2,pos+1,cnt+1);
+//	dfs(sum+w[pos],pos+1,cnt);
+//}
+//
+//int main(){
+//	cin>>n>>m;m<<=1;
+//	for(int i=1;i<=n;i++)	cin>>w[i],w[i]<<=1;
+//	sort(w+1,w+n+1,greater<int>());
+//	for(int i=n;i>=1;i--)	 f[i]=f[i+1]+w[i];
+//	dfs(0,1,0);
+//	cout<<ans<<endl;
+//	return 0;
+//}
+
+
+//https://www.lanqiao.cn/problems/3511/learning/?page=1&first_category_id=1&second_category_id=3&tags=2023
+//#include<bits/stdc++.h>
+//using namespace std;
+//#define ll long long
+//
+//typedef struct Plane{
+//	ll t,d,l;
+//}Plane; 
+//
+//int vis[20], flag=0;
+//
+//void dfs(ll n, ll cnt, ll last, vector<Plane> plane){
+//	if(cnt==n){
+//		flag=1;
+//		return;
+//	}
+//	for(int i=1;i<=n;i++){
+//		if(!vis[i] && plane[i].t+plane[i].d>=last){
+//			vis[i]=1;
+//			dfs(n, cnt+1, max(last,plane[i].t)+plane[i].l, plane);
+//			vis[i]=0;
+//		}
+//	}
+//}
+//
+//void clear(){
+//	for(int i=1;i<=20;i++)	vis[i]=0;
+//}
+//
+//int main(){
+//	ll t;cin>>t;
+//	while(t--){
+//		ll n;cin>>n;
+//		vector<Plane> plane(n+1);
+//		for(int i=1;i<=n;i++)
+//			cin>>plane[i].t>>plane[i].d>>plane[i].l;
+//		clear();flag=0;
+//		dfs(n,0,0,plane);
+//		if(flag)	cout<<"YES"<<endl;
+//		else	cout<<"NO"<<endl;
+//	}
+//	return 0;
+//}
+
+
+//https://www.lanqiao.cn/problems/98/learning/?page=1&first_category_id=1&second_category_id=3
 #include<bits/stdc++.h>
 using namespace std;
-const int N=1e10;
+#define ll long long 
+const ll N=1e7; 
+ll n, num[101], dp[N];
 
 int main(){
-	long long int sum=0, temp=1;
-	int i=1;
-	while(i<=202320232023){
-		temp=(temp*i)%N;
-		sum=(sum+temp)%N;
-		i++;
+	ll res=0;
+	cin>>n;
+	for(int i=1;i<=n;i++){
+		cin>>num[i];
+		dp[num[i]]++;
+	} 
+	for(int i=1;i<=N;i++){
+		for(int j=1;j<=n;j++){
+			if(i-num[j]<=0)	continue;
+			dp[i]=dp[i-num[j]]+dp[i];
+			if(dp[i])	break;
+		}
+		if(!dp[i])	res++;
 	}
-	cout<<sum<<endl;
+	if(res>10000)	cout<<"INF"<<endl;
+	else	cout<<res<<endl;
 	return 0;
 } 
