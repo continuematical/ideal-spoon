@@ -213,6 +213,6 @@ class DataCreate {
 
     companion object {
         var data = ArrayList<VideoBean?>()
-        var userList: MutableList<UserBean>? = null
+        var userList = ArrayList<UserBean?>()
     }
 }

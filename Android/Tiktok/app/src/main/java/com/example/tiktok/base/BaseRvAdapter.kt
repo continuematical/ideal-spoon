@@ -5,11 +5,11 @@ import androidx.recyclerview.widget.RecyclerView
 
 abstract class BaseRvAdapter<T, VH : BaseRvViewHolder?>(
     val context: Context?,
-    private var data: MutableList<T>
+    private var data: ArrayList<T>
 ) : RecyclerView.Adapter<VH>() {
 
     override fun onBindViewHolder(holder: VH & Any, position: Int) {
-        onBindData(holder, data!![position], position)
+        onBindData(holder, data[position], position)
     }
 
     override fun getItemCount(): Int {

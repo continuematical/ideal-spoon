@@ -30,6 +30,7 @@ class CurrentLocationFragment : BaseFragment() {
     private fun initView() {
         recyclerView = binding.recyclerView
         refreshLayout = binding.refreshLayout
+        DataCreate().initData()
 
         recyclerView!!.layoutManager =
             StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
@@ -47,7 +48,7 @@ class CurrentLocationFragment : BaseFragment() {
                     refreshLayout!!.isRefreshing = false
                 }
 
-            }
+            }.start()
         }
     }
 }
