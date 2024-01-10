@@ -165,28 +165,111 @@
 
 
 //https://www.lanqiao.cn/problems/98/learning/?page=1&first_category_id=1&second_category_id=3
+//#include<bits/stdc++.h>
+//using namespace std;
+//#define ll long long 
+//const ll N=1e7; 
+//ll n, num[101], dp[N];
+//
+//int main(){
+//	ll res=0;
+//	cin>>n;
+//	for(int i=1;i<=n;i++){
+//		cin>>num[i];
+//		dp[num[i]]++;
+//	} 
+//	for(int i=1;i<=N;i++){
+//		for(int j=1;j<=n;j++){
+//			if(i-num[j]<=0)	continue;
+//			dp[i]=dp[i-num[j]]+dp[i];
+//			if(dp[i])	break;
+//		}
+//		if(!dp[i])	res++;
+//	}
+//	if(res>10000)	cout<<"INF"<<endl;
+//	else	cout<<res<<endl;
+//	return 0;
+//} 
+
+//https://www.lanqiao.cn/problems/209/learning/?page=1&first_category_id=1&tags=%E8%B4%AA%E5%BF%83
+//#include<bits/stdc++.h>
+//using namespace std;
+//
+//void change(string& s, int i){
+//	if(s[i]=='*')	s[i]='o';
+//	else	s[i]='*';
+//}
+//
+//int main(){
+//	string s,e;cin>>s>>e;
+//	int count=0;
+//	for(int i=0;i<s.size();i++){
+//		if(s[i]!=e[i]){
+//			change(s,i);
+//			if(i+1<s.size())	change(s,i+1);
+//			count++;
+//		}
+//	}
+//	cout<<count<<endl;
+//	return 0;
+//} 
+
+
+//https://www.lanqiao.cn/problems/364/learning/?page=1&first_category_id=1&tags=%E8%B4%AA%E5%BF%83
+//#include<bits/stdc++.h>
+//using namespace std;
+//#define int long long 
+//const int N=5e4+1;
+//
+//int l,n,m,arr[N]; 
+//
+//bool check(int x){
+//	int pos=0, cnt=0;//最左端 需要移走的石头数目
+//	for(int i=1;i<=n+1;i++){
+//		if(arr[i]-arr[pos]<x)	cnt++;
+//		else	pos=i;
+//	} 
+//	if(cnt>m)	return false;
+//	else	return true;
+//}
+//
+//signed main(){
+//	cin>>l>>n>>m;
+//	for(int i=1;i<=n;i++)	cin>>arr[i];
+//	arr[n+1]=l;
+//	int left=0, right=l;
+//	while(left<right){
+//		int mid=(left+right+1)>>1;
+//		if(check(mid))	left=mid;
+//		else	right=mid-1;
+//	}
+//	cout<<left<<endl;
+//	return 0;
+//} 
+
+
+//https://www.luogu.com.cn/problem/CF1675B 
 #include<bits/stdc++.h>
 using namespace std;
-#define ll long long 
-const ll N=1e7; 
-ll n, num[101], dp[N];
+
+int T, arr[31];
+const int N=2e9;
 
 int main(){
-	ll res=0;
-	cin>>n;
-	for(int i=1;i<=n;i++){
-		cin>>num[i];
-		dp[num[i]]++;
-	} 
-	for(int i=1;i<=N;i++){
-		for(int j=1;j<=n;j++){
-			if(i-num[j]<=0)	continue;
-			dp[i]=dp[i-num[j]]+dp[i];
-			if(dp[i])	break;
+	cin>>T;
+	while(T--){
+		int n, res=0;cin>>n;
+		for(int i=1;i<=n;i++)	cin>>arr[i];
+		for(int i=n-1;i>=1;i--){
+			if(arr[i+1]==0){
+				res=-1;break;
+			}
+			while(arr[i]>=arr[i+1] && arr[i]>0){
+				arr[i]/=2;
+				res++;
+			}
 		}
-		if(!dp[i])	res++;
+		cout<<res<<endl;
 	}
-	if(res>10000)	cout<<"INF"<<endl;
-	else	cout<<res<<endl;
 	return 0;
 } 
