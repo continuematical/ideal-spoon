@@ -7,6 +7,9 @@ import androidx.compose.material.icons.filled.Face
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.vector.ImageVector
+import com.example.navigationcodelab.ui.theme.accounts.AccountScreen
+import com.example.navigationcodelab.ui.theme.bills.BillScreen
+import com.example.navigationcodelab.ui.theme.overview.OverviewScreen
 
 interface RallyDestination {
     val icon: ImageVector
@@ -18,25 +21,25 @@ interface RallyDestination {
 object Account : RallyDestination {
     override val icon: ImageVector = Icons.Filled.Add
     override val route: String = ""
-    override val screen: @Composable () -> Unit = {}
+    override val screen: @Composable () -> Unit = { AccountScreen() }
 }
 
 object Overview : RallyDestination {
     override val icon: ImageVector = Icons.Filled.Person
     override val route: String = "overview"
-    override val screen: @Composable () -> Unit = { Overview }
+    override val screen: @Composable () -> Unit = { OverviewScreen() }
 }
 
 object Bills : RallyDestination {
     override val icon: ImageVector = Icons.Filled.Build
     override val route: String = "bills"
-    override val screen: @Composable () -> Unit = {}
+    override val screen: @Composable () -> Unit = { BillScreen() }
 }
 
 object SingleAccount : RallyDestination {
     override val icon: ImageVector = Icons.Filled.Face
     override val route: String = "single_account"
-    override val screen: @Composable () -> Unit = {}
+    override val screen: @Composable () -> Unit = {  }
 }
 
 val rallyTabRowScreens = listOf<RallyDestination>(Overview, Account, Bills)

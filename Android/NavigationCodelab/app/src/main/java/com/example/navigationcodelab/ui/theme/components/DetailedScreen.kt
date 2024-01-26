@@ -21,6 +21,7 @@ fun <T> StatementBody(
     amounts: (T) -> Float,
     amountsTotal: Float,
     circleLabel: String,
+    rows: @Composable (T) -> Unit
 ) {
     Column(
         modifier = Modifier.verticalScroll(rememberScrollState())
