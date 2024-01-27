@@ -321,3 +321,157 @@
 //}
 
 
+//https://www.luogu.com.cn/problem/P1714
+//#include<bits/stdc++.h>
+//using namespace std;
+//const int N=5e5+1, INF=-1e9;
+//int n,m,sum[N],q[N];
+//
+//int main(){
+//	cin>>n>>m;
+//	for(int i=1;i<=n;i++){
+//		int x;cin>>x;
+//		sum[i]=sum[i-1]+x;
+//	}
+//	//使用单调队列
+//	int head=1, tail=1,ans=INF;//头部和尾部指针 
+//	for(int i=1;i<=n;i++){
+//		while(head<=tail && q[head]<i-m)	head++;
+//		ans=max(ans,sum[i]-sum[q[head]]);
+//		while(head<=tail && sum[i]<=sum[q[tail]])	tail--;
+//		q[++tail]=i;
+//	} 
+//	cout<<ans<<endl;
+//	return 0;
+//}
+
+
+//https://www.lanqiao.cn/problems/3535/learning/?problem_list_id=26&page=1
+//#include<bits/stdc++.h>
+//#define int long long
+//using namespace std;
+//const int P=1e9+7;
+//const int N=1001;
+//
+//int T,n,sum=0,arr[N],dp[N][2];
+////dp[n][0]为偶数个数，dp[n][1]为奇数个数 
+//
+//int solve(){
+//	memset(dp,0,sizeof(dp));
+//	dp[0][0]=1;
+//	for(int i=0;i<n;i++){
+//		//为奇数 
+//		if(arr[i]%2){
+//			dp[i+1][0]=dp[i][0]+dp[i][1];
+//			dp[i+1][1]=dp[i][0]+dp[i][1];
+//		}else{
+//			dp[i+1][0]=dp[i][0]*2;
+//			dp[i+1][1]=dp[i][1]*2; 
+//		}
+//		dp[i+1][0]%=P;
+//		dp[i+1][1]%=P;
+//	}
+//	return dp[n][0];
+//}
+//
+//signed main(){
+//	cin>>T;
+//	while(T--){
+//		memset(arr,0,sizeof(arr));
+//		cin>>n;sum=0;
+//		for(int i=0;i<n;i++){
+//			cin>>arr[i];
+//			sum+=arr[i];
+//		}
+//		if(sum%2)	cout<<0<<endl;
+//		else	cout<<solve()<<endl;
+//	}
+//	return 0;
+//} 
+
+
+//https://www.lanqiao.cn/problems/12117/learning/?contest_id=160
+//#include<bits/stdc++.h>
+//using namespace std;
+//#define int long long
+//const int N=1e5+2;
+//int n,sum=0,arr[N],pre[N],back[N];
+//
+//signed main(){
+//	cin>>n;
+//	for(int i=1;i<=n;i++){
+//		cin>>arr[i];
+//		pre[i]=max(pre[i-1],arr[i]);
+//	}
+//	for(int i=n;i>=1;i--)	back[i]=max(back[i+1],arr[i]);
+//	for(int i=2;i<n;i++){
+//		int x=(pre[i-1]+back[i+1])/arr[i];
+//		sum=max(sum,x);
+//	}
+//	cout<<sum<<endl;
+//	return 0;
+//} 
+
+
+//https://www.lanqiao.cn/problems/12118/learning/?contest_id=160
+//#include<bits/stdc++.h>
+//using namespace std;
+//const int N=1e5+1;
+//
+//int main(){
+//	int n,num1,num2,num=0;char s[N];
+//	cin>>n;
+//	for(int i=0;i<n;i++){
+//		cin>>s[i];
+//		num1+=(s[i]-'0')*(i-num);
+//		num+=s[i]-'0'; 
+//	} 
+//	num=0;
+//	for(int i=n-1;i>=0;i--){
+//		num2+=(s[i]-'0')*(n-1-i-num);
+//		num+=s[i]-'0';
+//	}
+//	num=num1>num2?num2:num1;
+//	cout<<num<<endl;
+//	return 0;
+//}
+
+
+//https://www.lanqiao.cn/problems/12110/learning/?contest_id=160
+//#include<bits/stdc++.h>
+//using namespace std;
+//int T,a,b,c;
+//
+//int main(){
+//	cin>>T;
+//	while(T--){
+//		cin>>a>>b>>c;
+//		int x=(a+c-1)/c;
+//		int res=(b+x-1)/x;
+//		cout<<res<<endl;
+//	}
+//	return 0;
+//}
+
+
+
+//https://www.lanqiao.cn/problems/12116/learning/?contest_id=160
+# include<bits/stdc++.h>
+using namespace std;
+#define int long long 
+const int N=1e5+1;
+int n,k,a[N],b[N],minn=1e18,sum=0,ans=1e18;
+
+signed main(){
+	cin>>n>>k;
+	for(int i=1;i<=n;i++)	cin>>a[i];
+	for(int i=1;i<=n;i++)	cin>>b[i];
+	int m=min(n,k);
+	for(int i=1;i<=m;i++){
+		sum+=a[i];
+		minn=min(minn,a[i]+b[i]);
+		ans=min(ans,sum+(k-i)*minn);
+	}
+	cout<<ans<<endl;
+	return 0;
+} 
