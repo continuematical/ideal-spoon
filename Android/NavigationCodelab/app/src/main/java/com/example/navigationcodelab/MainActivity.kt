@@ -14,7 +14,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import com.example.navigationcodelab.ui.theme.RallyTheme
-import com.example.navigationcodelab.ui.theme.components.RallyTabRow
+import com.example.navigationcodelab.ui.components.RallyTabRow
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -1,4 +1,4 @@
-package com.example.navigationcodelab.ui.theme.components
+package com.example.navigationcodelab.ui.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement

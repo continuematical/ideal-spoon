@@ -7,9 +7,10 @@ import androidx.compose.material.icons.filled.Face
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.vector.ImageVector
-import com.example.navigationcodelab.ui.theme.accounts.AccountScreen
-import com.example.navigationcodelab.ui.theme.bills.BillScreen
-import com.example.navigationcodelab.ui.theme.overview.OverviewScreen
+import com.example.navigationcodelab.ui.accounts.AccountScreen
+import com.example.navigationcodelab.ui.accounts.SingleAccountScreen
+import com.example.navigationcodelab.ui.bills.BillScreen
+import com.example.navigationcodelab.ui.overview.OverviewScreen
 
 interface RallyDestination {
     val icon: ImageVector
@@ -20,13 +21,13 @@ interface RallyDestination {
 //object用来声明类，在声明类的同时创建一个实例
 object Account : RallyDestination {
     override val icon: ImageVector = Icons.Filled.Add
-    override val route: String = ""
+    override val route = "account"
     override val screen: @Composable () -> Unit = { AccountScreen() }
 }
 
 object Overview : RallyDestination {
     override val icon: ImageVector = Icons.Filled.Person
-    override val route: String = "overview"
+    override val route = "overview"
     override val screen: @Composable () -> Unit = { OverviewScreen() }
 }
 
@@ -39,7 +40,8 @@ object Bills : RallyDestination {
 object SingleAccount : RallyDestination {
     override val icon: ImageVector = Icons.Filled.Face
     override val route: String = "single_account"
-    override val screen: @Composable () -> Unit = {  }
+    override val screen: @Composable () -> Unit = { SingleAccountScreen() }
+    const val accountTypeArg = "account_type"
 }
 
-val rallyTabRowScreens = listOf<RallyDestination>(Overview, Account, Bills)
+val rallyTabRowScreens = listOf(Overview, Account, Bills)

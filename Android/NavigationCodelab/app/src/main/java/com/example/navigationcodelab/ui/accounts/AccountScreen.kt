@@ -1,4 +1,4 @@
-package com.example.navigationcodelab.ui.theme.accounts
+package com.example.navigationcodelab.ui.accounts
 
 import UserData
 import androidx.compose.foundation.clickable
@@ -9,8 +9,8 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
 import com.example.navigationcodelab.R
-import com.example.navigationcodelab.ui.theme.components.AccountRow
-import com.example.navigationcodelab.ui.theme.components.StatementBody
+import com.example.navigationcodelab.ui.components.AccountRow
+import com.example.navigationcodelab.ui.components.StatementBody
 
 /**
  * The Accounts Screen

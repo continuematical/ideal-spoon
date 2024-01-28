@@ -1,6 +1,5 @@
-package com.example.navigationcodelab.ui.theme.components
+package com.example.navigationcodelab.ui.components
 
-import android.media.midi.MidiDevice.MidiConnection
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.animateContentSize
 import androidx.compose.animation.core.LinearEasing
@@ -31,7 +30,6 @@ import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.example.navigationcodelab.RallyDestination
-import com.example.navigationcodelab.rallyTabRowScreens
 import java.util.Locale
 
 /** 参数 **/

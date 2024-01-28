@@ -1,4 +1,4 @@
-package com.example.navigationcodelab.ui.theme.overview
+package com.example.navigationcodelab.ui.overview
 
 import UserData
 import androidx.compose.foundation.background
@@ -22,6 +22,10 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -30,7 +34,9 @@ import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.example.navigationcodelab.ui.theme.components.AccountRow
+import com.example.navigationcodelab.ui.components.AccountRow
+import com.example.navigationcodelab.ui.components.RallyAlertDialog
+import java.util.Locale
 
 private val RallyDefaultPadding = 12.dp
 private const val SHOWN_ITEMS = 3
@@ -61,8 +67,20 @@ fun OverviewScreen(
     }
 }
 
+
 @Composable
 private fun AlertedCard() {
+    var showDialog by remember { mutableStateOf(true) }
+    var alertMessage = "Heads up, you've used up 90% of your Shopping budget for this month."
+
+    if (showDialog) {
+        RallyAlertDialog(
+            onDismiss = { showDialog = false },
+            bodyText = alertMessage,
+            buttonText = "dismiss".uppercase(Locale.getDefault())
+        )
+    }
+
     Card {
         Column {
             AlertedHeader {}

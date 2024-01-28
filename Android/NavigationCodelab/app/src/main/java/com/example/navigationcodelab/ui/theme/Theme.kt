@@ -10,6 +10,8 @@ import androidx.compose.material3.dynamicLightColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.SideEffect
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.compositeOver
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalView
@@ -66,5 +68,19 @@ fun NavigationCodelabTheme(
         colorScheme = colorScheme,
         typography = Typography,
         content = content
+    )
+}
+
+@Composable
+fun RallyDialogThemeOverlay(content: @Composable () -> Unit) {
+    var dialogColors = darkColorScheme(
+        primary = Color.White,
+        surface = Color.White.copy(alpha = 0.12f).compositeOver(Color.Black),
+        onSurface = Color.White
+    )
+
+    var currentTypography = MaterialTheme.typography
+    var dialogTypography = currentTypography.copy(
+
     )
 }
