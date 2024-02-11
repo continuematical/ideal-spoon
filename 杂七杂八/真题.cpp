@@ -249,27 +249,39 @@
 
 
 //https://www.luogu.com.cn/problem/CF1675B 
+//#include<bits/stdc++.h>
+//using namespace std;
+//
+//int T, arr[31];
+//const int N=2e9;
+//
+//int main(){
+//	cin>>T;
+//	while(T--){
+//		int n, res=0;cin>>n;
+//		for(int i=1;i<=n;i++)	cin>>arr[i];
+//		for(int i=n-1;i>=1;i--){
+//			if(arr[i+1]==0){
+//				res=-1;break;
+//			}
+//			while(arr[i]>=arr[i+1] && arr[i]>0){
+//				arr[i]/=2;
+//				res++;
+//			}
+//		}
+//		cout<<res<<endl;
+//	}
+//	return 0;
+//} 
+
 #include<bits/stdc++.h>
 using namespace std;
 
-int T, arr[31];
-const int N=2e9;
+class A{
+	
+};
+
 
 int main(){
-	cin>>T;
-	while(T--){
-		int n, res=0;cin>>n;
-		for(int i=1;i<=n;i++)	cin>>arr[i];
-		for(int i=n-1;i>=1;i--){
-			if(arr[i+1]==0){
-				res=-1;break;
-			}
-			while(arr[i]>=arr[i+1] && arr[i]>0){
-				arr[i]/=2;
-				res++;
-			}
-		}
-		cout<<res<<endl;
-	}
-	return 0;
-} 
+	
+}
