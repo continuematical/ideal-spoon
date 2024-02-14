@@ -40,47 +40,21 @@
 
 #include<bits/stdc++.h>
 using namespace std;
-const int N=1001;
-int n,m,X,Y,ans, vis[N], mm[N], num[N];
-//ans为路径条数 
-//num表示每一条路径经过的节点
-vector<int> cnt[N];
-
-//到达节点  每一条路径节点个数 
-void dfs(int x, int t){
-	if(x==Y){
-		ans++;//路径条数 
-		for(int i=1;i<t;i++)	num[mm[i]]++;
-		return;
-	}
-	for(int i=0;i<cnt[x].size();i++){
-		int next=cnt[x][i];
-		if(vis[next])	continue;
-		vis[next]=1;
-		mm[t]=next;
-		dfs(next, t+1);
-		vis[next]=0;
-	}
-}
+int w,n,arr[30001],res=0,temp; 
 
 int main(){
-	cin>>n>>m;
-	while(m--){
-		int u,v;cin>>u>>v;
-		cnt[u].push_back(v);
-		cnt[v].push_back(u);
-	}
-	cin>>X>>Y;//起点和终点
-	vis[X]=1;
-	dfs(X,1);
-	if(ans==0){
-		cout<<"-1"<<endl;
-	} else{
-		int k=0;
-		for(int i=1;i<=n;i++){
-			if(num[i]==ans)	k++;
+	cin>>w>>n;
+	for(int i=1;i<=n;i++)	cin>>arr[i];
+	sort(arr+1,arr+1+n);
+	int i=1,j=n;
+	while(i<=j){
+		if(arr[i]+arr[j]<=w){
+			i++;j--;
+			res++;
+		}else{
+			j--;res++;
 		}
-		cout<<k-1<<endl;
-	}
+	} 
+	cout<<res<<endl;
 	return 0;
 } 
