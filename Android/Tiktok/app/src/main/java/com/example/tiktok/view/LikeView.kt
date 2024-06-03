@@ -1,17 +1,23 @@
 package com.example.tiktok.view
 
 import android.content.Context
+import android.os.Handler
 import android.util.AttributeSet
 import android.view.GestureDetector
 import android.view.GestureDetector.SimpleOnGestureListener
 import android.view.MotionEvent
 import android.view.View
-import android.view.ViewGroup
+import android.view.animation.Animation
 import android.view.animation.AnimationSet
 import android.widget.ImageView
 import android.widget.RelativeLayout
 import com.example.tiktok.R
+import com.example.tiktok.utils.AnimUtils
 import kotlin.random.Random
+
+/**
+ * 点赞动画
+ */
 
 class LikeView : RelativeLayout {
     /** 手势 **/
@@ -38,13 +44,22 @@ class LikeView : RelativeLayout {
         gestureDetector = GestureDetector(object : SimpleOnGestureListener() {
             override fun onDoubleTap(e: MotionEvent): Boolean {
                 addLikeView(e)
-                return super.onDoubleTap(e)
+                onLikeListener!!.onLikeListener()
+                return true
             }
 
             override fun onSingleTapConfirmed(e: MotionEvent): Boolean {
-                return super.onSingleTapConfirmed(e)
+                if (onPlayPauseListener != null) {
+                    onPlayPauseListener!!.OnPlayPauseListener()
+                }
+                return true
             }
         })
+
+        setOnTouchListener { v: View, event: MotionEvent ->
+            gestureDetector!!.onTouchEvent(event)
+            true
+        }
     }
 
     private fun addLikeView(e: MotionEvent) {
@@ -66,7 +81,28 @@ class LikeView : RelativeLayout {
         val animationSet = AnimationSet(true)
         val degrees = angles[Random.nextInt()]
 
+        animationSet.addAnimation(AnimUtils.rotateAnimation(0, 0, degrees.toFloat()))
+        animationSet.addAnimation(AnimUtils.scaleAnim(100, 2f, 1f, 0))
+        animationSet.addAnimation(AnimUtils.alphaAnim(0f, 1f, 100, 0))
+        animationSet.addAnimation(AnimUtils.scaleAnim(500, 1f, 1.8f, 300))
+        animationSet.addAnimation(AnimUtils.alphaAnim(1f, 0f, 500, 300))
+        animationSet.addAnimation(AnimUtils.translationAnim(500, 0f, 0f, 0f, -400f, 300))
+        animationSet.setAnimationListener(object : Animation.AnimationListener {
+            override fun onAnimationStart(animation: Animation?) {
+                TODO("Not yet implemented")
+            }
 
+            override fun onAnimationEnd(animation: Animation?) {
+                Handler().post {
+                    removeView(view)
+                }
+            }
+
+            override fun onAnimationRepeat(animation: Animation?) {
+                TODO("Not yet implemented")
+            }
+        })
+        view.startAnimation(animationSet)
     }
 
     interface OnLikeListener {

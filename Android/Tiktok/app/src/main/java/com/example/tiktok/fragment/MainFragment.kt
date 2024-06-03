@@ -1,6 +1,5 @@
 package com.example.tiktok.fragment
 
-import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -52,8 +51,7 @@ class MainFragment : BaseFragment() {
                 position: Int,
                 positionOffset: Float,
                 positionOffsetPixels: Int
-            ) {
-            }
+            ) {}
 
             override fun onPageSelected(position: Int) {
                 curPage = position

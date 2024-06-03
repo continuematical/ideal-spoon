@@ -1,0 +1,3 @@
+const chartsRouter={
+    path: '/charts',
+}

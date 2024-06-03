@@ -234,6 +234,8 @@ RMI 注册表中注册的主机名。如果想要远程监控主机上的 java �
 
 ## 2.3. jstat：查看 JVM 统计信息
 
+[jstat命令详解](https://blog.csdn.net/zhaozheng7758/article/details/8623549)
+
 jstat（JVM Statistics Monitoring Tool）：用于监视虚拟机各种运行状态信息的命令行工具。它可以显示本地或者远程虚拟机进程中的类装载、内存、垃圾收集、JIT 编译等运行数据。在没有 GUI 图形界面，只提供了纯文本控制台环境的服务器上，它将是运行期定位虚拟机性能问题的首选工具。常用于检测垃圾回收问题以及内存泄漏问题。
 
 官方文档：[https://docs.oracle.com/javase/8/docs/technotes/tools/unix/jstat.html](https://docs.oracle.com/javase/8/docs/technotes/tools/unix/jstat.html)
@@ -374,7 +376,9 @@ jinfo(Configuration Info for Java)：查看虚拟机配置参数信息，也可�
 | -flags           | 输出全部的参数                                               |
 | -sysprops        | 输出系统属性                                                 |
 
-**jinfo -sysprops**
+**jinfo -sysprops PID**
+
+可以查看由`System.getProperities()`取得的参数。
 
 ```properties
 > jinfo -sysprops
@@ -387,7 +391,9 @@ os.name = Windows 10
 ...
 ```
 
-**jinfo -flags**
+**jinfo -flags PID**
+
+查看曾经赋过值的一些参数。
 
 ```shell
 > jinfo -flags 25592
@@ -395,7 +401,9 @@ Non-default VM flags: -XX:CICompilerCount=4 -XX:InitialHeapSize=333447168 -XX:Ma
 Command line:  -agentlib:jdwp=transport=dt_socket,address=127.0.0.1:8040,suspend=y,server=n -Drebel.base=C:\Users\Vector\.jrebel -Drebel.env.ide.plugin.version=2021.1.2 -Drebel.env.ide.version=2020.3.3 -Drebel.env.ide.product=IU -Drebel.env.ide=intellij -Drebel.notification.url=http://localhost:7976 -agentpath:C:\Users\Vector\AppData\Roaming\JetBrains\IntelliJIdea2020.3\plugins\jr-ide-idea\lib\jrebel6\lib\jrebel64.dll -Dmaven.home=D:\eclipse\env\maven -Didea.modules.paths.file=C:\Users\Vector\AppData\Local\JetBrains\IntelliJIdea2020.3\Maven\idea-projects-state-596682c7.properties -Dclassworlds.conf=C:\Users\Vector\AppData\Local\Temp\idea-6755-mvn.conf -Dmaven.ext.class.path=D:\IDEA\plugins\maven\lib\maven-event-listener.jar -javaagent:D:\IDEA\plugins\java\lib\rt\debugger-agent.jar -Dfile.encoding=UTF-8
 ```
 
-**jinfo -flag**
+**jinfo -flag PID**
+
+查看某个`Java`进程的具体参数的值。
 
 ```shell
 > jinfo -flag UseParallelGC 25592
@@ -405,7 +413,9 @@ Command line:  -agentlib:jdwp=transport=dt_socket,address=127.0.0.1:8040,suspend
 -XX:-UseG1GC
 ```
 
-**jinfo -flag name**
+**jinfo -flag name PID**
+
+针对非`boolean`类型。
 
 ```shell
 > jinfo -flag UseParallelGC 25592
@@ -415,7 +425,9 @@ Command line:  -agentlib:jdwp=transport=dt_socket,address=127.0.0.1:8040,suspend
 -XX:-UseG1GC
 ```
 
-**jinfo -flag [+-]name**
+**jinfo -flag [+-]name PID**
+
+针对`boolean`类型。
 
 ```shell
 > jinfo -flag +PrintGCDetails 25592
@@ -462,6 +474,10 @@ Command line:  -agentlib:jdwp=transport=dt_socket,address=127.0.0.1:8040,suspend
 
 jmap（JVM Memory Map）：作用一方面是获取 dump 文件（堆转储快照文件，二进制文件），它还可以获取目标 Java 进程的内存相关信息，包括 Java 堆各区域的使用情况、堆中对象的统计信息、类加载信息等。开发人员可以在控制台中输入命令“jmap -help”查阅 jmap 工具的具体使用方式和一些标准选项配置。
 
+说明：通常在写Heap Dump文件前会触发一次Full GC，所以heap dump文件里面保存的都是Full GC留下来的对象信息。
+
+生成dump文件比较耗时，尤其是大内存镜像需要更长的时间。
+
 官方帮助文档：[https://docs.oracle.com/en/java/javase/11/tools/jmap.html](https://docs.oracle.com/en/java/javase/11/tools/jmap.html)
 
 基本使用语法为：
@@ -482,9 +498,39 @@ jmap（JVM Memory Map）：作用一方面是获取 dump 文件（堆转储快�
 
 说明：这些参数和 linux 下输入显示的命令多少会有不同，包括也受 jdk 版本的影响。
 
+### 2.5.1 使用一 导出内存映像文件
+
+#### 手动方式
+
 ```shell
-> jmap -dump:format=b,file=<filename.hprof> <pid>> jmap -dump:live,format=b,file=<filename.hprof> <pid>
+> jmap -dump:format=b,file=<filename.hprof> <pid>
+> jmap -dump:live,format=b,file=<filename.hprof> <pid>
+// b表示标准状态
 ```
+
+#### 自动方式
+
+当程序发生OOM退出系统时，一些瞬时信息都随着程序的终止而消失，而重现OOM问题比较耗时。
+
+比较常用的自动取到堆快照的方法有：
+
+`-XX:+HeapDumpOnOutOfMemoryError`：程序发生OOM时，导出应用程序的当前堆快照。
+
+`-XX:HeapDumpPath`：可以指定堆快照的保存位置。
+
+### 2.5.2 显示堆内存相关信息
+
+`jmap -heap pid`
+
+`jmap -histo pid`
+
+### 2.5.3 其他作用
+
+`jmap -clstats pid`：查看系统的`ClassLoader`信息。
+
+`jmap finalizerinfo pid`：查看堆积在`finalizer`队列中的对象。
+
+### 小结
 
 由于 jmap 将访问堆中的所有对象，为了保证在此过程中不被应用线程干扰，jmap 需要借助安全点机制，让所有线程停留在不改变堆中数据的状态。也就是说，由 jmap 导出的堆快照必定是安全点位置的。这可能导致基于该堆快照的分析结果存在偏差。
 

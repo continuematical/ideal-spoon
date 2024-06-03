@@ -1,10 +1,9 @@
 package com.example.tiktok.activity
 
 import android.content.Intent
-import com.example.tiktok.R
-import com.example.tiktok.base.BaseActivity
 import android.os.CountDownTimer
 import android.view.View
+import com.example.tiktok.base.BaseActivity
 import com.example.tiktok.databinding.ActivitySplashBinding
 
 /**

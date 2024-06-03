@@ -1,0 +1,12 @@
+# Custom data for safety helmet
+
+
+# train and val data as 1) directory: path/images/, 2) file: path/images.txt, or 3) list: [path1/images/, path2/images/]
+train: D:/ideal-spoon/YOLOV5/yolov5-fire-42-master/images
+val: D:/ideal-spoon/YOLOV5/yolov5-fire-42-master/val
+
+# number of classes
+nc: 2
+
+# class names
+names: ['phone', 'person']

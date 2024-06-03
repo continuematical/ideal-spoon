@@ -4,16 +4,16 @@
     "type": "split",
     "children": [
       {
-        "id": "700a232199e5e3d9",
+        "id": "a8338750fb037ba1",
         "type": "tabs",
         "children": [
           {
-            "id": "5b04696bc3c29e5e",
+            "id": "91fd175d93ba5848",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Android/第三方库.md",
+                "file": "Matlab/时间序列分析.md",
                 "mode": "source",
                 "source": false
               }
@@ -71,6 +71,18 @@
             "id": "d48be11305968934",
             "type": "leaf",
             "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Matlab/时间序列分析.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "4beea663018de217",
+            "type": "leaf",
+            "state": {
               "type": "file-explorer",
               "state": {
                 "sortOrder": "alphabetical"
@@ -78,7 +90,7 @@
             }
           }
         ],
-        "currentTab": 3
+        "currentTab": 4
       }
     ],
     "direction": "horizontal",
@@ -98,7 +110,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Android/第三方库.md",
+                "file": "Matlab/时间序列分析.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -115,7 +127,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Android/第三方库.md",
+                "file": "Matlab/时间序列分析.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -138,7 +150,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Android/第三方库.md"
+                "file": "Matlab/时间序列分析.md"
               }
             }
           }
@@ -161,40 +173,40 @@
       "table-editor-obsidian:Advanced Tables Toolbar": false
     }
   },
-  "active": "5b04696bc3c29e5e",
+  "active": "91fd175d93ba5848",
   "lastOpenFiles": [
-    "Matlab/美赛.md",
+    "Android/Jetpack Compose/注解.md",
+    "Android/Binder.md",
+    "Matlab/多元分析.md",
+    "Matlab/异常检测.md",
+    "Matlab/决策树.md",
+    "Matlab/时间序列分析.md",
+    "Android/SnapHelper.md",
     "Android/第三方库.md",
+    "Android/多线程.md",
+    "Android/事件总线.md",
+    "Android/findViewByld.md",
+    "Android/EventBus.md",
+    "Matlab/库.md",
+    "Matlab/绘图.md",
+    "Matlab/假设检验/T检验.md",
+    "Matlab/美赛.md",
     "Android/Android Gradle.md",
     "Android/图/常用方法1.png",
-    "Matlab/假设检验/T检验.md",
     "Matlab/OpenCV.md",
-    "Matlab/绘图.md",
     "Android/Jetpack Compose/Navigation.md",
     "Android/Jetpack Compose/入门.md",
     "Android/Maven/入门.md",
     "Android/Maven",
     "Android/Maven",
     "Android/Jetpack Compose",
-    "Matlab/库.md",
     "MySQL/mysql基础篇笔记/第07章_单行函数.md",
     "MySQL/mysql基础篇笔记/第00章_写在最后.md",
     "MySQL/mysql基础篇笔记/第11章_数据处理之增删改.md",
-    "Matlab/多元分析.md",
     "Matlab/假设检验/卡方检验.md",
     "汇编语言/变量、标号和地址表达式.md",
-    "Matlab/2023 B.md",
-    "Matlab/检验.md",
-    "Matlab/假设检验/假设检验方法.md",
-    "Matlab/假设检验/正态性检验.md",
-    "Matlab/假设检验/方差分析.md",
     "Matlab/假设检验",
-    "汇编语言/指令.md",
-    "Android/多线程.md",
-    "Android/Handler.md",
     "Matlab/文件/CUMCM-2023-B.pdf",
-    "Android/Binder.md",
-    "数据结构/排序.md",
     "Matlab/优化算法",
     "Android/图/Handler消息机制.png",
     "Matlab/图/模拟退火算法步骤.png",

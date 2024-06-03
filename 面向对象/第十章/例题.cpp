@@ -109,6 +109,6 @@ void twelve(){
 } 
 
 int main(){
-	nine();
+	cout.precision(10); 
 	return 0;
 } 

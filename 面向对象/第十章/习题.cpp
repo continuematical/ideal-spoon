@@ -130,6 +130,6 @@ void store(char* filename){
 }
 
 int main(){
-	
+	A<char&,char> c;
 	return 0;
 } 

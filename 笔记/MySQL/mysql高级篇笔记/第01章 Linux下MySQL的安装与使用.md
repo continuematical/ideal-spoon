@@ -247,7 +247,7 @@ ALTER USER 'root'@'%' IDENTIFIED WITH mysql_native_password BY 'abc123';
 
 #### **5.** **字符集的相关操作**
 
-##### **5.1** **各级别的字符集**
+##### **5.1 **各级别的字符集**
 
 ```mysql
 show variables like 'character%';
@@ -265,7 +265,7 @@ show variables like 'character%';
 - 如果`创建表时`没有显式的指定字符集和比较规则，则该表`默认用数据库的`字符集和比较规则
 - 如果`创建数据库时`没有显式的指定字符集和比较规则，则该数据库`默认用服务器的`字符集和比较规则
 
-##### **5.2** **请求到响应过程中字符集的变化**
+##### **5.2 **请求到响应过程中字符集的变化**
 
 ```mermaid
 graph TB
